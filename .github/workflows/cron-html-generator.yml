@@ -6,6 +6,9 @@ on:
     - cron: '0 12 * * *'
   workflow_dispatch: # Allow manual triggering
 
+permissions:
+  contents: write
+
 jobs:
   generate-html:
     runs-on: ubuntu-latest
