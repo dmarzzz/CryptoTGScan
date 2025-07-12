@@ -1,0 +1,31 @@
+name: Generate HTML with Date
+
+on:
+  schedule:
+    # Run daily at 12:00 UTC
+    - cron: '0 12 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  generate-html:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Generate HTML with date
+      run: python scripts/generate_html.py
+      
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add ./website/
+        git commit -m "Auto-generated HTML with date $(date +%Y-%m-%d)" || echo "No changes to commit"
+        git push 
