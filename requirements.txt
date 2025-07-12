@@ -3,7 +3,6 @@
 
 PyYAML>=6.0
 # Telegram client libraries for API ID/hash approach
-pyrogram>=2.0.0
 telethon>=1.28.0
 # Future dependencies for Milestone 2+:
 # openai>=1.0.0     # For LLM integration 

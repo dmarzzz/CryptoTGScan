@@ -3,8 +3,7 @@
 # Format: List of Telegram chat/channel IDs to monitor
 
 telegram_chat_ids:
-  - 123456789
-  - 987654321
+  - -4639148312
   # Add more chat IDs as needed
   # Example: - -1001234567890  # Channel ID
   # Example: - 123456789        # Group ID 

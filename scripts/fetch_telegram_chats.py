@@ -7,7 +7,7 @@ This script:
 - Reads chat IDs from chat_ids.yaml
 - Connects to Telegram API using API ID and hash (no bot token)
 - Verifies access and basic retrieval capability for each listed chat
-- Outputs verification results
+- Outputs verification results with chat names and recent messages
 """
 
 import os
@@ -59,27 +59,48 @@ class TelegramChatVerifier:
         logger.info("All required API credentials are available")
         return True
     
-    def verify_chat_access(self, chat_id: int) -> Tuple[bool, str]:
+    def verify_chat_access(self, chat_id: int) -> Tuple[bool, str, str, str]:
         """
-        Verify access to a specific Telegram chat.
-        Returns (is_accessible, error_message)
+        Verify access to a specific Telegram chat using real API calls with telethon.
+        Returns (is_accessible, error_message, chat_name, recent_message)
         """
         try:
-            # For now, we'll simulate the verification
-            # In a real implementation, this would use the Telegram API
-            # to attempt to fetch basic chat information using pyrogram or telethon
+            from telethon.sync import TelegramClient
             
-            # Simulate API call (replace with actual Telegram API call)
-            if chat_id > 0:
-                # Simulate successful access for positive IDs
-                return True, "Accessible"
-            else:
-                # Simulate access issues for negative IDs
-                return False, "Access denied or chat not found"
+            # Create a temporary client for this verification
+            with TelegramClient(
+                "temp_session",
+                self.api_id,
+                self.api_hash
+            ) as client:
+                logger.info(f"Attempting to connect to chat ID: {chat_id}")
+                
+                # Try to get chat information
+                chat = client.get_entity(chat_id)
+                chat_name = getattr(chat, 'title', None) or getattr(chat, 'first_name', None) or f"Chat {chat_id}"
+                
+                # Try to get the most recent message
+                recent_message = "No recent messages found"
+                try:
+                    # Get the most recent message (limit=1)
+                    messages = client.get_messages(chat_id, limit=1)
+                    if messages:
+                        message = messages[0]
+                        if message.text:
+                            recent_message = message.text
+                        elif message.caption:
+                            recent_message = message.caption
+                        else:
+                            recent_message = f"[{message.media.__class__.__name__ if message.media else 'Text'}] Media message"
+                except Exception as e:
+                    logger.warning(f"Could not fetch recent message for chat {chat_id}: {e}")
+                    recent_message = "Could not fetch recent message"
+                
+                return True, "Accessible", chat_name, recent_message
                 
         except Exception as e:
             logger.error(f"Error verifying chat {chat_id}: {e}")
-            return False, f"Error: {str(e)}"
+            return False, f"Error: {str(e)}", "Unknown", "No recent messages"
     
     def verify_all_chats(self) -> Dict[int, Dict[str, any]]:
         """Verify access to all configured chat IDs."""
@@ -91,16 +112,20 @@ class TelegramChatVerifier:
         
         for chat_id in chat_ids:
             logger.info(f"Verifying access to chat ID: {chat_id}")
-            is_accessible, message = self.verify_chat_access(chat_id)
+            is_accessible, message, chat_name, recent_message = self.verify_chat_access(chat_id)
             
             results[chat_id] = {
                 'accessible': is_accessible,
                 'message': message,
+                'chat_name': chat_name,
+                'recent_message': recent_message,
                 'verified_at': datetime.now().isoformat()
             }
             
             status = "✅ Yes" if is_accessible else "❌ No"
-            logger.info(f"Chat {chat_id}: {status} - {message}")
+            logger.info(f"Chat {chat_id} ({chat_name}): {status} - {message}")
+            if is_accessible and recent_message:
+                logger.info(f"Recent message: {recent_message[:100]}...")
         
         self.verification_results = results
         return results
@@ -120,11 +145,19 @@ class HTMLReportGenerator:
         for chat_id, result in verification_results.items():
             status = "Yes" if result['accessible'] else "No"
             status_class = "success" if result['accessible'] else "error"
+            chat_name = result.get('chat_name', 'Unknown')
+            recent_message = result.get('recent_message', 'No recent messages')
+            
+            # Truncate recent message for display
+            display_message = recent_message[:100] + "..." if len(recent_message) > 100 else recent_message
+            
             table_rows += f"""
                 <tr>
                     <td>{chat_id}</td>
+                    <td>{chat_name}</td>
                     <td class="{status_class}">{status}</td>
                     <td>{result['message']}</td>
+                    <td class="recent-message" title="{recent_message}">{display_message}</td>
                     <td>{result['verified_at']}</td>
                 </tr>"""
         
@@ -142,7 +175,7 @@ class HTMLReportGenerator:
             background-color: #f5f5f5;
         }}
         .container {{
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             background-color: white;
             padding: 40px;
@@ -158,11 +191,13 @@ class HTMLReportGenerator:
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            font-size: 14px;
         }}
         th, td {{
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            vertical-align: top;
         }}
         th {{
             background-color: #f8f9fa;
@@ -195,6 +230,16 @@ class HTMLReportGenerator:
             padding: 15px;
             margin-bottom: 20px;
         }}
+        .recent-message {{
+            max-width: 200px;
+            word-wrap: break-word;
+            font-style: italic;
+            color: #666;
+        }}
+        .chat-name {{
+            font-weight: bold;
+            color: #333;
+        }}
     </style>
 </head>
 <body>
@@ -205,6 +250,7 @@ class HTMLReportGenerator:
             <h3>API Configuration</h3>
             <p><strong>Method:</strong> API ID and Hash (No Bot Token Required)</p>
             <p><strong>Environment Variables:</strong> TELEGRAM_API_ID, TELEGRAM_API_HASH</p>
+            <p><strong>Status:</strong> Real API calls using telethon (Official Telegram Client)</p>
         </div>
         
         <div class="summary">
@@ -218,8 +264,10 @@ class HTMLReportGenerator:
             <thead>
                 <tr>
                     <th>Chat ID</th>
+                    <th>Chat Name</th>
                     <th>Accessible</th>
                     <th>Message</th>
+                    <th>Recent Message</th>
                     <th>Verified At</th>
                 </tr>
             </thead>
@@ -237,9 +285,15 @@ class HTMLReportGenerator:
         
         return html_content
     
-    def save_report(self, verification_results: Dict[int, Dict[str, any]], filename: str = "chat_verification.html") -> str:
+    def save_report(self, verification_results: Dict[int, Dict[str, any]], filename: str = None) -> str:
         """Save the verification report to a file."""
         html_content = self.generate_verification_report(verification_results)
+        
+        # Generate filename with date if not provided
+        if filename is None:
+            current_date = datetime.now().strftime('%Y-%m-%d')
+            filename = f"output_{current_date}.html"
+        
         output_file = self.output_dir / filename
         
         with open(output_file, 'w', encoding='utf-8') as f:
@@ -272,6 +326,11 @@ def main():
     accessible_count = sum(1 for r in results.values() if r['accessible'])
     total_count = len(results)
     logger.info(f"Summary: {accessible_count}/{total_count} chats are accessible")
+    
+    # Print detailed results
+    logger.info("Detailed verification results:")
+    for chat_id, result in results.items():
+        logger.info(f"  Chat {chat_id} ({result['chat_name']}): {result['message']}")
 
 if __name__ == "__main__":
     main() 
