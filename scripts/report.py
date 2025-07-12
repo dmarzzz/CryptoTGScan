@@ -8,18 +8,78 @@ from chat verification results and other data.
 """
 
 from pathlib import Path
-from typing import Dict
+from typing import Dict, List
 from datetime import datetime
 import logging
+import html
 
 logger = logging.getLogger(__name__)
 
 class HTMLReportGenerator:
     """Modular class for generating HTML verification reports."""
     
-    def __init__(self, output_dir: str = "website"):
+    def __init__(self, output_dir: str = "website", template_path: str = "assets/template.html"):
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(exist_ok=True)
+        self.template_path = Path(template_path)
+    
+    def load_template(self) -> str:
+        """Load HTML template from file."""
+        try:
+            with open(self.template_path, 'r', encoding='utf-8') as f:
+                return f.read()
+        except FileNotFoundError:
+            logger.warning(f"Template file {self.template_path} not found. Using fallback template.")
+            return self._get_fallback_template()
+    
+    def _get_fallback_template(self) -> str:
+        """Fallback template if template.html is not found."""
+        return """<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>{{TITLE}}</title></head>
+<body>{{CONTENT}}</body></html>"""
+    
+    def _generate_messages_dropdown(self, chat_id: int, messages: List[Dict]) -> str:
+        """Generate HTML for messages dropdown."""
+        if not messages or not isinstance(messages, list):
+            return "No messages available"
+        
+        dropdown_html = f"""
+        <div class="messages-dropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown({chat_id})">
+                View Messages <span class="messages-count">({len(messages)} messages)</span>
+            </button>
+            <div id="dropdown-{chat_id}" class="dropdown-content">"""
+        
+        for msg in messages:
+            if isinstance(msg, dict):
+                sender = html.escape(str(msg.get('sender', 'Unknown')))
+                timestamp = msg.get('timestamp', 'Unknown')
+                content = html.escape(str(msg.get('content', 'No content')))
+                
+                # Format timestamp
+                try:
+                    if timestamp != 'Unknown' and timestamp != 'N/A':
+                        dt = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+                        formatted_time = dt.strftime('%Y-%m-%d %H:%M:%S')
+                    else:
+                        formatted_time = timestamp
+                except:
+                    formatted_time = timestamp
+                
+                dropdown_html += f"""
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-sender">{sender}</span>
+                        <span class="message-timestamp">{formatted_time}</span>
+                    </div>
+                    <div class="message-content">{content}</div>
+                </div>"""
+        
+        dropdown_html += """
+            </div>
+        </div>"""
+        
+        return dropdown_html
     
     def generate_verification_report(self, verification_results: Dict[int, Dict[str, any]]) -> str:
         """Generate HTML report for chat verification results."""
@@ -29,105 +89,24 @@ class HTMLReportGenerator:
         for chat_id, result in verification_results.items():
             status = "Yes" if result['accessible'] else "No"
             status_class = "success" if result['accessible'] else "error"
-            chat_name = result.get('chat_name', 'Unknown')
-            recent_message = result.get('recent_message', 'No recent messages')
+            chat_name = html.escape(result.get('chat_name', 'Unknown'))
+            recent_messages = result.get('recent_messages', [])
             
-            # Truncate recent message for display
-            display_message = recent_message[:100] + "..." if len(recent_message) > 100 else recent_message
+            # Generate messages dropdown
+            messages_dropdown = self._generate_messages_dropdown(chat_id, recent_messages)
             
             table_rows += f"""
                 <tr>
                     <td>{chat_id}</td>
-                    <td>{chat_name}</td>
+                    <td class="chat-name">{chat_name}</td>
                     <td class="{status_class}">{status}</td>
-                    <td>{result['message']}</td>
-                    <td class="recent-message" title="{recent_message}">{display_message}</td>
+                    <td>{html.escape(result['message'])}</td>
+                    <td>{messages_dropdown}</td>
                     <td>{result['verified_at']}</td>
                 </tr>"""
         
-        html_content = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Chat Verification Results</title>
-    <style>
-        body {{
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }}
-        .container {{
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }}
-        h1 {{
-            color: #333;
-            text-align: center;
-            margin-bottom: 30px;
-        }}
-        table {{
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            font-size: 14px;
-        }}
-        th, td {{
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            vertical-align: top;
-        }}
-        th {{
-            background-color: #f8f9fa;
-            font-weight: bold;
-        }}
-        .success {{
-            color: #28a745;
-            font-weight: bold;
-        }}
-        .error {{
-            color: #dc3545;
-            font-weight: bold;
-        }}
-        .summary {{
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #e9ecef;
-            border-radius: 5px;
-        }}
-        .timestamp {{
-            text-align: center;
-            color: #666;
-            margin-top: 20px;
-            font-size: 14px;
-        }}
-        .api-info {{
-            background-color: #d1ecf1;
-            border: 1px solid #bee5eb;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }}
-        .recent-message {{
-            max-width: 200px;
-            word-wrap: break-word;
-            font-style: italic;
-            color: #666;
-        }}
-        .chat-name {{
-            font-weight: bold;
-            color: #333;
-        }}
-    </style>
-</head>
-<body>
-    <div class="container">
+        # Generate content for template
+        content = f"""
         <h1>Telegram Chat Verification Results</h1>
         
         <div class="api-info">
@@ -151,7 +130,7 @@ class HTMLReportGenerator:
                     <th>Chat Name</th>
                     <th>Accessible</th>
                     <th>Message</th>
-                    <th>Recent Message</th>
+                    <th>Messages</th>
                     <th>Verified At</th>
                 </tr>
             </thead>
@@ -163,9 +142,12 @@ class HTMLReportGenerator:
         <div class="timestamp">
             Report generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}
         </div>
-    </div>
-</body>
-</html>"""
+        """
+        
+        # Load template and replace placeholders
+        template = self.load_template()
+        html_content = template.replace('{{TITLE}}', 'Telegram Chat Verification Results')
+        html_content = html_content.replace('{{CONTENT}}', content)
         
         return html_content
     

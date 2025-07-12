@@ -59,11 +59,11 @@ class TelegramChatVerifier:
         logger.info("All required API credentials are available")
         return True
     
-    def verify_chat_access(self, chat_id: int) -> Tuple[bool, str, str, str]:
+    def verify_chat_access(self, chat_id: int) -> Tuple[bool, str, str, list]:
         """
         Verify access to a specific Telegram chat using real API calls with telethon.
         Handles both regular chats and channels/megagroups.
-        Returns (is_accessible, error_message, chat_name, recent_message)
+        Returns (is_accessible, error_message, chat_name, recent_messages_list)
         """
         try:
             from telethon.sync import TelegramClient
@@ -100,28 +100,52 @@ class TelegramChatVerifier:
                 
                 logger.info(f"Found {entity_type}: {chat_name}")
                 
-                # Try to get the most recent message
-                recent_message = "No recent messages found"
+                # Try to get the last 200 messages
+                recent_messages = []
                 try:
-                    # Get the most recent message (limit=1)
-                    messages = client.get_messages(chat_id, limit=1)
-                    if messages:
-                        message = messages[0]
-                        if message.text:
-                            recent_message = message.text
-                        elif message.caption:
-                            recent_message = message.caption
+                    # Get the last 200 messages
+                    messages = client.get_messages(chat_id, limit=200)
+                    logger.info(f"Retrieved {len(messages)} messages from {entity_type}")
+                    
+                    for msg in messages:
+                        if msg.text:
+                            content = msg.text
+                        elif msg.caption:
+                            content = msg.caption
+                        elif msg.media:
+                            content = f"[{msg.media.__class__.__name__}] Media message"
                         else:
-                            recent_message = f"[{message.media.__class__.__name__ if message.media else 'Text'}] Media message"
+                            content = "[Unknown] Message type"
+                        
+                        # Format message with timestamp and sender info
+                        sender_info = "Unknown"
+                        if msg.sender:
+                            if hasattr(msg.sender, 'first_name'):
+                                sender_info = f"{msg.sender.first_name or ''} {msg.sender.last_name or ''}".strip()
+                            elif hasattr(msg.sender, 'title'):
+                                sender_info = msg.sender.title or "Channel"
+                            elif hasattr(msg.sender, 'username'):
+                                sender_info = f"@{msg.sender.username}"
+                        
+                        recent_messages.append({
+                            'timestamp': msg.date.isoformat() if msg.date else 'Unknown',
+                            'sender': sender_info,
+                            'content': content,
+                            'message_id': msg.id
+                        })
+                        
+                    if not recent_messages:
+                        recent_messages = [{'timestamp': 'N/A', 'sender': 'System', 'content': 'No messages found', 'message_id': 0}]
+                        
                 except Exception as e:
-                    logger.warning(f"Could not fetch recent message for {entity_type} {chat_id}: {e}")
-                    recent_message = f"Could not fetch recent message ({entity_type})"
+                    logger.warning(f"Could not fetch messages for {entity_type} {chat_id}: {e}")
+                    recent_messages = [{'timestamp': 'N/A', 'sender': 'Error', 'content': f"Could not fetch messages ({entity_type}): {e}", 'message_id': 0}]
                 
-                return True, f"Accessible ({entity_type})", chat_name, recent_message
+                return True, f"Accessible ({entity_type})", chat_name, recent_messages
                 
         except Exception as e:
             logger.error(f"Error verifying chat {chat_id}: {e}")
-            return False, f"Error: {str(e)}", "Unknown", "No recent messages"
+            return False, f"Error: {str(e)}", "Unknown", [{'timestamp': 'N/A', 'sender': 'Error', 'content': f"Error: {str(e)}", 'message_id': 0}]
     
     def verify_all_chats(self) -> Dict[int, Dict[str, any]]:
         """Verify access to all configured chat IDs."""
@@ -133,20 +157,20 @@ class TelegramChatVerifier:
         
         for chat_id in chat_ids:
             logger.info(f"Verifying access to chat ID: {chat_id}")
-            is_accessible, message, chat_name, recent_message = self.verify_chat_access(chat_id)
+            is_accessible, message, chat_name, recent_messages = self.verify_chat_access(chat_id)
             
             results[chat_id] = {
                 'accessible': is_accessible,
                 'message': message,
                 'chat_name': chat_name,
-                'recent_message': recent_message,
+                'recent_messages': recent_messages,
                 'verified_at': datetime.now().isoformat()
             }
             
             status = "✅ Yes" if is_accessible else "❌ No"
             logger.info(f"Chat {chat_id} ({chat_name}): {status} - {message}")
-            if is_accessible and recent_message:
-                logger.info(f"Recent message: {recent_message[:100]}...")
+            if is_accessible and recent_messages:
+                logger.info(f"Retrieved {len(recent_messages)} messages")
         
         self.verification_results = results
         return results
