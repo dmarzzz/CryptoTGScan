@@ -22,13 +22,24 @@ jobs:
       with:
         python-version: '3.11'
         
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        
     - name: Generate HTML with date
       run: python scripts/generate_html.py
+      
+    - name: Verify Telegram chats
+      env:
+        TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+        TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+      run: python scripts/fetch_telegram_chats.py
       
     - name: Commit and push changes
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add ./website/
-        git commit -m "Auto-generated HTML with date $(date +%Y-%m-%d)" || echo "No changes to commit"
+        git add chat_ids.yaml
+        git commit -m "Auto-generated HTML and chat verification report $(date +%Y-%m-%d)" || echo "No changes to commit"
         git push 

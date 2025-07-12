@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Chat Verification Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .summary {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .timestamp {
+            text-align: center;
+            color: #666;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .api-info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Telegram Chat Verification Results</h1>
+        
+        <div class="api-info">
+            <h3>API Configuration</h3>
+            <p><strong>Method:</strong> API ID and Hash (No Bot Token Required)</p>
+            <p><strong>Environment Variables:</strong> TELEGRAM_API_ID, TELEGRAM_API_HASH</p>
+        </div>
+        
+        <div class="summary">
+            <h3>Summary</h3>
+            <p>Total chats verified: 2</p>
+            <p>Accessible: 2</p>
+            <p>Not accessible: 0</p>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Chat ID</th>
+                    <th>Accessible</th>
+                    <th>Message</th>
+                    <th>Verified At</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td>123456789</td>
+                    <td class="success">Yes</td>
+                    <td>Accessible</td>
+                    <td>2025-07-12T17:41:59.413984</td>
+                </tr>
+                <tr>
+                    <td>987654321</td>
+                    <td class="success">Yes</td>
+                    <td>Accessible</td>
+                    <td>2025-07-12T17:41:59.414012</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="timestamp">
+            Report generated on: 2025-07-12 17:41:59 UTC
+        </div>
+    </div>
+</body>
+</html>
