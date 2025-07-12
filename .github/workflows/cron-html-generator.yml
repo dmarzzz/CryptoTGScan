@@ -1,4 +1,4 @@
-name: Generate HTML with Date
+name: Telegram Chat Verification
 
 on:
   schedule:
@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  generate-html:
+  verify-telegram-chats:
     runs-on: ubuntu-latest
     
     steps:
@@ -26,9 +26,6 @@ jobs:
       run: |
         pip install -r requirements.txt
         
-    - name: Generate HTML with date
-      run: python scripts/generate_html.py
-      
     - name: Verify Telegram chats
       env:
         TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
@@ -41,5 +38,5 @@ jobs:
         git config --local user.name "GitHub Action"
         git add ./website/
         git add chat_ids.yaml
-        git commit -m "Auto-generated HTML and chat verification report $(date +%Y-%m-%d)" || echo "No changes to commit"
+        git commit -m "Telegram chat verification report $(date +%Y-%m-%d)" || echo "No changes to commit"
         git push 
