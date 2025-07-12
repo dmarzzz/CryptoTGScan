@@ -26,6 +26,18 @@ telegram_chat_ids:
   - 123456789
   - 987654321
 ```
+```mermaid
+sequenceDiagram
+    participant User
+    participant GitHub
+    participant Config
+    
+    User->>GitHub: Create Pull Request
+    GitHub->>Config: Update chat_ids.yaml
+    Config->>Config: Validate YAML Format
+    Config->>GitHub: Merge PR
+    GitHub->>Config: Store Updated Configuration
+```
 
 ### ✅ 3. Chat Fetching & Verification Script
 - Modular Python script (`scripts/fetch_telegram_chats.py`)
@@ -49,6 +61,23 @@ The repository includes a GitHub Action workflow located at `.github/workflows/c
 - Verifies Telegram chat accessibility
 - Saves files to the `./website` directory
 - Automatically commits and pushes the generated files
+
+```mermaid
+sequenceDiagram
+    participant Cron
+    participant GitHub
+    participant Python
+    participant Telegram
+    participant Output
+    
+    Cron->>GitHub: Daily Trigger (12:00 UTC)
+    GitHub->>Python: Checkout Repository
+    Python->>Python: Setup Python 3.11
+    Python->>Python: Install Dependencies
+    Python->>Telegram: Execute fetch_telegram_chats.py
+    Telegram->>Output: Generate HTML Reports
+    Output->>GitHub: Commit & Push Changes
+```
 
 ## 🔧 Setup Instructions
 
