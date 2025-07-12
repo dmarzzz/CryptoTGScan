@@ -26,9 +26,21 @@ telegram_chat_ids:
   - 123456789
   - 987654321
 ```
+```mermaid
+sequenceDiagram
+    participant User
+    participant GitHub
+    participant Config
+    
+    User->>GitHub: Create Pull Request
+    GitHub->>Config: Update chat_ids.yaml
+    Config->>Config: Validate YAML Format
+    Config->>GitHub: Merge PR
+    GitHub->>Config: Store Updated Configuration
+```
 
 ### ✅ 3. Chat Fetching & Verification Script
-- Modular Python script (`scripts/fetch_telegram_chats.py`)
+- Modular Python script (`scripts/fetch_chats.py`)
 - Reads chat IDs from config file
 - Connects to Telegram API using API ID and hash
 - Verifies access and basic retrieval capability for each listed chat
@@ -49,6 +61,23 @@ The repository includes a GitHub Action workflow located at `.github/workflows/c
 - Verifies Telegram chat accessibility
 - Saves files to the `./website` directory
 - Automatically commits and pushes the generated files
+
+```mermaid
+sequenceDiagram
+    participant Cron
+    participant GitHub
+    participant Python
+    participant Telegram
+    participant Output
+    
+    Cron->>GitHub: Daily Trigger (12:00 UTC)
+    GitHub->>Python: Checkout Repository
+    Python->>Python: Setup Python 3.11
+    Python->>Python: Install Dependencies
+    Python->>Telegram: Execute fetch_chats.py
+    Telegram->>Output: Generate HTML Reports
+    Output->>GitHub: Commit & Push Changes
+```
 
 ## 🔧 Setup Instructions
 
@@ -80,7 +109,7 @@ export TELEGRAM_API_HASH=your_api_hash
 python3 scripts/generate_html.py
 
 # Test the Telegram chat verification
-python3 scripts/fetch_telegram_chats.py
+python3 scripts/fetch_chats.py
 ```
 
 ## 📁 File Structure
@@ -90,7 +119,7 @@ python3 scripts/fetch_telegram_chats.py
 │   └── cron-html-generator.yml    # GitHub Action workflow
 ├── scripts/
 │   ├── generate_html.py           # Original HTML generator
-│   └── fetch_telegram_chats.py    # Telegram chat verification
+│   └── fetch_chats.py    # Telegram chat verification
 ├── website/                       # Generated HTML files
 ├── chat_ids.yaml                  # Chat ID configuration
 ├── requirements.txt               # Python dependencies
