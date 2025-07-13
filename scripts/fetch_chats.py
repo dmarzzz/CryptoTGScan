@@ -103,35 +103,48 @@ class TelegramChatVerifier:
                 # Try to get the last 200 messages
                 recent_messages = []
                 try:
-                    # Get the last 200 messages
-                    messages = client.get_messages(chat_id, limit=200)
-                    logger.info(f"Retrieved {len(messages)} messages from {entity_type}")
+                    # Get the last 200 messages using iter_messages for better memory efficiency
+                    messages = []
+                    message_count = 0
+                    for msg in client.iter_messages(chat_id, limit=200):
+                        message_count += 1
+                        messages.append(msg)
+                    
+                    logger.info(f"Retrieved {message_count} messages from {entity_type}")
                     
                     for msg in messages:
-                        if msg.text:
+                        # Handle different message types safely
+                        if hasattr(msg, 'text') and msg.text:
                             content = msg.text
-                        elif msg.caption:
+                        elif hasattr(msg, 'caption') and msg.caption:
                             content = msg.caption
-                        elif msg.media:
+                        elif hasattr(msg, 'media') and msg.media:
                             content = f"[{msg.media.__class__.__name__}] Media message"
+                        elif hasattr(msg, 'action') and msg.action:
+                            # Handle service messages (user joined, left, etc.)
+                            action_type = msg.action.__class__.__name__
+                            content = f"[Service] {action_type}"
                         else:
-                            content = "[Unknown] Message type"
+                            content = f"[{msg.__class__.__name__}] Message type"
                         
                         # Format message with timestamp and sender info
                         sender_info = "Unknown"
-                        if msg.sender:
+                        if hasattr(msg, 'sender') and msg.sender:
                             if hasattr(msg.sender, 'first_name'):
                                 sender_info = f"{msg.sender.first_name or ''} {msg.sender.last_name or ''}".strip()
                             elif hasattr(msg.sender, 'title'):
                                 sender_info = msg.sender.title or "Channel"
                             elif hasattr(msg.sender, 'username'):
                                 sender_info = f"@{msg.sender.username}"
+                        elif hasattr(msg, 'action') and msg.action:
+                            # For service messages, sender might be the system
+                            sender_info = "System"
                         
                         recent_messages.append({
-                            'timestamp': msg.date.isoformat() if msg.date else 'Unknown',
+                            'timestamp': msg.date.isoformat() if hasattr(msg, 'date') and msg.date else 'Unknown',
                             'sender': sender_info,
                             'content': content,
-                            'message_id': msg.id
+                            'message_id': msg.id if hasattr(msg, 'id') else 0
                         })
                         
                     if not recent_messages:
