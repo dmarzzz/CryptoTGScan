@@ -40,7 +40,7 @@ sequenceDiagram
 ```
 
 ### ✅ 3. Chat Fetching & Verification Script
-- Modular Python script (`scripts/fetch_chats.py`)
+- Modular Python script (`scripts/account_fetch.py`)
 - Reads chat IDs from config file
 - Connects to Telegram API using API ID and hash
 - Verifies access and basic retrieval capability for each listed chat
@@ -74,7 +74,7 @@ sequenceDiagram
     GitHub->>Python: Checkout Repository
     Python->>Python: Setup Python 3.11
     Python->>Python: Install Dependencies
-    Python->>Telegram: Execute fetch_chats.py
+    Python->>Telegram: Execute account_fetch.py
     Telegram->>Output: Generate HTML Reports
     Output->>GitHub: Commit & Push Changes
 ```
@@ -109,7 +109,7 @@ export TELEGRAM_API_HASH=your_api_hash
 python3 scripts/generate_html.py
 
 # Test the Telegram chat verification
-python3 scripts/fetch_chats.py
+python3 scripts/account_fetch.py
 ```
 
 ## 📁 File Structure
@@ -119,7 +119,7 @@ python3 scripts/fetch_chats.py
 │   └── cron-html-generator.yml    # GitHub Action workflow
 ├── scripts/
 │   ├── generate_html.py           # Original HTML generator
-│   └── fetch_chats.py    # Telegram chat verification
+│   └── account_fetch.py    # Telegram chat verification
 ├── website/                       # Generated HTML files
 ├── chat_ids.yaml                  # Chat ID configuration
 ├── requirements.txt               # Python dependencies
