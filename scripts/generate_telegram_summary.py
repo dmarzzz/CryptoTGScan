@@ -26,7 +26,7 @@ def get_recent_messages(hours=1):
     cutoff_time = datetime.now() - timedelta(hours=hours)
     
     response = supabase.table('messages_v1').select(
-        '*, users_v1(*), chats_v1(*)'
+        '*, users_v1(*), chats_v1!messages_v1_chat_id_fkey(*)'
     ).gte('date', cutoff_time.isoformat()).order('date', desc=True).execute()
     
     return response.data
@@ -103,7 +103,7 @@ def generate_html_summary():
         chat_id = msg['chat_id']
         if chat_id not in chats:
             chats[chat_id] = {
-                'chat_info': msg['chats_v1'],
+                'chat_info': msg['chats_v1!messages_v1_chat_id_fkey'],
                 'messages': [],
                 'summary': get_chat_summary(chat_id),
                 'forum_topics': []
