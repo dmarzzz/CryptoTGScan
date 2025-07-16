@@ -206,7 +206,12 @@ For each active chat, the report shows:
 5. **Database relationship errors**
    - If you see "Could not embed because more than one relationship was found" error
    - This has been fixed in the script by specifying exact relationship names
-   - The script now uses `chats_v1!messages_v1_chat_id_fkey` and `users_v1!messages_v1_from_user_id_fkey`
+   - The script now properly handles the complex relationships between tables
+   
+6. **Forum topics relationship errors**
+   - If you see "Could not find a relationship between 'messages_v1' and 'forum_topics_v1'" error
+   - This has been fixed by removing the direct relationship query
+   - Forum topics are now queried separately and properly linked via message_thread_id
 
 ### **Debug Commands**
 

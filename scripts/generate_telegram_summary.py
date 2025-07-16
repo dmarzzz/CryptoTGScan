@@ -26,7 +26,7 @@ def get_recent_messages(hours=1):
     cutoff_time = datetime.now() - timedelta(hours=hours)
     
     response = supabase.table('messages_v1').select(
-        '*, users_v1!messages_v1_from_user_id_fkey(*), chats_v1!messages_v1_chat_id_fkey(*), forum_topics_v1(*)'
+        '*, users_v1!messages_v1_from_user_id_fkey(*), chats_v1!messages_v1_chat_id_fkey(*)'
     ).gte('date', cutoff_time.isoformat()).order('date', desc=True).execute()
     
     return response.data
@@ -59,9 +59,23 @@ def get_chat_summary(chat_id):
     }
 
 def get_forum_topics(chat_id):
-    """Get forum topics for a chat"""
-    response = supabase.table('forum_topics_v1').select('*').eq('chat_id', chat_id).execute()
-    return response.data
+    """Get forum topics with recent message counts for a chat"""
+    cutoff_time = datetime.now() - timedelta(hours=1)
+    
+    # Get forum topics for this chat
+    topics_response = supabase.table('forum_topics_v1').select('*').eq('chat_id', chat_id).execute()
+    topics = topics_response.data
+    
+    # For each topic, get recent messages
+    for topic in topics:
+        messages_response = supabase.table('messages_v1').select(
+            'id, from_user_id, text, date, users_v1!messages_v1_from_user_id_fkey(first_name, username)'
+        ).eq('chat_id', chat_id).eq('message_thread_id', topic['topic_id']).gte('date', cutoff_time.isoformat()).execute()
+        
+        topic['recent_messages'] = messages_response.data
+        topic['message_count'] = len(messages_response.data)
+    
+    return topics
 
 def get_topic_messages(chat_id, topic_id):
     """Get messages for a specific forum topic in the last hour"""
@@ -96,14 +110,10 @@ def generate_html_summary():
             }
         chats[chat_id]['messages'].append(msg)
     
-    # Get forum topics for supergroups
+    # Get forum topics for each chat
     for chat_id, chat_data in chats.items():
-        if chat_data['chat_info'].get('is_forum'):
+        if chat_data['chat_info']['is_forum']:
             chat_data['forum_topics'] = get_forum_topics(chat_id)
-            
-            # Get topic activity
-            for topic in chat_data['forum_topics']:
-                topic['recent_messages'] = get_topic_messages(chat_id, topic['topic_id'])
     
     # Generate HTML
     html_template = """
