@@ -203,6 +203,11 @@ For each active chat, the report shows:
    - Check that service role key has proper permissions
    - Ensure Supabase URL is correct
 
+5. **Database relationship errors**
+   - If you see "Could not embed because more than one relationship was found" error
+   - This has been fixed in the script by specifying exact relationship names
+   - The script now uses `chats_v1!messages_v1_chat_id_fkey` and `users_v1!messages_v1_from_user_id_fkey`
+
 ### **Debug Commands**
 
 ```bash
