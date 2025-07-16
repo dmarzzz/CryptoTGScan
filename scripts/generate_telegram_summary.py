@@ -156,292 +156,588 @@ def generate_html_summary():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telegram Activity Summary - {{ generation_time }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * {
             margin: 0;
-            padding: 20px;
-            background-color: #f5f7fa;
-            line-height: 1.6;
+            padding: 0;
+            box-sizing: border-box;
         }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+        
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background-color: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.2em;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 15px;
-        }
-        h2 {
-            color: #34495e;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-left: 4px solid #3498db;
-            padding-left: 15px;
-        }
-        h3 {
-            color: #2980b9;
-            margin-bottom: 10px;
-        }
-        .summary-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        
+        .header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
             color: white;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 40px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            padding: 40px;
+            background: #f8fafc;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 32px 24px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+        
         .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+            display: block;
         }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
         .chat-section {
-            margin: 30px 0;
-            padding: 20px;
-            border: 1px solid #ecf0f1;
-            border-radius: 10px;
-            background-color: #fafbfc;
+            margin: 32px 0;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
+        
+        .chat-section:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
         .chat-header {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            padding: 24px 32px;
+            border-bottom: 1px solid #e2e8f0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 16px;
         }
+        
         .chat-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .chat-type {
-            background: #3498db;
+        
+        .chat-icon {
+            width: 24px;
+            height: 24px;
+            background: #3b82f6;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
+            font-size: 12px;
+            font-weight: 600;
         }
+        
+        .chat-type {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+        }
+        
         .chat-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 15px 0;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 16px;
+            padding: 24px 32px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
         }
+        
         .chat-stat {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
             text-align: center;
-            border-left: 4px solid #3498db;
-        }
-        .message-list {
-            max-height: 300px;
-            overflow-y: auto;
-            border: 1px solid #ecf0f1;
-            border-radius: 8px;
+            padding: 16px;
             background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
         }
-        .message-item {
-            padding: 10px 15px;
-            border-bottom: 1px solid #f1f3f4;
+        
+        .chat-stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 4px;
+            display: block;
+        }
+        
+        .chat-stat-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .chat-content {
+            padding: 32px;
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
+            gap: 8px;
         }
+        
+        .section-icon {
+            width: 20px;
+            height: 20px;
+            background: #3b82f6;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .message-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+        
+        .message-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            background: white;
+            transition: background-color 0.2s ease;
+        }
+        
         .message-item:last-child {
             border-bottom: none;
         }
-        .message-content {
-            flex: 1;
-            margin-right: 15px;
+        
+        .message-item:hover {
+            background: #f1f5f9;
         }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
         .message-sender {
-            font-weight: bold;
-            color: #2980b9;
-            margin-bottom: 5px;
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.9rem;
         }
+        
+        .message-time {
+            color: #64748b;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
         .message-text {
-            color: #2c3e50;
+            color: #374151;
+            line-height: 1.5;
             word-wrap: break-word;
         }
-        .message-time {
-            color: #7f8c8d;
-            font-size: 0.8em;
-            white-space: nowrap;
-        }
+        
         .topic-section {
-            margin: 15px 0;
-            padding: 15px;
-            background: white;
-            border-radius: 8px;
-            border-left: 4px solid #e74c3c;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 12px;
+            border-left: 4px solid #f59e0b;
         }
+        
         .topic-header {
-            font-weight: bold;
-            color: #e74c3c;
-            margin-bottom: 10px;
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .timestamp {
+        
+        .topic-icon {
+            width: 16px;
+            height: 16px;
+            background: #f59e0b;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 8px;
+            font-weight: 600;
+        }
+        
+        .topic-content {
+            color: #78350f;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 32px 40px;
             text-align: center;
-            color: #7f8c8d;
-            margin-top: 30px;
-            font-size: 14px;
-            padding: 15px;
-            background-color: #ecf0f1;
-            border-radius: 8px;
+            border-top: 1px solid #e2e8f0;
         }
+        
+        .timestamp {
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
         .no-activity {
             text-align: center;
-            color: #7f8c8d;
+            color: #64748b;
             font-style: italic;
-            padding: 40px;
+            padding: 60px 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            margin: 20px 0;
         }
+        
+        .no-activity-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        
+        /* Scrollbar styling */
+        .message-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .message-list::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        
+        .message-list::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        
+        .message-list::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 16px;
+                padding: 24px;
+            }
+            
+            .content {
+                padding: 24px;
+            }
+            
+            .chat-header {
+                padding: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .chat-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                padding: 20px;
+            }
+            
+            .chat-content {
+                padding: 20px;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chat-section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .stat-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📱 Telegram Activity Summary</h1>
+        <div class="header">
+            <h1>📱 Telegram Activity Summary</h1>
+            <div class="subtitle">Real-time insights from your Telegram channels</div>
+        </div>
         
-        <div class="summary-stats">
+        <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number">{{ total_chats }}</div>
-                <div>Active Chats</div>
+                <span class="stat-number">{{ total_chats }}</span>
+                <div class="stat-label">Active Chats</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">{{ total_messages }}</div>
-                <div>Total Messages</div>
+                <span class="stat-number">{{ total_messages }}</span>
+                <div class="stat-label">Total Messages</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">{{ total_users }}</div>
-                <div>Active Users</div>
+                <span class="stat-number">{{ total_users }}</span>
+                <div class="stat-label">Active Users</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">{{ forum_chats }}</div>
-                <div>Forum Chats</div>
+                <span class="stat-number">{{ forum_chats }}</span>
+                <div class="stat-label">Forum Chats</div>
             </div>
         </div>
 
-        {% for chat_id, chat_data in chats.items() %}
-        <div class="chat-section">
-            <div class="chat-header">
-                <div class="chat-title">
-                    {% if chat_data.chat_info.title %}
-                        {{ chat_data.chat_info.title }}
-                    {% else %}
-                        Chat {{ chat_id }}
+        <div class="content">
+            {% for chat_id, chat_data in chats.items() %}
+            <div class="chat-section">
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <div class="chat-icon">💬</div>
+                        {% if chat_data.chat_info and chat_data.chat_info.title %}
+                            {{ chat_data.chat_info.title }}
+                        {% else %}
+                            Chat {{ chat_id }}
+                        {% endif %}
+                    </div>
+                    <div class="chat-type">{{ chat_data.chat_info.chat_type if chat_data.chat_info else 'Unknown' }}</div>
+                </div>
+                
+                <div class="chat-stats">
+                    <div class="chat-stat">
+                        <span class="chat-stat-number">{{ chat_data.summary.message_count }}</span>
+                        <div class="chat-stat-label">Messages</div>
+                    </div>
+                    <div class="chat-stat">
+                        <span class="chat-stat-number">{{ chat_data.summary.unique_users }}</span>
+                        <div class="chat-stat-label">Users</div>
+                    </div>
+                    <div class="chat-stat">
+                        <span class="chat-stat-number">{{ chat_data.messages|length }}</span>
+                        <div class="chat-stat-label">Recent</div>
+                    </div>
+                    {% if chat_data.chat_info and chat_data.chat_info.is_forum %}
+                    <div class="chat-stat">
+                        <span class="chat-stat-number">{{ chat_data.forum_topics|length }}</span>
+                        <div class="chat-stat-label">Topics</div>
+                    </div>
                     {% endif %}
                 </div>
-                <div class="chat-type">{{ chat_data.chat_info.chat_type }}</div>
-            </div>
-            
-            <div class="chat-stats">
-                <div class="chat-stat">
-                    <div style="font-size: 1.5em; font-weight: bold; color: #3498db;">
-                        {{ chat_data.summary.message_count }}
-                    </div>
-                    <div>Messages</div>
-                </div>
-                <div class="chat-stat">
-                    <div style="font-size: 1.5em; font-weight: bold; color: #e74c3c;">
-                        {{ chat_data.summary.unique_users }}
-                    </div>
-                    <div>Users</div>
-                </div>
-                <div class="chat-stat">
-                    <div style="font-size: 1.5em; font-weight: bold; color: #f39c12;">
-                        {{ chat_data.messages|length }}
-                    </div>
-                    <div>Recent</div>
-                </div>
-                {% if chat_data.chat_info.is_forum %}
-                <div class="chat-stat">
-                    <div style="font-size: 1.5em; font-weight: bold; color: #9b59b6;">
-                        {{ chat_data.forum_topics|length }}
-                    </div>
-                    <div>Topics</div>
-                </div>
-                {% endif %}
-            </div>
 
-            {% if chat_data.messages %}
-            <h3>📝 Recent Messages</h3>
-            <div class="message-list">
-                {% for msg in chat_data.messages[:10] %}
-                <div class="message-item">
-                    <div class="message-content">
-                        <div class="message-sender">
-                            {% if msg.from_user_id in users_data %}
-                                {{ users_data[msg.from_user_id].first_name }}
-                                {% if users_data[msg.from_user_id].username %}
-                                    (@{{ users_data[msg.from_user_id].username }})
+                <div class="chat-content">
+                    {% if chat_data.messages %}
+                    <div class="section-title">
+                        <div class="section-icon">📝</div>
+                        Recent Messages
+                    </div>
+                    <div class="message-list">
+                        {% for msg in chat_data.messages[:10] %}
+                        <div class="message-item">
+                            <div class="message-header">
+                                <div class="message-sender">
+                                    {% if msg.from_user_id in users_data %}
+                                        {{ users_data[msg.from_user_id].first_name }}
+                                        {% if users_data[msg.from_user_id].username %}
+                                            (@{{ users_data[msg.from_user_id].username }})
+                                        {% endif %}
+                                    {% else %}
+                                        Unknown User
+                                    {% endif %}
+                                </div>
+                                <div class="message-time">
+                                    {{ msg.date.split('T')[1][:5] }}
+                                </div>
+                            </div>
+                            <div class="message-text">
+                                {% if msg.text %}
+                                    {{ msg.text[:100] }}{% if msg.text|length > 100 %}...{% endif %}
+                                {% else %}
+                                    <em>[{{ msg.message_type }} message]</em>
                                 {% endif %}
-                            {% else %}
-                                Unknown User
-                            {% endif %}
+                            </div>
                         </div>
-                        <div class="message-text">
-                            {% if msg.text %}
-                                {{ msg.text[:100] }}{% if msg.text|length > 100 %}...{% endif %}
-                            {% else %}
-                                <em>[{{ msg.message_type }} message]</em>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="message-time">
-                        {{ msg.date.split('T')[1][:5] }}
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            {% endif %}
-
-            {% if chat_data.chat_info.is_forum and chat_data.forum_topics %}
-            <h3>🏷️ Forum Topics</h3>
-            {% for topic in chat_data.forum_topics %}
-            <div class="topic-section">
-                <div class="topic-header">
-                    {{ topic.name }}
-                    {% if topic.is_closed %}
-                        <span style="color: #e74c3c;">(Closed)</span>
-                    {% endif %}
-                </div>
-                {% if topic.recent_messages %}
-                <div style="margin-top: 10px;">
-                    <strong>{{ topic.recent_messages|length }} recent messages:</strong>
-                    <div style="margin-top: 5px; font-size: 0.9em; color: #7f8c8d;">
-                        {% for msg in topic.recent_messages[:3] %}
-                            {% if msg.from_user_id in users_data %}
-                                {{ users_data[msg.from_user_id].first_name }}: {{ msg.text[:50] }}{% if msg.text|length > 50 %}...{% endif %}
-                            {% endif %}
-                            {% if not loop.last %}<br>{% endif %}
                         {% endfor %}
                     </div>
+                    {% endif %}
+
+                    {% if chat_data.chat_info and chat_data.chat_info.is_forum and chat_data.forum_topics %}
+                    <div class="section-title" style="margin-top: 32px;">
+                        <div class="section-icon">🏷️</div>
+                        Forum Topics
+                    </div>
+                    {% for topic in chat_data.forum_topics %}
+                    <div class="topic-section">
+                        <div class="topic-header">
+                            <div class="topic-icon">📌</div>
+                            {{ topic.name }}
+                            {% if topic.is_closed %}
+                                <span style="color: #dc2626;">(Closed)</span>
+                            {% endif %}
+                        </div>
+                        {% if topic.recent_messages %}
+                        <div class="topic-content">
+                            <strong>{{ topic.recent_messages|length }} recent messages:</strong><br>
+                            {% for msg in topic.recent_messages[:3] %}
+                                {% if msg.from_user_id in users_data %}
+                                    <strong>{{ users_data[msg.from_user_id].first_name }}</strong>: {{ msg.text[:50] }}{% if msg.text|length > 50 %}...{% endif %}
+                                {% endif %}
+                                {% if not loop.last %}<br>{% endif %}
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="topic-content" style="font-style: italic;">No recent activity</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
                 </div>
-                {% else %}
-                <div style="color: #7f8c8d; font-style: italic;">No recent activity</div>
-                {% endif %}
             </div>
             {% endfor %}
+
+            {% if not chats %}
+            <div class="no-activity">
+                <div class="no-activity-icon">📭</div>
+                <h3>No Recent Activity</h3>
+                <p>No messages were found in the last hour.</p>
+            </div>
             {% endif %}
         </div>
-        {% endfor %}
 
-        <div class="timestamp">
-            Report generated on: {{ generation_time }}<br>
-            Data covers the last hour ({{ start_time }} to {{ end_time }})
+        <div class="footer">
+            <div class="timestamp">
+                📊 Report generated on: {{ generation_time }}<br>
+                ⏰ Data covers the last hour ({{ start_time }} to {{ end_time }})
+            </div>
         </div>
     </div>
 </body>
