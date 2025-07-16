@@ -2,7 +2,10 @@
 # Milestone 1 requirements
 
 PyYAML>=6.0
-# Telegram client libraries for API ID/hash approach
+# Telegram client libraries - using telethon (official Telegram client)
 telethon>=1.28.0
+# Additional packages for enhanced functionality
+pytz>=2023.3
 # Future dependencies for Milestone 2+:
-# openai>=1.0.0     # For LLM integration 
+# openai>=1.0.0     # For LLM integration
+# python-dotenv>=1.0.0  # For environment variable loading 
