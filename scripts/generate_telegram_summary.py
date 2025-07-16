@@ -26,7 +26,7 @@ def get_recent_messages(hours=1):
     cutoff_time = datetime.now() - timedelta(hours=hours)
     
     response = supabase.table('messages_v1').select(
-        '*, users_v1!messages_v1_from_user_id_fkey(*), chats_v1!messages_v1_chat_id_fkey(*)'
+        '*, users_v1(*), chats_v1(*)'
     ).gte('date', cutoff_time.isoformat()).order('date', desc=True).execute()
     
     return response.data
@@ -69,7 +69,7 @@ def get_forum_topics(chat_id):
     # For each topic, get recent messages
     for topic in topics:
         messages_response = supabase.table('messages_v1').select(
-            'id, from_user_id, text, date, users_v1!messages_v1_from_user_id_fkey(first_name, username)'
+            'id, from_user_id, text, date, users_v1(first_name, username)'
         ).eq('chat_id', chat_id).eq('message_thread_id', topic['topic_id']).gte('date', cutoff_time.isoformat()).execute()
         
         topic['recent_messages'] = messages_response.data
@@ -82,7 +82,7 @@ def get_topic_messages(chat_id, topic_id):
     cutoff_time = datetime.now() - timedelta(hours=1)
     
     response = supabase.table('messages_v1').select(
-        'id, from_user_id, text, date, users_v1!messages_v1_from_user_id_fkey(first_name, username)'
+        'id, from_user_id, text, date, users_v1(first_name, username)'
     ).eq('chat_id', chat_id).eq('message_thread_id', topic_id).gte('date', cutoff_time.isoformat()).execute()
     
     return response.data
@@ -103,7 +103,7 @@ def generate_html_summary():
         chat_id = msg['chat_id']
         if chat_id not in chats:
             chats[chat_id] = {
-                'chat_info': msg['chats_v1!messages_v1_chat_id_fkey'],
+                'chat_info': msg['chats_v1'],
                 'messages': [],
                 'summary': get_chat_summary(chat_id),
                 'forum_topics': []
@@ -350,10 +350,10 @@ def generate_html_summary():
                 <div class="message-item">
                     <div class="message-content">
                         <div class="message-sender">
-                            {% if msg.users_v1!messages_v1_from_user_id_fkey %}
-                                {{ msg.users_v1!messages_v1_from_user_id_fkey.first_name }}
-                                {% if msg.users_v1!messages_v1_from_user_id_fkey.username %}
-                                    (@{{ msg.users_v1!messages_v1_from_user_id_fkey.username }})
+                            {% if msg.users_v1 %}
+                                {{ msg.users_v1.first_name }}
+                                {% if msg.users_v1.username %}
+                                    (@{{ msg.users_v1.username }})
                                 {% endif %}
                             {% else %}
                                 Unknown User
@@ -390,8 +390,8 @@ def generate_html_summary():
                     <strong>{{ topic.recent_messages|length }} recent messages:</strong>
                     <div style="margin-top: 5px; font-size: 0.9em; color: #7f8c8d;">
                         {% for msg in topic.recent_messages[:3] %}
-                            {% if msg.users_v1!messages_v1_from_user_id_fkey %}
-                                {{ msg.users_v1!messages_v1_from_user_id_fkey.first_name }}: {{ msg.text[:50] }}{% if msg.text|length > 50 %}...{% endif %}
+                            {% if msg.users_v1 %}
+                                {{ msg.users_v1.first_name }}: {{ msg.text[:50] }}{% if msg.text|length > 50 %}...{% endif %}
                             {% endif %}
                             {% if not loop.last %}<br>{% endif %}
                         {% endfor %}

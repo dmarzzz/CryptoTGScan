@@ -213,6 +213,11 @@ For each active chat, the report shows:
    - This has been fixed by removing the direct relationship query
    - Forum topics are now queried separately and properly linked via message_thread_id
 
+7. **KeyError with relationship names**
+   - If you see "KeyError: 'chats_v1!messages_v1_chat_id_fkey'" error
+   - This has been fixed by using simpler relationship names
+   - The script now uses `chats_v1(*)` and `users_v1(*)` instead of complex foreign key names
+
 ### **Debug Commands**
 
 ```bash
