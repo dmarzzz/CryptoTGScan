@@ -5,7 +5,7 @@
 Set these environment variables in your Supabase project dashboard:
 
 ### 1. Go to Supabase Dashboard
-- Visit: https://supabase.com/dashboard/project/hrfiaxcjknmswdirgczm
+- Visit: https://supabase.com/dashboard/project/pojfweifwionoifnwe
 - Navigate to **Settings** → **Edge Functions**
 
 ### 2. Add Environment Variables
@@ -13,7 +13,7 @@ Set these environment variables in your Supabase project dashboard:
 | Variable Name | Description | Example |
 |---------------|-------------|---------|
 | `TELEGRAM_BOT_TOKEN` | Your Telegram bot token from @BotFather | `1234567890:ABCdefGHIjklMNOpqrsTUVwxyz` |
-| `SUPABASE_URL` | Your Supabase project URL | `https://hrfiaxcjknmswdirgczm.supabase.co` |
+| `SUPABASE_URL` | Your Supabase project URL | `https://pojfweifwionoifnwe.supabase.co` |
 | `SUPABASE_SERVICE_ROLE_KEY` | Your Supabase service role key | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...` |
 | `FUNCTION_SECRET` | Random secret for webhook security | `your-random-secret-string` |
 

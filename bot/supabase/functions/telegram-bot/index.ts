@@ -25,6 +25,72 @@ function convertUnixTimestamp(timestamp: number): string {
   return new Date(timestamp * 1000).toISOString()
 }
 
+// Helper function to check if it's a private chat
+function isPrivateChat(chat: any): boolean {
+  return chat?.type === 'private'
+}
+
+// Helper function to generate debug information
+function generateDebugInfo(ctx: any, logEntry: any): string {
+  const message = ctx.message
+  const chat = ctx.chat
+  const from = ctx.from
+  
+  const debugInfo = `
+🔍 **DEBUG INFORMATION**
+
+📱 **Message Details:**
+• Message ID: ${message.message_id}
+• Date: ${message.date ? convertUnixTimestamp(message.date) : 'N/A'}
+• Edit Date: ${message.edit_date ? convertUnixTimestamp(message.edit_date) : 'N/A'}
+• Type: ${message.text ? 'text' : 'non-text'}
+
+👤 **User Information:**
+• User ID: ${from?.id || 'N/A'}
+• Username: ${from?.username || 'N/A'}
+• First Name: ${from?.first_name || 'N/A'}
+• Last Name: ${from?.last_name || 'N/A'}
+• Is Bot: ${from?.is_bot ? 'Yes' : 'No'}
+• Is Premium: ${from?.is_premium ? 'Yes' : 'No'}
+• Language: ${from?.language_code || 'N/A'}
+
+💬 **Chat Information:**
+• Chat ID: ${chat?.id || 'N/A'}
+• Chat Type: ${chat?.type || 'N/A'}
+• Title: ${chat?.title || 'N/A'}
+• Username: ${chat?.username || 'N/A'}
+• Description: ${chat?.description || 'N/A'}
+• Is Forum: ${chat?.is_forum ? 'Yes' : 'No'}
+• Member Count: ${chat?.member_count || 'N/A'}
+
+📝 **Message Content:**
+• Text: ${message.text || 'No text'}
+• Caption: ${message.caption || 'No caption'}
+• Thread ID: ${message.message_thread_id || 'N/A'}
+
+🔗 **Reply Information:**
+• Reply To Message ID: ${message.reply_to_message?.message_id || 'N/A'}
+• Reply To Chat ID: ${message.reply_to_message?.chat?.id || 'N/A'}
+
+🗄️ **Database Status:**
+• User Stored: ✅
+• Chat Stored: ✅
+• Message Stored: ✅
+
+⏰ **Timestamps:**
+• Bot Processing: ${new Date().toISOString()}
+• Telegram Date: ${message.date ? convertUnixTimestamp(message.date) : 'N/A'}
+
+🔧 **Environment:**
+• Supabase URL: ${supabaseUrl ? '✅ Set' : '❌ Missing'}
+• Service Key: ${supabaseServiceKey ? '✅ Set' : '❌ Missing'}
+• Bot Token: ${Deno.env.get('TELEGRAM_BOT_TOKEN') ? '✅ Set' : '❌ Missing'}
+• Function Secret: ${Deno.env.get('FUNCTION_SECRET') ? '✅ Set' : '❌ Missing'}
+`
+  
+  return debugInfo
+}
+
 // Database operations
 async function upsertUser(user: any): Promise<void> {
   const { error } = await supabase
@@ -107,8 +173,8 @@ bot.on('message:text', async (ctx) => {
   const chat = ctx.chat
   const from = ctx.from
   
-  // Check for "vishesh" keyword
-  if (message.text && message.text.toLowerCase().includes('vishesh')) {
+  // Check for "vishesh" keyword (only in private chats)
+  if (isPrivateChat(chat) && message.text && message.text.toLowerCase().includes('vishesh')) {
     await ctx.reply('vishesh? you mean the worlds biggest loser?')
   }
   
@@ -136,9 +202,10 @@ bot.on('message:text', async (ctx) => {
   // Log to console (for now)
   console.log('📨 New Message:', JSON.stringify(logEntry, null, 2))
   
-  // Optional: Send confirmation for debugging
-  if (chat?.type === 'private') {
-    await ctx.reply('✅ Message logged to database!')
+  // Only reply in private chats with debug information
+  if (isPrivateChat(chat)) {
+    const debugInfo = generateDebugInfo(ctx, logEntry)
+    await ctx.reply(debugInfo)
   }
 })
 
@@ -203,9 +270,10 @@ bot.on('message', async (ctx) => {
   // Log to console
   console.log('📨 New Message (Non-text):', JSON.stringify(logEntry, null, 2))
   
-  // Optional: Send confirmation for debugging
-  if (chat?.type === 'private') {
-    await ctx.reply(`✅ ${messageType} message logged to database!`)
+  // Only reply in private chats with debug information
+  if (isPrivateChat(chat)) {
+    const debugInfo = generateDebugInfo(ctx, logEntry)
+    await ctx.reply(debugInfo)
   }
 })
 
@@ -214,12 +282,7 @@ bot.on('channel_post', async (ctx) => {
   const post = ctx.channelPost
   const chat = ctx.chat
   
-  // Check for "vishesh" keyword in channel posts
-  if (post.text && post.text.toLowerCase().includes('vishesh')) {
-    await ctx.reply('vishesh? you mean the worlds biggest loser?')
-  }
-  
-  // Store in database
+  // Store in database (no replies in channels)
   await upsertChat(chat)
   await insertMessage(ctx)
   
