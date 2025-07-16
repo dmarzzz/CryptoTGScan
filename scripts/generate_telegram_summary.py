@@ -25,11 +25,34 @@ def get_recent_messages(hours=1):
     """Get messages from the last N hours"""
     cutoff_time = datetime.now() - timedelta(hours=hours)
     
+    # Get messages without relationships to avoid the foreign key issue
     response = supabase.table('messages_v1').select(
-        '*, users_v1(*), chats_v1!messages_v1_chat_id_fkey(*)'
+        'id, telegram_message_id, chat_id, from_user_id, message_thread_id, date, edit_date, text, message_type, reply_to_message_id, reply_to_chat_id, is_deleted'
     ).gte('date', cutoff_time.isoformat()).order('date', desc=True).execute()
     
     return response.data
+
+def get_users_data(user_ids):
+    """Get user data for the given user IDs"""
+    if not user_ids:
+        return {}
+    
+    response = supabase.table('users_v1').select('*').in_('user_id', list(user_ids)).execute()
+    users = {}
+    for user in response.data:
+        users[user['user_id']] = user
+    return users
+
+def get_chats_data(chat_ids):
+    """Get chat data for the given chat IDs"""
+    if not chat_ids:
+        return {}
+    
+    response = supabase.table('chats_v1').select('*').in_('chat_id', list(chat_ids)).execute()
+    chats = {}
+    for chat in response.data:
+        chats[chat['chat_id']] = chat
+    return chats
 
 def get_chat_summary(chat_id):
     """Get summary statistics for a specific chat"""
@@ -69,7 +92,7 @@ def get_forum_topics(chat_id):
     # For each topic, get recent messages
     for topic in topics:
         messages_response = supabase.table('messages_v1').select(
-            'id, from_user_id, text, date, users_v1(first_name, username)'
+            'id, from_user_id, text, date'
         ).eq('chat_id', chat_id).eq('message_thread_id', topic['topic_id']).gte('date', cutoff_time.isoformat()).execute()
         
         topic['recent_messages'] = messages_response.data
@@ -82,7 +105,7 @@ def get_topic_messages(chat_id, topic_id):
     cutoff_time = datetime.now() - timedelta(hours=1)
     
     response = supabase.table('messages_v1').select(
-        'id, from_user_id, text, date, users_v1(first_name, username)'
+        'id, from_user_id, text, date'
     ).eq('chat_id', chat_id).eq('message_thread_id', topic_id).gte('date', cutoff_time.isoformat()).execute()
     
     return response.data
@@ -97,13 +120,23 @@ def generate_html_summary():
         print("No recent messages found")
         return
     
+    # Extract user_ids and chat_ids from messages
+    user_ids = set(msg['from_user_id'] for msg in recent_messages if msg['from_user_id'])
+    chat_ids = set(msg['chat_id'] for msg in recent_messages if msg['chat_id'])
+    
+    # Get user data
+    users_data = get_users_data(user_ids)
+    
+    # Get chat data
+    chats_data = get_chats_data(chat_ids)
+    
     # Group messages by chat
     chats = {}
     for msg in recent_messages:
         chat_id = msg['chat_id']
         if chat_id not in chats:
             chats[chat_id] = {
-                'chat_info': msg['chats_v1!messages_v1_chat_id_fkey'],
+                'chat_info': chats_data.get(chat_id),
                 'messages': [],
                 'summary': get_chat_summary(chat_id),
                 'forum_topics': []
@@ -112,7 +145,7 @@ def generate_html_summary():
     
     # Get forum topics for each chat
     for chat_id, chat_data in chats.items():
-        if chat_data['chat_info']['is_forum']:
+        if chat_data['chat_info'] and chat_data['chat_info'].get('is_forum'):
             chat_data['forum_topics'] = get_forum_topics(chat_id)
     
     # Generate HTML
@@ -350,10 +383,10 @@ def generate_html_summary():
                 <div class="message-item">
                     <div class="message-content">
                         <div class="message-sender">
-                            {% if msg.users_v1 %}
-                                {{ msg.users_v1.first_name }}
-                                {% if msg.users_v1.username %}
-                                    (@{{ msg.users_v1.username }})
+                            {% if msg.from_user_id in users_data %}
+                                {{ users_data[msg.from_user_id].first_name }}
+                                {% if users_data[msg.from_user_id].username %}
+                                    (@{{ users_data[msg.from_user_id].username }})
                                 {% endif %}
                             {% else %}
                                 Unknown User
@@ -390,8 +423,8 @@ def generate_html_summary():
                     <strong>{{ topic.recent_messages|length }} recent messages:</strong>
                     <div style="margin-top: 5px; font-size: 0.9em; color: #7f8c8d;">
                         {% for msg in topic.recent_messages[:3] %}
-                            {% if msg.users_v1 %}
-                                {{ msg.users_v1.first_name }}: {{ msg.text[:50] }}{% if msg.text|length > 50 %}...{% endif %}
+                            {% if msg.from_user_id in users_data %}
+                                {{ users_data[msg.from_user_id].first_name }}: {{ msg.text[:50] }}{% if msg.text|length > 50 %}...{% endif %}
                             {% endif %}
                             {% if not loop.last %}<br>{% endif %}
                         {% endfor %}
@@ -424,7 +457,7 @@ def generate_html_summary():
         for msg in chat['messages'] 
         if msg['from_user_id']
     ))
-    forum_chats = sum(1 for chat in chats.values() if chat['chat_info'].get('is_forum'))
+    forum_chats = sum(1 for chat in chats.values() if chat['chat_info'] and chat['chat_info'].get('is_forum'))
     
     # Generate timestamps
     generation_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')
@@ -441,7 +474,9 @@ def generate_html_summary():
         forum_chats=forum_chats,
         generation_time=generation_time,
         start_time=start_time,
-        end_time=end_time
+        end_time=end_time,
+        users_data=users_data,
+        chats_data=chats_data
     )
     
     # Ensure website directory exists
