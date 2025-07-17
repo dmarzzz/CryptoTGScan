@@ -62,8 +62,8 @@ def get_chat_activity_24h(chat_id):
     trend = "up" if message_change > 0 else "down"
     
     return {
-        "messages_24": current_count,
-        "participants_24": current_users,
+        "messages_24h": current_count,
+        "participants_24h": current_users,
         "change_percent": round(message_change, 1),
         "trend": trend
     }
@@ -124,10 +124,8 @@ def get_active_chats():
     
     if not chat_ids:
         return []
-    # Get chat details
-    chats_response = supabase.table('chats_v1').select(
-      "chat_id, title, type, member_count, is_forum"
-    ).in_('chat_id', list(chat_ids)).execute()
+    # Get chat details - use select('*') like the working script
+    chats_response = supabase.table('chats_v1').select('*').in_('chat_id', list(chat_ids)).execute()
     
     return chats_response.data
 
@@ -154,14 +152,14 @@ def generate_channels_data():
         activity = get_chat_activity_24h(chat['chat_id'])
         
         # Skip chats with no recent activity
-        if activity['messages_24'] == 0:
+        if activity['messages_24h'] == 0:
             continue
         
         # Create channel entry
         channel = {
           "id": str(chat['chat_id']),
             "name": chat.get('title', 'Unknown Chat'),
-           "icon": get_chat_icon(chat.get('type'), chat.get('title')),
+           "icon": get_chat_icon(chat.get('chat_type'), chat.get('title')),
             "last_update": now.strftime('%Y-%m-%dT%H:%M:%SZ'),
             "stats": activity
         }
@@ -169,7 +167,7 @@ def generate_channels_data():
         channels.append(channel)
     
     # Sort by message count (most active first)
-    channels.sort(key=lambda x: x['stats']['messages_24'], reverse=True)
+    channels.sort(key=lambda x: x['stats']['messages_24h'], reverse=True)
     
     # Limit to top 12 channels
     channels = channels[:12]
@@ -214,7 +212,7 @@ def main():
         # Print summary
         print(f"\n✅ Successfully generated data for {data['total_channels']} channels:")
         for channel in data['channels']:
-            print(f"  • {channel['name']}: {channel['stats']['messages_24']} messages, {channel['stats']['participants_24']} users")
+            print(f"  • {channel['name']}: {channel['stats']['messages_24h']} messages, {channel['stats']['participants_24h']} users")
         
         print(f"\n📁 Data saved to: {output_file.absolute()}")
         return True       
