@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wartime Milady CEO - Ethereum Intelligence Command</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+
+:root {
+  --color-primary: #FF006E;
+  --color-secondary: #00F5FF;
+  --color-accent: #00FF00;
+  --color-bg: #0A0A0A;
+  --color-surface: #1A1A1A;
+  --color-text: #F0F0F0;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+}
+body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); line-height: 1.6; }
+.scan-lines { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 100; }
+.scan-lines::before { content: ''; position: fixed; top: -100vh; left: 0; width: 100vw; height: 200vh; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,110,0.03) 2px, rgba(255,0,110,0.03) 4px); animation: scan-lines 8s linear infinite; pointer-events: none; z-index: 100; }
+@keyframes scan-lines { 0% { transform: translateY(0); } 100% { transform: translateY(100vh); } }
+.site-header { background: linear-gradient(135deg, var(--color-surface), rgba(26,26,26,0.9)); border-bottom: 2px solid var(--color-primary); padding: 2rem 0; position: relative; overflow: hidden; }
+.header-content { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; gap: 2rem; position: relative; z-index: 1; }
+.milady-avatar { flex-shrink: 0; }
+.avatar-placeholder { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); display: flex; align-items: center; justify-content: center; font-size: 3rem; border: 3px solid var(--color-accent); box-shadow: 0 0 20px var(--color-primary), 0 0 20px var(--color-accent); animation: pulse 2s ease-in-out infinite alternate; }
+@keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
+.header-text { flex: 1; }
+.site-title { font-size: 2.5rem; font-family: var(--font-mono); background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 30px var(--color-primary); margin-bottom: 0.5rem; }
+.site-subtitle { font-size: 1.1rem; color: #888; margin-bottom: 1rem; }
+.status-bar { display: flex; align-items: center; gap: 2rem; margin-top: 1rem; }
+.timestamp { font-family: var(--font-mono); font-size: 0.9rem; color: var(--color-secondary); background: rgba(0,245,255,0.1); padding: 0.5rem 1rem; border: 1px solid var(--color-secondary); border-radius: 4px; }
+.status-indicator { font-family: var(--font-mono); font-size: 0.9rem; color: var(--color-accent); display: flex; align-items: center; gap: 0.5em; }
+.status-indicator::before { content: '●'; color: var(--color-accent); animation: blink 1s ease-in-out infinite alternate; margin-right: 0.5em; }
+@keyframes blink { 0% { opacity: 1; } 100% { opacity: 0.3; } }
+.main-content { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+.channel-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.channel-card { background: var(--color-surface); border: 1px solid var(--color-primary); border-radius: 8px; padding: 1.5rem; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden; outline: none; }
+.channel-card:hover, .channel-card:focus { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 20px rgba(255,0,110,0.5), 0 0 40px rgba(255,0,110,0.3), inset 0 0 20px rgba(255,0,110,0.1); border-color: var(--color-accent); }
+.channel-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.channel-icon { font-size: 2rem; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: rgba(255,0,110,0.1); border: 1px solid var(--color-primary); border-radius: 8px; }
+.channel-name { font-size: 1.3rem; color: var(--color-text); margin-bottom: 0.25rem; font-family: var(--font-mono); }
+.channel-meta { font-size: 0.85rem; color: #888; }
+.channel-stats { display: flex; justify-content: space-between; align-items: flex-end; }
+.stat-row { display: flex; gap: 1.5rem; }
+.stat-item { display: flex; flex-direction: column; align-items: flex-start; }
+.stat-label { font-size: 0.75rem; color: #888; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25em; }
+.stat-value { font-size: 1.5rem; font-weight: 600; font-family: var(--font-mono); color: var(--color-secondary); }
+.activity-badge { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.5rem; background: rgba(0,255,0,0.1); border: 1px solid var(--color-accent); border-radius: 4px; font-size: 0.75rem; font-family: var(--font-mono); }
+.activity-badge.trend-up { background: rgba(0,255,0,0.1); border-color: var(--color-accent); color: var(--color-accent); }
+.activity-badge.trend-down { background: rgba(255,0,110,0.1); border-color: var(--color-primary); color: var(--color-primary); }
+.trend-arrow { font-size: 1rem; }
+.site-footer { background: var(--color-surface); border-top: 1px solid var(--color-primary); padding: 2rem; text-align: center; color: #888; font-size: 0.9rem; }
+@media (max-width: 1024px) { .site-title { font-size: 2rem; } .header-content { flex-direction: column; text-align: center; gap: 1.5rem; } .avatar-placeholder { width: 100px; height: 100px; font-size: 2.5rem; } .channel-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); } }
+@media (max-width: 768px) { .site-title { font-size: 1.5rem; } .header-content { padding: 0 1em; } .main-content { padding: 2rem 1rem; } .channel-grid { grid-template-columns: 1fr; gap: 1.5rem; } .channel-card { padding: 1rem; } .stat-row { gap: 1rem; } .status-bar { flex-direction: column; gap: 1rem; align-items: flex-start; } }
+@media (max-width: 480px) { .site-title { font-size: 1.25rem; } .avatar-placeholder { width: 80px; height: 80px; font-size: 2rem; } .channel-header { flex-direction: column; text-align: center; gap: 0.75rem; } .channel-stats { flex-direction: column; gap: 1rem; align-items: center; } .stat-row { justify-content: center; } }
+@media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.1s !important; } }
+.channel-card:focus { outline: 2px solid var(--color-secondary); outline-offset: 2px; }
+@media (prefers-contrast: high) { :root { --color-bg: #000; --color-surface: #111111; --color-text: #ffffff; } }
+        
+    </style>
+</head>
+<body>
+    <div class="scan-lines"></div>
+    <header class="site-header">
+        <div class="header-content">
+            <div class="milady-avatar">
+                
+            <img src="assets/wartimemiladyceo.jpg" alt="Wartime Milady CEO avatar" class="avatar-img" width="120" height="120" loading="lazy" style="display:block; border-radius:50%; object-fit:cover; background:#222;" onerror="this.style.display='none';this.parentNode.querySelector('.avatar-fallback').style.display='flex';">
+            <div class="avatar-fallback" style="display:none; width:120px; height:120px; align-items:center; justify-content:center; border-radius:50%; background:linear-gradient(45deg,#FF006E,#00F5FF); font-size:3rem; border:3px solid #00FF00; box-shadow:0 0 20px #FF006E,0 0 20px #00FF00;">👾</div>
+        
+            </div>
+            <div class="header-text">
+                <h1 class="site-title">ETHEREUM INTELLIGENCE COMMAND</h1>
+                <p class="site-subtitle">Monitoring 8 channels across the frontlines</p>
+                <div class="status-bar">
+                    <span class="timestamp">2025-07-17 0104Z</span>
+                    <span class="status-indicator" aria-live="polite">● SYSTEMS ONLINE</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="main-content">
+        <div class="channel-grid">
+            
+            <div class="channel-card" tabindex="0" aria-label="Ethereum Core Devs channel card">
+                <div class="channel-header">
+                    <div class="channel-icon">⚡</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">Ethereum Core Devs</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-17 0103Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">156</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Users</span>
+                            <span class="stat-value">23</span>
+                        </div>
+                    </div>
+                    <div class="activity-badge trend-up">
+                        <span class="trend-arrow">↗</span>
+                        <span class="change-percent">15.5%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="channel-card" tabindex="0" aria-label="Ethereum Research channel card">
+                <div class="channel-header">
+                    <div class="channel-icon">🔬</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">Ethereum Research</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-17 0103Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">89</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Users</span>
+                            <span class="stat-value">17</span>
+                        </div>
+                    </div>
+                    <div class="activity-badge trend-down">
+                        <span class="trend-arrow">↘</span>
+                        <span class="change-percent">5.2%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="channel-card" tabindex="0" aria-label="DeFi Protocols channel card">
+                <div class="channel-header">
+                    <div class="channel-icon">💸</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">DeFi Protocols</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-17 0103Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">234</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Users</span>
+                            <span class="stat-value">45</span>
+                        </div>
+                    </div>
+                    <div class="activity-badge trend-up">
+                        <span class="trend-arrow">↗</span>
+                        <span class="change-percent">28.7%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="channel-card" tabindex="0" aria-label="Layer 2 Scaling channel card">
+                <div class="channel-header">
+                    <div class="channel-icon">🛣️</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">Layer 2 Scaling</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-17 0103Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">67</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Users</span>
+                            <span class="stat-value">12</span>
+                        </div>
+                    </div>
+                    <div class="activity-badge trend-down">
+                        <span class="trend-arrow">↘</span>
+                        <span class="change-percent">2.1%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="channel-card" tabindex="0" aria-label="NFT Ecosystem channel card">
+                <div class="channel-header">
+                    <div class="channel-icon">🖼️</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">NFT Ecosystem</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-17 0103Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">189</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Users</span>
+                            <span class="stat-value">34</span>
+                        </div>
+                    </div>
+                    <div class="activity-badge trend-up">
+                        <span class="trend-arrow">↗</span>
+                        <span class="change-percent">42.3%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="channel-card" tabindex="0" aria-label="DAO Governance channel card">
+                <div class="channel-header">
+                    <div class="channel-icon">🏛️</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">DAO Governance</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-17 0103Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">45</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Users</span>
+                            <span class="stat-value">8</span>
+                        </div>
+                    </div>
+                    <div class="activity-badge trend-up">
+                        <span class="trend-arrow">↗</span>
+                        <span class="change-percent">12.8%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="channel-card" tabindex="0" aria-label="Security Audits channel card">
+                <div class="channel-header">
+                    <div class="channel-icon">🛡️</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">Security Audits</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-17 0103Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">78</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Users</span>
+                            <span class="stat-value">15</span>
+                        </div>
+                    </div>
+                    <div class="activity-badge trend-down">
+                        <span class="trend-arrow">↘</span>
+                        <span class="change-percent">8.9%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="channel-card" tabindex="0" aria-label="Developer Tools channel card">
+                <div class="channel-header">
+                    <div class="channel-icon">🛠️</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">Developer Tools</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-17 0103Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">123</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Users</span>
+                            <span class="stat-value">28</span>
+                        </div>
+                    </div>
+                    <div class="activity-badge trend-up">
+                        <span class="trend-arrow">↗</span>
+                        <span class="change-percent">19.4%</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    <footer class="site-footer">
+        <p>Generated by Wartime Milady CEO Intelligence Platform</p>
+        <p>Data updated: 2025-07-17 0103Z</p>
+    </footer>
+</body>
+</html>
