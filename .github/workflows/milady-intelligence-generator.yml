@@ -1,0 +1,41 @@
+name: Wartime Milady CEO Intelligence Generator
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-milady-intelligence:
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install supabase psycopg2-binary
+      - name: Generate channels data from database
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/generate_milady_data.py
+      - name: Generate Wartime Milady CEO homepage
+        run: python generator.py
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add ./data/channels.json
+          git add ./website/index.html
+          git add ./website/assets/
+          git commit -m "🤖 Update Wartime Milady CEO Intelligence Platform $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
+          git push
