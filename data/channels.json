@@ -1,100 +1,88 @@
 {
-  "generated_at": "2025-07-17T01:03:11Z",
-  "total_channels": 8,
+  "generated_at": "2025-07-17T01:23:52Z",
+  "total_channels": 7,
   "channels": [
     {
-      "id": "ethereum-core-devs",
-      "name": "Ethereum Core Devs",
-      "icon": "\u26a1",
-      "last_update": "2025-07-17T01:03:11Z",
+      "id": "-1002009589709",
+      "name": "Tevm",
+      "icon": "👥",
+      "last_update": "2025-07-17T01:23:52Z",
       "stats": {
-        "messages_24h": 156,
-        "participants_24h": 23,
-        "change_percent": 15.5,
-        "trend": "up"
-      }
-    },
-    {
-      "id": "ethresearch",
-      "name": "Ethereum Research",
-      "icon": "\ud83d\udd2c",
-      "last_update": "2025-07-17T01:03:11Z",
-      "stats": {
-        "messages_24h": 89,
-        "participants_24h": 17,
-        "change_percent": -5.2,
-        "trend": "down"
-      }
-    },
-    {
-      "id": "defi-protocols",
-      "name": "DeFi Protocols",
-      "icon": "\ud83d\udcb8",
-      "last_update": "2025-07-17T01:03:11Z",
-      "stats": {
-        "messages_24h": 234,
-        "participants_24h": 45,
-        "change_percent": 28.7,
-        "trend": "up"
-      }
-    },
-    {
-      "id": "layer2-scaling",
-      "name": "Layer 2 Scaling",
-      "icon": "\ud83d\udee3\ufe0f",
-      "last_update": "2025-07-17T01:03:11Z",
-      "stats": {
-        "messages_24h": 67,
+        "messages_24h": 130,
         "participants_24h": 12,
-        "change_percent": -2.1,
-        "trend": "down"
-      }
-    },
-    {
-      "id": "nft-ecosystem",
-      "name": "NFT Ecosystem",
-      "icon": "\ud83d\uddbc\ufe0f",
-      "last_update": "2025-07-17T01:03:11Z",
-      "stats": {
-        "messages_24h": 189,
-        "participants_24h": 34,
-        "change_percent": 42.3,
+        "change_percent": 100,
         "trend": "up"
       }
     },
     {
-      "id": "governance",
-      "name": "DAO Governance",
-      "icon": "\ud83c\udfdb\ufe0f",
-      "last_update": "2025-07-17T01:03:11Z",
+      "id": "-1002682777986",
+      "name": "Flashbots_X Core",
+      "icon": "👥",
+      "last_update": "2025-07-17T01:23:52Z",
       "stats": {
-        "messages_24h": 45,
-        "participants_24h": 8,
-        "change_percent": 12.8,
+        "messages_24h": 15,
+        "participants_24h": 4,
+        "change_percent": 100,
         "trend": "up"
       }
     },
     {
-      "id": "security-audits",
-      "name": "Security Audits",
-      "icon": "\ud83d\udee1\ufe0f",
-      "last_update": "2025-07-17T01:03:11Z",
+      "id": "706956651",
+      "name": null,
+      "icon": "💬",
+      "last_update": "2025-07-17T01:23:52Z",
       "stats": {
-        "messages_24h": 78,
-        "participants_24h": 15,
-        "change_percent": -8.9,
-        "trend": "down"
+        "messages_24h": 10,
+        "participants_24h": 1,
+        "change_percent": 100,
+        "trend": "up"
       }
     },
     {
-      "id": "developer-tools",
-      "name": "Developer Tools",
-      "icon": "\ud83d\udee0\ufe0f",
-      "last_update": "2025-07-17T01:03:11Z",
+      "id": "-1002412320552",
+      "name": "Fault Tolerant Frens",
+      "icon": "👥",
+      "last_update": "2025-07-17T01:23:52Z",
       "stats": {
-        "messages_24h": 123,
-        "participants_24h": 28,
-        "change_percent": 19.4,
+        "messages_24h": 4,
+        "participants_24h": 2,
+        "change_percent": 100,
+        "trend": "up"
+      }
+    },
+    {
+      "id": "-1002109810685",
+      "name": "libp2p",
+      "icon": "👥",
+      "last_update": "2025-07-17T01:23:52Z",
+      "stats": {
+        "messages_24h": 3,
+        "participants_24h": 3,
+        "change_percent": 100,
+        "trend": "up"
+      }
+    },
+    {
+      "id": "-1002276686237",
+      "name": "L2 Interop Working Group",
+      "icon": "👥",
+      "last_update": "2025-07-17T01:23:52Z",
+      "stats": {
+        "messages_24h": 1,
+        "participants_24h": 1,
+        "change_percent": 100,
+        "trend": "up"
+      }
+    },
+    {
+      "id": "1787666834",
+      "name": null,
+      "icon": "💬",
+      "last_update": "2025-07-17T01:23:52Z",
+      "stats": {
+        "messages_24h": 1,
+        "participants_24h": 1,
+        "change_percent": 100,
         "trend": "up"
       }
     }
