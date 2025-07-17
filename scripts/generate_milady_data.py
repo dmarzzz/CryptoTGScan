@@ -72,7 +72,7 @@ def get_chat_icon(chat_type, title):
     """
     Get appropriate icon for chat type
     """
-    title_lower = title.lower()
+    title_lower = (title or '').lower()
     
     # Channel-specific icons
     if "ethereum" in title_lower and "core" in title_lower:
