@@ -1,12 +1,12 @@
 {
-  "generated_at": "2025-07-17T01:31:27Z",
-  "total_channels": 7,
+  "generated_at": "2025-07-17T01:33:01Z",
+  "total_channels": 5,
   "channels": [
     {
       "id": "-1002009589709",
       "name": "Tevm",
       "icon": "👥",
-      "last_update": "2025-07-17T01:31:27Z",
+      "last_update": "2025-07-17T01:33:01Z",
       "stats": {
         "messages_24h": 130,
         "participants_24h": 12,
@@ -18,7 +18,7 @@
       "id": "-1002682777986",
       "name": "Flashbots_X Core",
       "icon": "👥",
-      "last_update": "2025-07-17T01:31:27Z",
+      "last_update": "2025-07-17T01:33:01Z",
       "stats": {
         "messages_24h": 15,
         "participants_24h": 4,
@@ -27,22 +27,10 @@
       }
     },
     {
-      "id": "706956651",
-      "name": null,
-      "icon": "💬",
-      "last_update": "2025-07-17T01:31:27Z",
-      "stats": {
-        "messages_24h": 10,
-        "participants_24h": 1,
-        "change_percent": 100,
-        "trend": "up"
-      }
-    },
-    {
       "id": "-1002412320552",
       "name": "Fault Tolerant Frens",
       "icon": "👥",
-      "last_update": "2025-07-17T01:31:27Z",
+      "last_update": "2025-07-17T01:33:01Z",
       "stats": {
         "messages_24h": 4,
         "participants_24h": 2,
@@ -54,7 +42,7 @@
       "id": "-1002109810685",
       "name": "libp2p",
       "icon": "👥",
-      "last_update": "2025-07-17T01:31:27Z",
+      "last_update": "2025-07-17T01:33:01Z",
       "stats": {
         "messages_24h": 3,
         "participants_24h": 3,
@@ -66,19 +54,7 @@
       "id": "-1002276686237",
       "name": "L2 Interop Working Group",
       "icon": "👥",
-      "last_update": "2025-07-17T01:31:27Z",
-      "stats": {
-        "messages_24h": 1,
-        "participants_24h": 1,
-        "change_percent": 100,
-        "trend": "up"
-      }
-    },
-    {
-      "id": "1787666834",
-      "name": null,
-      "icon": "💬",
-      "last_update": "2025-07-17T01:31:27Z",
+      "last_update": "2025-07-17T01:33:01Z",
       "stats": {
         "messages_24h": 1,
         "participants_24h": 1,
