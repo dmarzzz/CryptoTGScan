@@ -165,6 +165,32 @@ h1.site-title {
   background: linear-gradient(45deg, transparent 50%, #FF006E 50%);
   opacity: 0.3;
 }
+
+/* Add terminal-style decoration to header */
+.header-container::before {
+  content: ' * ]';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: 'Space Mono', monospace;
+  color: #00FF00;
+  opacity: 0.6;
+  animation: blink 2s infinite;
+}
+
+/* Add matrix-rain effect with pseudo elements (very lightweight) */
+.header-container::after {
+  content: ' 10111 11101 11110 11011110011001';
+  position: absolute;
+  bottom: 0.5em;
+  left: 1rem;
+  font-size: 0.7rem;
+  font-family: monospace;
+  color: #00F5FF;
+  opacity: 0.2;
+  letter-spacing: 0.2em;
+}
+
 .scan-lines::before {
   content: '';
   position: fixed;
@@ -292,17 +318,6 @@ h1.site-title {
 ::selection {
   background: #FF006E;
   color: #0A0A0A;
-}
-::-webkit-scrollbar {
-  width: 12px;
-}
-::-webkit-scrollbar-track {
-  background: #0A0A0A;
-  border: 1px solid #1A1A1A;
-}
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #FF006E, #00F5FF);
-  border-radius: 6px;
 }
 .site-footer {
   margin-top: 4rem;
@@ -448,10 +463,10 @@ h1.site-title {
         
             </div>
             <div class="header-text">
-                <h1 class="site-title">ETHEREUM INTELLIGENCE COMMAND</h1>
+                <h1 class="site-title">Wartime Milady CEO</h1>
                 <p class="site-subtitle">Monitoring 5 channels across the frontlines</p>
                 <div class="status-bar">
-                    <span class="timestamp">2025-07-17 0234Z</span>
+                    <span class="timestamp">2025-07-17 0305Z</span>
                     <span class="status-indicator" aria-live="polite">● SYSTEMS ONLINE</span>
                 </div>
             </div>
@@ -466,7 +481,7 @@ h1.site-title {
                     <div class="channel-info">
                         <h3 class="channel-name">Tevm</h3>
                         <div class="channel-meta">
-                            <span class="last-update">Last: 2025-07-17 0234Z</span>
+                            <span class="last-update">Last: 2025-07-17 0305Z</span>
                         </div>
                     </div>
                 </div>
@@ -474,10 +489,10 @@ h1.site-title {
                     <div class="stat-row">
                         <div class="stat-item">
                             <span class="stat-label">Messages</span>
-                            <span class="stat-value">142</span>
+                            <span class="stat-value">143</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Users</span>
+                            <span class="stat-label">Participants</span>
                             <span class="stat-value">12</span>
                         </div>
                     </div>
@@ -494,7 +509,7 @@ h1.site-title {
                     <div class="channel-info">
                         <h3 class="channel-name">Flashbots_X Core</h3>
                         <div class="channel-meta">
-                            <span class="last-update">Last: 2025-07-17 0234Z</span>
+                            <span class="last-update">Last: 2025-07-17 0305Z</span>
                         </div>
                     </div>
                 </div>
@@ -502,16 +517,16 @@ h1.site-title {
                     <div class="stat-row">
                         <div class="stat-item">
                             <span class="stat-label">Messages</span>
-                            <span class="stat-value">15</span>
+                            <span class="stat-value">14</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Users</span>
-                            <span class="stat-value">3</span>
+                            <span class="stat-label">Participants</span>
+                            <span class="stat-value">2</span>
                         </div>
                     </div>
                     <div class="activity-badge trend-up">
                         <span class="trend-arrow">↗</span>
-                        <span class="change-percent">1400.0%</span>
+                        <span class="change-percent">600.0%</span>
                     </div>
                 </div>
             </div>
@@ -522,7 +537,7 @@ h1.site-title {
                     <div class="channel-info">
                         <h3 class="channel-name">Fault Tolerant Frens</h3>
                         <div class="channel-meta">
-                            <span class="last-update">Last: 2025-07-17 0234Z</span>
+                            <span class="last-update">Last: 2025-07-17 0305Z</span>
                         </div>
                     </div>
                 </div>
@@ -533,7 +548,7 @@ h1.site-title {
                             <span class="stat-value">4</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Users</span>
+                            <span class="stat-label">Participants</span>
                             <span class="stat-value">2</span>
                         </div>
                     </div>
@@ -550,7 +565,7 @@ h1.site-title {
                     <div class="channel-info">
                         <h3 class="channel-name">libp2p</h3>
                         <div class="channel-meta">
-                            <span class="last-update">Last: 2025-07-17 0234Z</span>
+                            <span class="last-update">Last: 2025-07-17 0305Z</span>
                         </div>
                     </div>
                 </div>
@@ -561,7 +576,7 @@ h1.site-title {
                             <span class="stat-value">3</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Users</span>
+                            <span class="stat-label">Participants</span>
                             <span class="stat-value">3</span>
                         </div>
                     </div>
@@ -578,7 +593,7 @@ h1.site-title {
                     <div class="channel-info">
                         <h3 class="channel-name">L2 Interop Working Group</h3>
                         <div class="channel-meta">
-                            <span class="last-update">Last: 2025-07-17 0234Z</span>
+                            <span class="last-update">Last: 2025-07-17 0305Z</span>
                         </div>
                     </div>
                 </div>
@@ -589,7 +604,7 @@ h1.site-title {
                             <span class="stat-value">1</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Users</span>
+                            <span class="stat-label">Participants</span>
                             <span class="stat-value">1</span>
                         </div>
                     </div>
@@ -604,7 +619,7 @@ h1.site-title {
     </main>
     <footer class="site-footer">
         <p>Generated by Wartime Milady CEO Intelligence Platform</p>
-        <p>Data updated: 2025-07-17 0234Z</p>
+        <p>Data updated: 2025-07-17 0305Z</p>
     </footer>
 </body>
 </html>
