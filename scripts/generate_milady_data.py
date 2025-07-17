@@ -127,7 +127,18 @@ def get_active_chats():
     # Get chat details - use select('*') like the working script
     chats_response = supabase.table('chats_v1').select('*').in_('chat_id', list(chat_ids)).execute()
     
-    return chats_response.data
+    # Filter out private chats and chats with no title
+    filtered_chats = []
+    for chat in chats_response.data:
+        # Skip private chats (DMs)
+        if chat.get('chat_type') == 'private':
+            continue
+        # Skip chats with no title
+        if not chat.get('title'):
+            continue
+        filtered_chats.append(chat)
+    
+    return filtered_chats
 
 def generate_channels_data():
     """
