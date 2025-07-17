@@ -424,48 +424,13 @@ h1.site-title {
   padding: 1.5rem;
   position: relative;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
   cursor: pointer;
 }
-.channel-card::after {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 100%; height: 100%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(255,0,110,0.1) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.channel-card:hover::after {
-  opacity: 1;
-}
-.channel-card::before {
-  content: '';
-  position: absolute;
-  top: -3px; left: -3px; right: -3px; bottom: -3px;
-  background: linear-gradient(45deg, #FF006E, #00F5FF, #00FF00, #FF006E);
-  border-radius: 12px;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s;
-  background-size: 400% 400%;
-  animation: gradient-shift 3s ease infinite;
-}
-.channel-card:hover::before {
-  opacity: 1;
-}
 .channel-card:hover {
-  transform: translateY(-4px) scale(1.02);
-  border-color: transparent;
-  box-shadow:
-    0 10px 40px rgba(255,0,110,0.3),
-    0 0 60px rgba(255,0,110,0.2);
-}
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  transform: translateY(-2px);
+  border-color: #00F5FF;
+  box-shadow: 0 4px 24px rgba(0,245,255,0.15);
 }
 .activity-badge {
   background: linear-gradient(135deg, rgba(0,255,0,0.3), rgba(0,255,0,0.1));
