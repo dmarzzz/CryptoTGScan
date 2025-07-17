@@ -162,7 +162,7 @@ class MiladySiteGenerator:
                             <span class="stat-value">{channel['stats']['messages_24h']}</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Users</span>
+                            <span class="stat-label">Participants</span>
                             <span class="stat-value">{channel['stats']['participants_24h']}</span>
                         </div>
                     </div>
@@ -380,6 +380,32 @@ h1.site-title {
   background: linear-gradient(45deg, transparent 50%, #FF006E 50%);
   opacity: 0.3;
 }
+
+/* Add terminal-style decoration to header */
+.header-container::before {
+  content: ' * ]';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: 'Space Mono', monospace;
+  color: #00FF00;
+  opacity: 0.6;
+  animation: blink 2s infinite;
+}
+
+/* Add matrix-rain effect with pseudo elements (very lightweight) */
+.header-container::after {
+  content: ' 10111 11101 11110 11011110011001';
+  position: absolute;
+  bottom: 0.5em;
+  left: 1rem;
+  font-size: 0.7rem;
+  font-family: monospace;
+  color: #00F5FF;
+  opacity: 0.2;
+  letter-spacing: 0.2em;
+}
+
 .scan-lines::before {
   content: '';
   position: fixed;
