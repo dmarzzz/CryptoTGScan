@@ -200,7 +200,7 @@ class MiladySiteGenerator:
                 {avatar_html}
             </div>
             <div class="header-text">
-                <h1 class="site-title">ETHEREUM INTELLIGENCE COMMAND</h1>
+                <h1 class="site-title">Wartime Milady CEO</h1>
                 <p class="site-subtitle">Monitoring {data['total_channels']} channels across the frontlines</p>
                 <div class="status-bar">
                     <span class="timestamp">{current_time}</span>
@@ -507,17 +507,6 @@ h1.site-title {
 ::selection {
   background: #FF006E;
   color: #0A0A0A;
-}
-::-webkit-scrollbar {
-  width: 12px;
-}
-::-webkit-scrollbar-track {
-  background: #0A0A0A;
-  border: 1px solid #1A1A1A;
-}
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #FF006E, #00F5FF);
-  border-radius: 6px;
 }
 .site-footer {
   margin-top: 4rem;
