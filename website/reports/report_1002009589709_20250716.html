@@ -222,6 +222,18 @@ h1.site-title {
   letter-spacing: 0.1em;
 }
 
+.section-note {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 0, 110, 0.2);
+  border-radius: 6px;
+  font-style: italic;
+}
+
 .message-list {
   display: flex;
   flex-direction: column;
@@ -341,7 +353,7 @@ h1.site-title {
                 <h1 class="site-title">Tevm</h1>
                 <p class="site-subtitle">Intelligence Report - 2025-07-16 to 2025-07-17</p>
                 <div class="status-bar">
-                    <span class="timestamp">2025-07-18 0336Z</span>
+                    <span class="timestamp">2025-07-18 0343Z</span>
                     <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
                 </div>
             </div>
@@ -368,6 +380,7 @@ h1.site-title {
         
         <div class="messages-section">
             <h2 class="section-title">Recent Messages</h2>
+            <p class="section-note">Showing up to 200 most recent messages from this period. Total messages: 152</p>
             <div class="message-list">
 
                 <div class="message-item">
@@ -823,13 +836,935 @@ https://x.com/FUCORY/status/1945628654236831849</div>
                     <span class="message-type-badge">text</span>
                 </div>
 
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2340Z</span>
+                    </div>
+                    <div class="message-text">send latin by default or chinese by default depending on locale</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2337Z</span>
+                    </div>
+                    <div class="message-text">lol clever you could do that the thing I'm optimizing is essentially the groups so you can chunk the groups and inject them at runtime</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-16 2337Z</span>
+                    </div>
+                    <div class="message-text">i bet 90% are ascii-only</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-16 2337Z</span>
+                    </div>
+                    <div class="message-text">crazy idea: several implementations, choose one based on the alphabet included in the query lol</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2331Z</span>
+                    </div>
+                    <div class="message-text">that would be better IMO if you had to do a lot of ens normalization if you only had to do minimal I would prefer the cloudflare approach</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2330Z</span>
+                    </div>
+                    <div class="message-text">you can always code split</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-16 2328Z</span>
+                    </div>
+                    <div class="message-text">could you just split it out into another bundle and load it on-demand?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-16 2328Z</span>
+                    </div>
+                    <div class="message-text">why do you need ENS support?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2321Z</span>
+                    </div>
+                    <div class="message-text">Your best bet is to stick it in a cloudflare worker if you care about bundle size</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2320Z</span>
+                    </div>
+                    <div class="message-text">In reality there is no optimization I can do that will make this not be a pretty huge bundle hit if you choose to use this</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2320Z</span>
+                    </div>
+                    <div class="message-text">Might be overoptimization but it's a good exercise</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2319Z</span>
+                    </div>
+                    <div class="message-text">I don't know if anyone else is handling the part I'm optimizing right now same way as me. Most implementations are using a json file turned into a hash map. I'm microoptimizing bundle size without giving up perf</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2318Z</span>
+                    </div>
+                    <div class="message-text">Narrator: He was correct</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2316Z</span>
+                    </div>
+                    <div class="message-text">Outside of making sure tests get locked in all vibes</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2316Z</span>
+                    </div>
+                    <div class="message-text">Test cases are the main thing driving it</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2315Z</span>
+                    </div>
+                    <div class="message-text">I have only gotten involved with my own hands in past few hours haha. The past 24+ hours have been all claude with minimal steering from myself</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2314Z</span>
+                    </div>
+                    <div class="message-text">but told it to favor c# and java because that's what raffy said to prefer</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2314Z</span>
+                    </div>
+                    <div class="message-text">I fed EVERY implementation into claude and asked it to rewrite it to zig lol</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 2314Z</span>
+                    </div>
+                    <div class="message-text">I need to sleep now anyway</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 2313Z</span>
+                    </div>
+                    <div class="message-text">I guess that</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 2313Z</span>
+                    </div>
+                    <div class="message-text">no clue</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2313Z</span>
+                    </div>
+                    <div class="message-text">my brother in christ, what do you think I'm doing?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 2313Z</span>
+                    </div>
+                    <div class="message-text">stupid idea: feed raffy's lib to Claude and ask to rewrite it to zig</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2310Z</span>
+                    </div>
+                    <div class="message-text">So my entire design I came up with after going back and forth with claude is dependent on the idea that most groups like latin, greek etc. are gonna be bunched together in ranges in unicode. If that assumption ever becomes false my architecture will fall apart</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2142Z</span>
+                    </div>
+                    <div class="message-text">claude thinks I'm brilliant!</div>
+                    <span class="message-type-badge">photo</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 2046Z</span>
+                    </div>
+                    <div class="message-text">The last 5% of the work here I don't think claude would have ever figured out without me stepping in</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1943Z</span>
+                    </div>
+                    <div class="message-text">Are script group rules overengineering or good? I actually can't decide. A script group basically means you can't intentionally do something like use Latin letters and then replace one of the letters with a greek letter that looks the same as a phishing attack.</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Sam Bacha</span>
+                        <span class="message-time">2025-07-16 1928Z</span>
+                    </div>
+                    <div class="message-text">i for one welcome my techno fueled  lunching by our overlords</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Eric Forgy</span>
+                        <span class="message-time">2025-07-16 1916Z</span>
+                    </div>
+                    <div class="message-text">None</div>
+                    <span class="message-type-badge">photo</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Sam Bacha</span>
+                        <span class="message-time">2025-07-16 1850Z</span>
+                    </div>
+                    <div class="message-text">what have i done</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Eric Forgy</span>
+                        <span class="message-time">2025-07-16 1848Z</span>
+                    </div>
+                    <div class="message-text">It is important to be nice to our Overlords for the day they take over.</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1836Z</span>
+                    </div>
+                    <div class="message-text">I can't stop being a toxic boss</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1835Z</span>
+                    </div>
+                    <div class="message-text">None</div>
+                    <span class="message-type-badge">photo</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1820Z</span>
+                    </div>
+                    <div class="message-text">Claude did a pretty good job vibe debugging getting pretty close to passing all tests</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1635Z</span>
+                    </div>
+                    <div class="message-text">My ideas have the power to be "leaky"</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1635Z</span>
+                    </div>
+                    <div class="message-text">Yea this is at the minimum conceptually simple though. Here are a bunch of rules of how to parse and if we hide all the complexity into these rules nothing else is complex</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-16 1631Z</span>
+                    </div>
+                    <div class="message-text">maybe a few instances of ultrathink will hammer it out lol</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-16 1631Z</span>
+                    </div>
+                    <div class="message-text">i won't argue that it can't be any simpler, but i will argue that we need a forcing function to universally support the necessary abstractions and right now we're successfully achieving that... but i hope we find ways to simplify/abstract it!</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1624Z</span>
+                    </div>
+                    <div class="message-text">My intuiotion is it will make some things less complex but overall add more complexity than it would remove to do that</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1623Z</span>
+                    </div>
+                    <div class="message-text">Is it possible to be simpler while still enabling this though? Like I thought there might be a design where you gotta kinda strongly type what your bytes are doing with some kinda schema encoded in the first N bytes or stored alongside the string</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-16 1621Z</span>
+                    </div>
+                    <div class="message-text">imagine all the dapps built today with the assumption of 38 char alphabet that would completely break if we added unicode later</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-16 1620Z</span>
+                    </div>
+                    <div class="message-text">plus, unicode forces more generalizing the idea of encoding/decoding the visual name to a storage space, and potentially opens up space for increasing the alphabet space even further in the future (whatever future thing we improve unicode with)... on the other hand, doing a naive ascii 38 character approach, it'd be a very bitcoin mentality, we'd be stuck in a rut that we couldn't dig ourselves out because the logic of scaling the namespace would just be too drastically different</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1620Z</span>
+                    </div>
+                    <div class="message-text">Also this feature is sick</div>
+                    <span class="message-type-badge">photo</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1619Z</span>
+                    </div>
+                    <div class="message-text">that makes sense</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-16 1619Z</span>
+                    </div>
+                    <div class="message-text">unicode takes on a lot more complexity, but feels like a much more robust long term vision</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-16 1618Z</span>
+                    </div>
+                    <div class="message-text">@fucory the way i think about ENS's complexity wrt unicode: naive choice was to just do something simple like strict ascii... but then you still end up having ambiguity resolving, so force lowercase ascii? remove special characters? you end up with a namespace alphabet of like 38-46 characters which is kinda weak (a-z0-9_-</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1600Z</span>
+                    </div>
+                    <div class="message-text">Claude got maybe a few more hours before I step in and do hand crafted artisan debugging</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1559Z</span>
+                    </div>
+                    <div class="message-text">Still vibe debugging the amount of test cases including fuzz tests is kinda hilarious</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1558Z</span>
+                    </div>
+                    <div class="message-text">Curious what claude found lol</div>
+                    <span class="message-type-badge">photo</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">amorfati</span>
+                        <span class="message-time">2025-07-16 1241Z</span>
+                    </div>
+                    <div class="message-text">he'll be done with that soon</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">amorfati</span>
+                        <span class="message-time">2025-07-16 1241Z</span>
+                    </div>
+                    <div class="message-text">home confinement</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Sebastian (won't dm first)</span>
+                        <span class="message-time">2025-07-16 1209Z</span>
+                    </div>
+                    <div class="message-text">I know this face</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 1158Z</span>
+                    </div>
+                    <div class="message-text">he's in transitional custody now, based on what his site says:
+
+https://virgil.gr/</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1148Z</span>
+                    </div>
+                    <div class="message-text">Can't wait for cursor or opencode to add mobile app about to go to gym and let it keep vibe debugging</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1146Z</span>
+                    </div>
+                    <div class="message-text">vibe debugging tests that are still failing now</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1142Z</span>
+                    </div>
+                    <div class="message-text">Very long time ago wow</div>
+                    <span class="message-type-badge">photo</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Simon Emanuel ses.eth | ENS Labs</span>
+                        <span class="message-time">2025-07-16 1139Z</span>
+                    </div>
+                    <div class="message-text">Correct, I joined ENS Labs beginning of June</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1137Z</span>
+                    </div>
+                    <div class="message-text">@schmidsi I think you were at edge and node the graph last time we met each other welcome</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1135Z</span>
+                    </div>
+                    <div class="message-text">Pushed latest code https://github.com/evmts/z-ens-normalize</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Simon Emanuel ses.eth | ENS Labs</span>
+                        <span class="message-time">2025-07-16 1134Z</span>
+                    </div>
+                    <div class="message-text">None</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 1056Z</span>
+                    </div>
+                    <div class="message-text">now it's back to what was ther ebefore</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 1056Z</span>
+                    </div>
+                    <div class="message-text">i changed my username because i had to talk to normies and couldn't use my shitposting pfp + nickname</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1055Z</span>
+                    </div>
+                    <div class="message-text">Oh I knew that I think my telegram was bugging out and showing you under a different name</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">GB</span>
+                        <span class="message-time">2025-07-16 1052Z</span>
+                    </div>
+                    <div class="message-text">well it is but lol</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">GB</span>
+                        <span class="message-time">2025-07-16 1051Z</span>
+                    </div>
+                    <div class="message-text">it's not ens problem that unicode is complicated</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 1048Z</span>
+                    </div>
+                    <div class="message-text">for over a year</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 1048Z</span>
+                    </div>
+                    <div class="message-text">I work there currently</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1047Z</span>
+                    </div>
+                    <div class="message-text">Do you work at or previously work at ens @leshnichiyy ?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1046Z</span>
+                    </div>
+                    <div class="message-text">I understand that</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 1046Z</span>
+                    </div>
+                    <div class="message-text">the complexity comes from ENS names being very permissive with what they can contain</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1034Z</span>
+                    </div>
+                    <div class="message-text">My first thought is it’s less complex if ens supports an enumerated list of schemas rather than storing and parsing an unknown string but i haven’t thought very hard about that</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1033Z</span>
+                    </div>
+                    <div class="message-text">Like my first thought is you want to support different schemas rather than parsing like this but I haven’t thought very hard about that yet</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 1031Z</span>
+                    </div>
+                    <div class="message-text">Yea and I’m still ignorant high chance as I think about it more I’ll decide it was necessary complexity</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 1006Z</span>
+                    </div>
+                    <div class="message-text">ah okay i got it, your opinion on it got worse, not ENS itself got worse</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 1005Z</span>
+                    </div>
+                    <div class="message-text">you can put a bunch of stuff into a domain, including special characters and emojis</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 1005Z</span>
+                    </div>
+                    <div class="message-text">because ENS names are quite permissive</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 1005Z</span>
+                    </div>
+                    <div class="message-text">this has been needed since forever tho</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 0958Z</span>
+                    </div>
+                    <div class="message-text">Not building that any more but when I was trying to build ens based Miniapps I had a meeting with someone from ens and I layed out every reason why ens wouldn’t work and they basically gave me early preview on the end chain before they publicallly announced it because it fixed every problem on my list lol</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 0956Z</span>
+                    </div>
+                    <div class="message-text">Also we are almost done already</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 0955Z</span>
+                    </div>
+                    <div class="message-text">I need feature parity with eth libs</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 0955Z</span>
+                    </div>
+                    <div class="message-text">No the new ens chain fixes all my problems</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">amorfati</span>
+                        <span class="message-time">2025-07-16 0955Z</span>
+                    </div>
+                    <div class="message-text">just use an API for ENS ops like normalization</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">amorfati</span>
+                        <span class="message-time">2025-07-16 0955Z</span>
+                    </div>
+                    <div class="message-text">not important. More important is I thought you were digging into the new ENS chain and had some feedback on it</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 0954Z</span>
+                    </div>
+                    <div class="message-text">Can you reword?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">amorfati</span>
+                        <span class="message-time">2025-07-16 0953Z</span>
+                    </div>
+                    <div class="message-text">do you think people perceive this as your opining changing because you think it got worse or do they ignore the ens part?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 0953Z</span>
+                    </div>
+                    <div class="message-text">This normalization library is the complexity</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 0952Z</span>
+                    </div>
+                    <div class="message-text">My opinion on ens got worse I never said ens got worse</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">amorfati</span>
+                        <span class="message-time">2025-07-16 0952Z</span>
+                    </div>
+                    <div class="message-text">ok decipher what you're trying to say about ens complexity</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 0952Z</span>
+                    </div>
+                    <div class="message-text">No you both read the message wrong</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">amorfati</span>
+                        <span class="message-time">2025-07-16 0951Z</span>
+                    </div>
+                    <div class="message-text">that's a recent addition?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 0951Z</span>
+                    </div>
+                    <div class="message-text">I fell asleep Claude coding so whatever Claude did recently was unsupervised lol</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 0944Z</span>
+                    </div>
+                    <div class="message-text">This entire normalization library</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 0943Z</span>
+                    </div>
+                    <div class="message-text">I’m implementing it right now!</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-16 0943Z</span>
+                    </div>
+                    <div class="message-text">Compared to when I was ignorant about how it worked</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">GB</span>
+                        <span class="message-time">2025-07-16 0916Z</span>
+                    </div>
+                    <div class="message-text">offchain lookup?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 0858Z</span>
+                    </div>
+                    <div class="message-text">where's the unnecessary complexity?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 0855Z</span>
+                    </div>
+                    <div class="message-text">wdym "got a lot worse now"? compared to when?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">addicted to black magick</span>
+                        <span class="message-time">2025-07-16 0855Z</span>
+                    </div>
+                    <div class="message-text">ENSv2 or ENSv1?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">yj</span>
+                        <span class="message-time">2025-07-16 0827Z</span>
+                    </div>
+                    <div class="message-text">Yeah, thought he's out since April? 
+
+https://twitter.com/aurbelis/status/1909956088490844434</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Norswap</span>
+                        <span class="message-time">2025-07-16 0438Z</span>
+                    </div>
+                    <div class="message-text">wait didn't he get freed?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Norswap</span>
+                        <span class="message-time">2025-07-16 0437Z</span>
+                    </div>
+                    <div class="message-text">Is it before or after the rapture? 😁</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Dmarz</span>
+                        <span class="message-time">2025-07-16 0406Z</span>
+                    </div>
+                    <div class="message-text">None</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
             </div>
         </div>
     </main>
     
     <footer class="site-footer">
         <p>Generated by Wartime Milady CEO Intelligence Platform</p>
-        <p>Report generated: 2025-07-18 0336Z</p>
+        <p>Report generated: 2025-07-18 0343Z</p>
     </footer>
 </body>
 </html>
