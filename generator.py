@@ -142,8 +142,6 @@ class MiladySiteGenerator:
         current_time = datetime.utcnow().strftime('%Y-%m-%d %H%MZ')
         channel_cards = []
         for channel in data['channels']:
-            trend_arrow = '↗' if channel['stats']['trend'] == 'up' else '↘'
-            trend_class = 'trend-up' if channel['stats']['trend'] == 'up' else 'trend-down'
             # Create safe filename for the report link - handle negative Telegram chat IDs
             channel_id = str(channel['id'])
             safe_filename = channel_id.replace('-', '')  # Remove minus sign for filename
@@ -168,10 +166,6 @@ class MiladySiteGenerator:
                             <span class="stat-label">Participants</span>
                             <span class="stat-value">{channel['stats']['participants_24h']}</span>
                         </div>
-                    </div>
-                    <div class="activity-badge {trend_class}">
-                        <span class="trend-arrow">{trend_arrow}</span>
-                        <span class="change-percent">{abs(channel['stats']['change_percent'])}%</span>
                     </div>
                 </div>
             </a>
@@ -464,32 +458,6 @@ h1.site-title {
   border-color: #00F5FF;
   box-shadow: 0 4px 24px rgba(0,245,255,0.15);
 }
-.activity-badge {
-  background: linear-gradient(135deg, rgba(0,255,0,0.3), rgba(0,255,0,0.1));
-  border: 2px solid #00FF00;
-  border-radius: 20px;
-  padding: 0.4rem 0.8rem;
-  font-family: 'Space Mono', monospace;
-  font-weight: 700;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
-  box-shadow:
-    inset 0 0 15px rgba(0,255,0,0.4),
-    0 0 20px rgba(0,255,0,0.6);
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow:
-      inset 0 0 15px rgba(0,255,0,0.4),
-      0 0 20px rgba(0,255,0,0.6);
-  }
-  50% {
-    box-shadow:
-      inset 0 0 20px rgba(0,255,0,0.6),
-      0 0 30px rgba(0,255,0,0.8);
-  }
-}
 .stat-value {
   font-family: 'Space Mono', monospace;
   font-weight: 700;
@@ -625,19 +593,6 @@ h1.site-title {
   flex-direction: column;
   align-items: flex-start;
 }
-.activity-badge.trend-up {
-  background: linear-gradient(135deg, rgba(0,255,0,0.3), rgba(0,255,0,0.1));
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-.activity-badge.trend-down {
-  background: linear-gradient(135deg, rgba(255,0,110,0.3), rgba(255,0,0,0.1));
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-.trend-arrow {
-  font-size: 1rem;
-}
 @media (max-width: 1024px) {
   .site-title { font-size: 2rem; }
   .header-content { flex-direction: column; text-align: center; gap: 1.5rem; }
@@ -756,10 +711,6 @@ h1.site-title {
             <div class="stat-card">
                 <div class="stat-value">{channel['stats']['participants_24h']}</div>
                 <div class="stat-label">Active Participants</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">{channel['stats']['change_percent']}%</div>
-                <div class="stat-label">Activity Change</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">3</div>

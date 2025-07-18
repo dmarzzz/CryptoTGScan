@@ -246,32 +246,6 @@ h1.site-title {
   border-color: #00F5FF;
   box-shadow: 0 4px 24px rgba(0,245,255,0.15);
 }
-.activity-badge {
-  background: linear-gradient(135deg, rgba(0,255,0,0.3), rgba(0,255,0,0.1));
-  border: 2px solid #00FF00;
-  border-radius: 20px;
-  padding: 0.4rem 0.8rem;
-  font-family: 'Space Mono', monospace;
-  font-weight: 700;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
-  box-shadow:
-    inset 0 0 15px rgba(0,255,0,0.4),
-    0 0 20px rgba(0,255,0,0.6);
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow:
-      inset 0 0 15px rgba(0,255,0,0.4),
-      0 0 20px rgba(0,255,0,0.6);
-  }
-  50% {
-    box-shadow:
-      inset 0 0 20px rgba(0,255,0,0.6),
-      0 0 30px rgba(0,255,0,0.8);
-  }
-}
 .stat-value {
   font-family: 'Space Mono', monospace;
   font-weight: 700;
@@ -407,19 +381,6 @@ h1.site-title {
   flex-direction: column;
   align-items: flex-start;
 }
-.activity-badge.trend-up {
-  background: linear-gradient(135deg, rgba(0,255,0,0.3), rgba(0,255,0,0.1));
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-.activity-badge.trend-down {
-  background: linear-gradient(135deg, rgba(255,0,110,0.3), rgba(255,0,0,0.1));
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-.trend-arrow {
-  font-size: 1rem;
-}
 @media (max-width: 1024px) {
   .site-title { font-size: 2rem; }
   .header-content { flex-direction: column; text-align: center; gap: 1.5rem; }
@@ -469,7 +430,7 @@ h1.site-title {
                 <h1 class="site-title">Wartime Milady CEO</h1>
                 <p class="site-subtitle">Monitoring 5 channels across the frontlines</p>
                 <div class="status-bar">
-                    <span class="timestamp">2025-07-18 0233Z</span>
+                    <span class="timestamp">2025-07-18 0239Z</span>
                     <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
                 </div>
             </div>
@@ -499,10 +460,6 @@ h1.site-title {
                             <span class="stat-value">14</span>
                         </div>
                     </div>
-                    <div class="activity-badge trend-up">
-                        <span class="trend-arrow">↗</span>
-                        <span class="change-percent">41.5%</span>
-                    </div>
                 </div>
             </a>
             
@@ -526,10 +483,6 @@ h1.site-title {
                             <span class="stat-label">Participants</span>
                             <span class="stat-value">4</span>
                         </div>
-                    </div>
-                    <div class="activity-badge trend-up">
-                        <span class="trend-arrow">↗</span>
-                        <span class="change-percent">325.0%</span>
                     </div>
                 </div>
             </a>
@@ -555,10 +508,6 @@ h1.site-title {
                             <span class="stat-value">10</span>
                         </div>
                     </div>
-                    <div class="activity-badge trend-up">
-                        <span class="trend-arrow">↗</span>
-                        <span class="change-percent">1400.0%</span>
-                    </div>
                 </div>
             </a>
             
@@ -583,10 +532,6 @@ h1.site-title {
                             <span class="stat-value">6</span>
                         </div>
                     </div>
-                    <div class="activity-badge trend-down">
-                        <span class="trend-arrow">↘</span>
-                        <span class="change-percent">20.0%</span>
-                    </div>
                 </div>
             </a>
             
@@ -610,10 +555,6 @@ h1.site-title {
                             <span class="stat-label">Participants</span>
                             <span class="stat-value">2</span>
                         </div>
-                    </div>
-                    <div class="activity-badge trend-up">
-                        <span class="trend-arrow">↗</span>
-                        <span class="change-percent">33.3%</span>
                     </div>
                 </div>
             </a>
