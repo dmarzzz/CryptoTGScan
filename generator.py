@@ -171,6 +171,17 @@ class MiladySiteGenerator:
             </div>
             '''
             channel_cards.append(card_html)
+        
+        # Load and embed the metadata directly
+        metadata_file = Path('website/reports/metadata.json')
+        reports_metadata = {}
+        if metadata_file.exists():
+            try:
+                with open(metadata_file, 'r', encoding='utf-8') as f:
+                    reports_metadata = json.load(f)
+            except Exception as e:
+                print(f"Warning: Could not load metadata.json: {e}")
+        
         # Use the static wartimemiladyceo.jpg for the avatar
         avatar_html = '''
             <img src="assets/wartimemiladyceo.jpg" alt="Wartime Milady CEO avatar" class="avatar-img" width="120" height="120" loading="lazy" style="display:block; border-radius:50%; object-fit:cover; background:#222;" onerror="this.style.display='none';this.parentNode.querySelector('.avatar-fallback').style.display='flex';">
@@ -231,25 +242,8 @@ class MiladySiteGenerator:
     </footer>
     
     <script>
-        let reportsMetadata = null;
-        
-        // Load reports metadata
-        fetch('reports/metadata.json')
-            .then(response => {{
-                console.log('Metadata fetch response status:', response.status);
-                if (!response.ok) {{
-                    throw new Error(`HTTP error! status: ${{response.status}}`);
-                }}
-                return response.json();
-            }})
-            .then(data => {{
-                console.log('Metadata loaded successfully:', data);
-                reportsMetadata = data;
-            }})
-            .catch(error => {{
-                console.error('Error loading reports metadata:', error);
-                reportsMetadata = {{}};
-            }});
+        // Embed metadata directly in the HTML to avoid CORS issues
+        const reportsMetadata = {json.dumps(reports_metadata)};
         
         function showReportSelector(chatId, chatName) {{
             const popup = document.getElementById('reportPopup');
@@ -261,17 +255,6 @@ class MiladySiteGenerator:
             
             title.textContent = `Select Report - ${{chatName}}`;
             
-            // Show loading state first
-            reportList.innerHTML = '<p class="no-reports">Loading reports...</p>';
-            popup.style.display = 'flex';
-            
-            // If metadata is not loaded yet, wait a bit and retry
-            if (!reportsMetadata) {{
-                console.log('Metadata not loaded yet, waiting...');
-                setTimeout(() => showReportSelector(chatId, chatName), 500);
-                return;
-            }}
-            
             // Remove minus sign from chat ID for metadata lookup
             const metadataKey = chatId.replace('-', '');
             console.log('Looking for metadata key:', metadataKey);
@@ -280,6 +263,7 @@ class MiladySiteGenerator:
                 console.log('No reports found for key:', metadataKey);
                 console.log('Available keys:', Object.keys(reportsMetadata));
                 reportList.innerHTML = '<p class="no-reports">No reports available for this channel.</p>';
+                popup.style.display = 'flex';
                 return;
             }}
             
@@ -305,6 +289,7 @@ class MiladySiteGenerator:
             }});
             
             reportList.innerHTML = html;
+            popup.style.display = 'flex';
         }}
         
         function closeReportSelector() {{

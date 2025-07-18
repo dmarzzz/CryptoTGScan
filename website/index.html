@@ -552,7 +552,7 @@ h1.site-title {
                 <h1 class="site-title">Wartime Milady CEO</h1>
                 <p class="site-subtitle">Monitoring 5 channels across the frontlines</p>
                 <div class="status-bar">
-                    <span class="timestamp">2025-07-18 0325Z</span>
+                    <span class="timestamp">2025-07-18 0328Z</span>
                     <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
                 </div>
             </div>
@@ -703,25 +703,8 @@ h1.site-title {
     </footer>
     
     <script>
-        let reportsMetadata = null;
-        
-        // Load reports metadata
-        fetch('reports/metadata.json')
-            .then(response => {
-                console.log('Metadata fetch response status:', response.status);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Metadata loaded successfully:', data);
-                reportsMetadata = data;
-            })
-            .catch(error => {
-                console.error('Error loading reports metadata:', error);
-                reportsMetadata = {};
-            });
+        // Embed metadata directly in the HTML to avoid CORS issues
+        const reportsMetadata = {"1002009589709": {"name": "Tevm", "reports": [{"date": "2025-07-17", "filename": "report_1002009589709_20250717.html", "start_date": "2025-07-17 03:25:33.725514", "end_date": "2025-07-18 03:25:33.725514"}, {"date": "2025-07-16", "filename": "report_1002009589709_20250716.html", "start_date": "2025-07-16 03:25:34.041660", "end_date": "2025-07-17 03:25:34.041660"}, {"date": "2025-07-15", "filename": "report_1002009589709_20250715.html", "start_date": "2025-07-15 03:25:34.297848", "end_date": "2025-07-16 03:25:34.297848"}, {"date": "2025-07-14", "filename": "report_1002009589709_20250714.html", "start_date": "2025-07-14 03:25:34.447985", "end_date": "2025-07-15 03:25:34.447985"}, {"date": "2025-07-13", "filename": "report_1002009589709_20250713.html", "start_date": "2025-07-13 03:25:34.633968", "end_date": "2025-07-14 03:25:34.633968"}, {"date": "2025-07-12", "filename": "report_1002009589709_20250712.html", "start_date": "2025-07-12 03:25:34.775597", "end_date": "2025-07-13 03:25:34.775597"}, {"date": "2025-07-11", "filename": "report_1002009589709_20250711.html", "start_date": "2025-07-11 03:25:34.939059", "end_date": "2025-07-12 03:25:34.939059"}]}, "1002412320552": {"name": "Fault Tolerant Frens", "reports": [{"date": "2025-07-17", "filename": "report_1002412320552_20250717.html", "start_date": "2025-07-17 03:25:35.074566", "end_date": "2025-07-18 03:25:35.074566"}, {"date": "2025-07-16", "filename": "report_1002412320552_20250716.html", "start_date": "2025-07-16 03:25:35.264067", "end_date": "2025-07-17 03:25:35.264067"}, {"date": "2025-07-15", "filename": "report_1002412320552_20250715.html", "start_date": "2025-07-15 03:25:35.473344", "end_date": "2025-07-16 03:25:35.473344"}, {"date": "2025-07-14", "filename": "report_1002412320552_20250714.html", "start_date": "2025-07-14 03:25:35.573867", "end_date": "2025-07-15 03:25:35.573867"}, {"date": "2025-07-13", "filename": "report_1002412320552_20250713.html", "start_date": "2025-07-13 03:25:35.700876", "end_date": "2025-07-14 03:25:35.700876"}, {"date": "2025-07-12", "filename": "report_1002412320552_20250712.html", "start_date": "2025-07-12 03:25:35.827343", "end_date": "2025-07-13 03:25:35.827343"}, {"date": "2025-07-11", "filename": "report_1002412320552_20250711.html", "start_date": "2025-07-11 03:25:35.935535", "end_date": "2025-07-12 03:25:35.935535"}]}, "1002276686237": {"name": "L2 Interop Working Group", "reports": [{"date": "2025-07-17", "filename": "report_1002276686237_20250717.html", "start_date": "2025-07-17 03:25:36.039995", "end_date": "2025-07-18 03:25:36.039995"}, {"date": "2025-07-16", "filename": "report_1002276686237_20250716.html", "start_date": "2025-07-16 03:25:36.204745", "end_date": "2025-07-17 03:25:36.204745"}, {"date": "2025-07-15", "filename": "report_1002276686237_20250715.html", "start_date": "2025-07-15 03:25:36.334912", "end_date": "2025-07-16 03:25:36.334912"}, {"date": "2025-07-14", "filename": "report_1002276686237_20250714.html", "start_date": "2025-07-14 03:25:36.465338", "end_date": "2025-07-15 03:25:36.465338"}, {"date": "2025-07-13", "filename": "report_1002276686237_20250713.html", "start_date": "2025-07-13 03:25:36.576988", "end_date": "2025-07-14 03:25:36.576988"}, {"date": "2025-07-12", "filename": "report_1002276686237_20250712.html", "start_date": "2025-07-12 03:25:36.739940", "end_date": "2025-07-13 03:25:36.739940"}, {"date": "2025-07-11", "filename": "report_1002276686237_20250711.html", "start_date": "2025-07-11 03:25:36.881098", "end_date": "2025-07-12 03:25:36.881098"}]}, "1002682777986": {"name": "Flashbots_X Core", "reports": [{"date": "2025-07-17", "filename": "report_1002682777986_20250717.html", "start_date": "2025-07-17 03:25:36.982801", "end_date": "2025-07-18 03:25:36.982801"}, {"date": "2025-07-16", "filename": "report_1002682777986_20250716.html", "start_date": "2025-07-16 03:25:37.145040", "end_date": "2025-07-17 03:25:37.145040"}, {"date": "2025-07-15", "filename": "report_1002682777986_20250715.html", "start_date": "2025-07-15 03:25:37.279540", "end_date": "2025-07-16 03:25:37.279540"}, {"date": "2025-07-14", "filename": "report_1002682777986_20250714.html", "start_date": "2025-07-14 03:25:37.414340", "end_date": "2025-07-15 03:25:37.414340"}, {"date": "2025-07-13", "filename": "report_1002682777986_20250713.html", "start_date": "2025-07-13 03:25:37.518330", "end_date": "2025-07-14 03:25:37.518330"}, {"date": "2025-07-12", "filename": "report_1002682777986_20250712.html", "start_date": "2025-07-12 03:25:37.653682", "end_date": "2025-07-13 03:25:37.653682"}, {"date": "2025-07-11", "filename": "report_1002682777986_20250711.html", "start_date": "2025-07-11 03:25:37.752410", "end_date": "2025-07-12 03:25:37.752410"}]}, "1002109810685": {"name": "libp2p", "reports": [{"date": "2025-07-17", "filename": "report_1002109810685_20250717.html", "start_date": "2025-07-17 03:25:37.850543", "end_date": "2025-07-18 03:25:37.850543"}, {"date": "2025-07-16", "filename": "report_1002109810685_20250716.html", "start_date": "2025-07-16 03:25:37.995151", "end_date": "2025-07-17 03:25:37.995151"}, {"date": "2025-07-15", "filename": "report_1002109810685_20250715.html", "start_date": "2025-07-15 03:25:38.135696", "end_date": "2025-07-16 03:25:38.135696"}, {"date": "2025-07-14", "filename": "report_1002109810685_20250714.html", "start_date": "2025-07-14 03:25:38.233518", "end_date": "2025-07-15 03:25:38.233518"}, {"date": "2025-07-13", "filename": "report_1002109810685_20250713.html", "start_date": "2025-07-13 03:25:38.330673", "end_date": "2025-07-14 03:25:38.330673"}, {"date": "2025-07-12", "filename": "report_1002109810685_20250712.html", "start_date": "2025-07-12 03:25:38.429881", "end_date": "2025-07-13 03:25:38.429881"}, {"date": "2025-07-11", "filename": "report_1002109810685_20250711.html", "start_date": "2025-07-11 03:25:38.540764", "end_date": "2025-07-12 03:25:38.540764"}]}};
         
         function showReportSelector(chatId, chatName) {
             const popup = document.getElementById('reportPopup');
@@ -733,17 +716,6 @@ h1.site-title {
             
             title.textContent = `Select Report - ${chatName}`;
             
-            // Show loading state first
-            reportList.innerHTML = '<p class="no-reports">Loading reports...</p>';
-            popup.style.display = 'flex';
-            
-            // If metadata is not loaded yet, wait a bit and retry
-            if (!reportsMetadata) {
-                console.log('Metadata not loaded yet, waiting...');
-                setTimeout(() => showReportSelector(chatId, chatName), 500);
-                return;
-            }
-            
             // Remove minus sign from chat ID for metadata lookup
             const metadataKey = chatId.replace('-', '');
             console.log('Looking for metadata key:', metadataKey);
@@ -752,6 +724,7 @@ h1.site-title {
                 console.log('No reports found for key:', metadataKey);
                 console.log('Available keys:', Object.keys(reportsMetadata));
                 reportList.innerHTML = '<p class="no-reports">No reports available for this channel.</p>';
+                popup.style.display = 'flex';
                 return;
             }
             
@@ -777,6 +750,7 @@ h1.site-title {
             });
             
             reportList.innerHTML = html;
+            popup.style.display = 'flex';
         }
         
         function closeReportSelector() {
