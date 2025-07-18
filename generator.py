@@ -235,12 +235,20 @@ class MiladySiteGenerator:
         
         // Load reports metadata
         fetch('reports/metadata.json')
-            .then(response => response.json())
+            .then(response => {{
+                console.log('Metadata fetch response status:', response.status);
+                if (!response.ok) {{
+                    throw new Error(`HTTP error! status: ${{response.status}}`);
+                }}
+                return response.json();
+            }})
             .then(data => {{
+                console.log('Metadata loaded successfully:', data);
                 reportsMetadata = data;
             }})
             .catch(error => {{
                 console.error('Error loading reports metadata:', error);
+                reportsMetadata = {{}};
             }});
         
         function showReportSelector(chatId, chatName) {{
@@ -248,18 +256,35 @@ class MiladySiteGenerator:
             const title = document.getElementById('popupTitle');
             const reportList = document.getElementById('reportList');
             
+            console.log('showReportSelector called with:', {{ chatId, chatName }});
+            console.log('reportsMetadata:', reportsMetadata);
+            
             title.textContent = `Select Report - ${{chatName}}`;
+            
+            // Show loading state first
+            reportList.innerHTML = '<p class="no-reports">Loading reports...</p>';
+            popup.style.display = 'flex';
+            
+            // If metadata is not loaded yet, wait a bit and retry
+            if (!reportsMetadata) {{
+                console.log('Metadata not loaded yet, waiting...');
+                setTimeout(() => showReportSelector(chatId, chatName), 500);
+                return;
+            }}
             
             // Remove minus sign from chat ID for metadata lookup
             const metadataKey = chatId.replace('-', '');
+            console.log('Looking for metadata key:', metadataKey);
             
-            if (!reportsMetadata || !reportsMetadata[metadataKey]) {{
+            if (!reportsMetadata[metadataKey]) {{
+                console.log('No reports found for key:', metadataKey);
+                console.log('Available keys:', Object.keys(reportsMetadata));
                 reportList.innerHTML = '<p class="no-reports">No reports available for this channel.</p>';
-                popup.style.display = 'flex';
                 return;
             }}
             
             const reports = reportsMetadata[metadataKey].reports;
+            console.log('Found reports:', reports);
             let html = '';
             
             reports.forEach(report => {{
@@ -280,7 +305,6 @@ class MiladySiteGenerator:
             }});
             
             reportList.innerHTML = html;
-            popup.style.display = 'flex';
         }}
         
         function closeReportSelector() {{
