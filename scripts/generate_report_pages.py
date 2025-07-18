@@ -604,8 +604,8 @@ def generate_daily_reports_for_chat(chat_id, days_back=7):
             reports.append({
                 'date': start_date.strftime('%Y-%m-%d'),
                 'filename': report_file.name,
-                'start_date': start_date,
-                'end_date': end_date,
+                'start_date': start_date.isoformat(),
+                'end_date': end_date.isoformat(),
                 'total_messages': stats['total_messages'],
                 'unique_participants': stats['unique_participants']
             })
