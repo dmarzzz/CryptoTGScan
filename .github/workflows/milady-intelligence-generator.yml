@@ -30,6 +30,11 @@ jobs:
         run: python scripts/generate_milady_data.py
       - name: Generate Wartime Milady CEO homepage
         run: python generator.py
+      - name: Generate individual report pages
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/generate_report_pages.py
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
@@ -37,5 +42,6 @@ jobs:
           git add ./data/channels.json
           git add ./website/index.html
           git add ./website/assets/
+          git add ./website/reports/
           git commit -m "🤖 Update Wartime Milady CEO Intelligence Platform $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
           git push
