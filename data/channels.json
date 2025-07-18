@@ -1,12 +1,12 @@
 {
-  "generated_at": "2025-07-18T04:47:17Z",
+  "generated_at": "2025-07-18T05:15:56Z",
   "total_channels": 7,
   "channels": [
     {
       "id": "-1002009589709",
       "name": "Tevm",
       "icon": "👥",
-      "last_update": "2025-07-18T04:47:17Z",
+      "last_update": "2025-07-18T05:15:56Z",
       "stats": {
         "messages_24h": 192,
         "participants_24h": 15,
@@ -18,11 +18,11 @@
       "id": "-1002412320552",
       "name": "Fault Tolerant Frens",
       "icon": "👥",
-      "last_update": "2025-07-18T04:47:17Z",
+      "last_update": "2025-07-18T05:15:56Z",
       "stats": {
-        "messages_24h": 17,
+        "messages_24h": 18,
         "participants_24h": 4,
-        "change_percent": 466.7,
+        "change_percent": 500.0,
         "trend": "up"
       }
     },
@@ -30,7 +30,7 @@
       "id": "-1002276686237",
       "name": "L2 Interop Working Group",
       "icon": "👥",
-      "last_update": "2025-07-18T04:47:17Z",
+      "last_update": "2025-07-18T05:15:56Z",
       "stats": {
         "messages_24h": 15,
         "participants_24h": 10,
@@ -42,7 +42,7 @@
       "id": "-1002682777986",
       "name": "Flashbots_X Core",
       "icon": "👥",
-      "last_update": "2025-07-18T04:47:17Z",
+      "last_update": "2025-07-18T05:15:56Z",
       "stats": {
         "messages_24h": 13,
         "participants_24h": 7,
@@ -54,7 +54,7 @@
       "id": "-1002109810685",
       "name": "libp2p",
       "icon": "👥",
-      "last_update": "2025-07-18T04:47:17Z",
+      "last_update": "2025-07-18T05:15:56Z",
       "stats": {
         "messages_24h": 4,
         "participants_24h": 2,
@@ -66,7 +66,7 @@
       "id": "-1001392690031",
       "name": "The TEE Kettle",
       "icon": "👥",
-      "last_update": "2025-07-18T04:47:17Z",
+      "last_update": "2025-07-18T05:15:56Z",
       "stats": {
         "messages_24h": 1,
         "participants_24h": 1,
@@ -78,7 +78,7 @@
       "id": "-1002305241085",
       "name": "Intents & Resource Locks [Interop Working Group]",
       "icon": "👥",
-      "last_update": "2025-07-18T04:47:17Z",
+      "last_update": "2025-07-18T05:15:56Z",
       "stats": {
         "messages_24h": 1,
         "participants_24h": 1,
