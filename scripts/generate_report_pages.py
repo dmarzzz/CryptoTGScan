@@ -337,6 +337,18 @@ h1.site-title {
   letter-spacing: 0.1em;
 }
 
+.section-note {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 0, 110, 0.2);
+  border-radius: 6px;
+  font-style: italic;
+}
+
 .message-list {
   display: flex;
   flex-direction: column;
@@ -454,7 +466,7 @@ def generate_report_page(chat_id, start_date, end_date, output_dir='website/repo
         return
     
     # Get messages
-    messages = get_chat_messages(chat_id, start_date, end_date, limit=50)
+    messages = get_chat_messages(chat_id, start_date, end_date, limit=200)
     
     # Get user data
     user_ids = set(msg['from_user_id'] for msg in messages if msg['from_user_id'])
@@ -525,6 +537,7 @@ def generate_report_page(chat_id, start_date, end_date, output_dir='website/repo
         
         <div class="messages-section">
             <h2 class="section-title">Recent Messages</h2>
+            <p class="section-note">Showing up to 200 most recent messages from this period. Total messages: {stats['total_messages']}</p>
             <div class="message-list">
 '''
     
