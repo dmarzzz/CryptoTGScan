@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wartime Milady CEO - Telegram Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap');
+:root {
+  --color-primary: #FF006E;
+  --color-secondary: #00F5FF;
+  --color-accent: #00FF00;
+  --color-bg: #0A0A0A;
+  --color-surface: #1A1A1A;
+  --color-text: #F0F0F0;
+  --font-mono: 'Space Mono', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background:
+    radial-gradient(ellipse at top left, rgba(255,0,110,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(0,245,255,0.1) 0%, transparent 50%),
+    #0A0A0A;
+  min-height: 100vh;
+  margin: 0;
+  animation: flicker 10s infinite;
+}
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-image:
+    linear-gradient(rgba(255,0,110,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,0,110,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 1;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: -5%; left: -5%;
+  width: 110%; height: 110%;
+  border-radius: 10%;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+  pointer-events: none;
+  z-index: 999;
+}
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  95% { opacity: 0.98; }
+}
+h1.site-title {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: linear-gradient(45deg, #FF006E, #00F5FF, #00FF00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(255,0,110,0.5);
+  margin: 0;
+}
+.site-subtitle {
+  font-family: 'Space Mono', monospace;
+  opacity: 0.8;
+  letter-spacing: 0.1em;
+}
+.avatar-img {
+  width: 200px !important;
+  height: 200px !important;
+  border-radius: 50% !important;
+  border: 3px solid #FF006E !important;
+  box-shadow:
+    0 0 30px rgba(255,0,110,0.8),
+    0 0 60px rgba(255,0,110,0.4),
+    inset 0 0 30px rgba(255,0,110,0.2) !important;
+  animation: float 3s ease-in-out infinite !important;
+  object-fit: cover !important;
+}
+.avatar-fallback {
+  width: 200px !important;
+  height: 200px !important;
+  border-radius: 50% !important;
+  border: 3px solid #FF006E !important;
+  box-shadow:
+    0 0 30px rgba(255,0,110,0.8),
+    0 0 60px rgba(255,0,110,0.4),
+    inset 0 0 30px rgba(255,0,110,0.2) !important;
+  animation: float 3s ease-in-out infinite !important;
+  font-size: 4em !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  background: rgba(0,255,0,0.1);
+  border: 2px solid #00FF00;
+  border-radius: 20px;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  box-shadow:
+    inset 0 0 20px rgba(0,255,0,0.3),
+    0 0 20px rgba(0,255,0,0.5);
+  position: relative;
+}
+.status-indicator::before {
+  content: '';
+  display: inline-block;
+  width: 10px; height: 10px;
+  background: #00FF00;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  animation: blink 1s infinite;
+  box-shadow: 0 0 10px #00FF00;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.site-header {
+  position: relative;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  background: linear-gradient(180deg, rgba(26,26,26,0.8) 0%, transparent 100%);
+  border: 2px solid #FF006E;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.site-header::before {
+  content: 'WARTIME MILADY CEO v1.337';
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: #FF006E;
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+}
+.site-header::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 50px; height: 50px;
+  background: linear-gradient(45deg, transparent 50%, #FF006E 50%);
+  opacity: 0.3;
+}
+
+/* Add terminal-style decoration to header */
+.header-container::before {
+  content: ' * ]';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: 'Space Mono', monospace;
+  color: #00FF00;
+  opacity: 0.6;
+  animation: blink 2s infinite;
+}
+
+/* Add matrix-rain effect with pseudo elements (very lightweight) */
+.header-container::after {
+  content: ' 10111 11101 11110 11011110011001';
+  position: absolute;
+  bottom: 0.5em;
+  left: 1rem;
+  font-size: 0.7rem;
+  font-family: monospace;
+  color: #00F5FF;
+  opacity: 0.2;
+  letter-spacing: 0.2em;
+}
+
+.scan-lines::before {
+  content: '';
+  position: fixed;
+  top: -100vh;
+  left: 0;
+  width: 100vw;
+  height: 200vh;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,0,110,0.06) 2px,
+    rgba(255,0,110,0.06) 4px
+  );
+  animation: scan-lines 8s linear infinite;
+  pointer-events: none;
+  z-index: 1000;
+}
+.scan-lines::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FF006E, transparent);
+  animation: scan-horizontal 4s linear infinite;
+  z-index: 1001;
+}
+@keyframes scan-horizontal {
+  0% { transform: translateY(-100vh); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes scan-lines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+.channel-card {
+  background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%);
+  border: 2px solid #FF006E;
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.channel-card:hover {
+  transform: translateY(-2px);
+  border-color: #00F5FF;
+  box-shadow: 0 4px 24px rgba(0,245,255,0.15);
+}
+.stat-value {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #00F5FF;
+  text-shadow:
+    0 0 10px #00F5FF,
+    0 0 20px #00F5FF,
+    0 0 30px #00F5FF;
+  letter-spacing: 0.1em;
+  background: rgba(0,245,255,0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+  font-family: 'Space Mono', monospace;
+}
+.timestamp {
+  font-family: 'Space Mono', monospace;
+  background: rgba(0,245,255,0.1);
+  border: 1px solid #00F5FF;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  letter-spacing: 0.1em;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+.timestamp::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,245,255,0.3), transparent);
+  animation: sweep 3s infinite;
+}
+@keyframes sweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+::selection {
+  background: #FF006E;
+  color: #0A0A0A;
+}
+.site-footer {
+  margin-top: 4rem;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.875rem;
+  opacity: 0.6;
+  letter-spacing: 0.1em;
+  border-top: 1px solid rgba(255,0,110,0.3);
+}
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+.milady-avatar {
+  flex-shrink: 0;
+}
+.header-text {
+  flex: 1;
+}
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  position: relative;
+  z-index: 2;
+}
+.channel-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* Intelligence Grid and Cards */
+.intelligence-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.intelligence-card {
+  background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%);
+  border: 2px solid #FF006E;
+  border-radius: 12px;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.intelligence-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,0,110,0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.intelligence-card:hover::before {
+  left: 100%;
+}
+
+.intelligence-card:hover {
+  transform: translateY(-4px);
+  border-color: #00F5FF;
+  box-shadow: 
+    0 8px 32px rgba(0,245,255,0.2),
+    0 0 20px rgba(255,0,110,0.3);
+}
+
+.intelligence-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.intelligence-icon {
+  font-size: 3em;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,0,110,0.1);
+  border: 2px solid var(--color-primary);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.intelligence-info {
+  flex: 1;
+}
+
+.intelligence-name {
+  font-size: 1.5rem;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.intelligence-description {
+  color: #888;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.intelligence-stats {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,0,110,0.2);
+  border-radius: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+}
+
+.breadcrumb-item {
+  color: #00F5FF;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-item:hover {
+  color: #FF006E;
+}
+
+.breadcrumb-separator {
+  color: #666;
+  margin: 0 0.25rem;
+}
+
+/* Channel Cards (existing styles) */
+.channel-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.channel-icon {
+  font-size: 2em;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,0,110,0.1);
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+}
+.channel-name {
+  font-size: 1.3rem;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+  font-family: 'Space Mono', monospace;
+}
+.channel-meta {
+  font-size: 0.85em;
+  color: #888;
+}
+.channel-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.stat-row {
+  display: flex;
+  gap: 1.5em;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+@media (max-width: 1024px) {
+  .site-title { font-size: 2rem; }
+  .header-content { flex-direction: column; text-align: center; gap: 1.5rem; }
+  .avatar-img, .avatar-fallback { width: 150px !important; height: 150px !important; }
+  .channel-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+}
+@media (max-width: 768px) {
+  .site-title { font-size: 1.5rem; }
+  .header-content { padding: 0 1em; }
+  .main-content { padding: 2rem 1rem; }
+  .channel-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .channel-card { padding: 1rem; }
+  .stat-row { gap: 1rem; }
+  .status-bar { flex-direction: column; gap: 1rem; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .site-title { font-size: 1.25rem; }
+  .avatar-img, .avatar-fallback { width: 120px !important; height: 120px !important; }
+  .channel-header { flex-direction: column; text-align: center; gap: 0.75rem; }
+  .channel-stats { flex-direction: column; gap: 1rem; align-items: center; }
+  .stat-row { justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.1s !important; }
+}
+.channel-card:focus {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+@media (prefers-contrast: high) {
+  :root { --color-bg: #000; --color-surface: #111111; --color-text: #ffffff; }
+}
+
+/* Report Selector Popup Styles */
+.report-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(5px);
+}
+
+.report-popup-content {
+  background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%);
+  border: 2px solid #FF006E;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 0 50px rgba(255, 0, 110, 0.3);
+}
+
+.report-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 0, 110, 0.3);
+}
+
+.popup-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.5rem;
+  color: #FF006E;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.popup-close {
+  background: none;
+  border: none;
+  color: #FF006E;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.popup-close:hover {
+  background: rgba(255, 0, 110, 0.1);
+  transform: scale(1.1);
+}
+
+.report-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.report-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 0, 110, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.report-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 0, 110, 0.4);
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(255, 0, 110, 0.2);
+}
+
+.report-date {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  color: #00F5FF;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.report-stats {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.stat-badge.messages {
+  background: rgba(0, 245, 255, 0.1);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  color: #00F5FF;
+}
+
+.stat-badge.participants {
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  color: #00FF00;
+}
+
+.report-filename {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: #888;
+  opacity: 0.7;
+}
+
+.no-reports {
+  text-align: center;
+  color: #888;
+  font-family: 'Space Mono', monospace;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .report-popup-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+  
+  .popup-title {
+    font-size: 1.2rem;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <div class="scan-lines"></div>
+    <header class="site-header">
+        <div class="header-content">
+            <div class="milady-avatar">
+                
+            <img src="assets/wartimemiladyceo.jpg" alt="Wartime Milady CEO avatar" class="avatar-img" width="120" height="120" loading="lazy" style="display:block; border-radius:50%; object-fit:cover; background:#222;" onerror="this.style.display='none';this.parentNode.querySelector('.avatar-fallback').style.display='flex';">
+            <div class="avatar-fallback" style="display:none; width:120px; height:120px; align-items:center; justify-content:center; border-radius:50%; background:linear-gradient(45deg,#FF006E,#00F5FF); font-size:3rem; border:3px solid #00FF00; box-shadow:0 0 20px #FF006E,0 0 20px #00FF00;">👾</div>
+        
+            </div>
+            <div class="header-text">
+                <h1 class="site-title">Telegram Intelligence</h1>
+                <p class="site-subtitle">Monitoring 5 Ethereum-focused channels</p>
+                <div class="status-bar">
+                    <span class="timestamp">2025-07-18 0446Z</span>
+                    <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="main-content">
+        <div class="breadcrumb">
+            <a href="index.html" class="breadcrumb-item">/</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-item">telegram</span>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-item">reports</span>
+        </div>
+        <div class="channel-grid">
+            
+            <div class="channel-card" tabindex="0" aria-label="Tevm channel card" onclick="showReportSelector('-1002009589709', 'Tevm')">
+                <div class="channel-header">
+                    <div class="channel-icon">👥</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">Tevm</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-18 0415Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">191</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Participants</span>
+                            <span class="stat-value">14</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="channel-card" tabindex="0" aria-label="Fault Tolerant Frens channel card" onclick="showReportSelector('-1002412320552', 'Fault Tolerant Frens')">
+                <div class="channel-header">
+                    <div class="channel-icon">👥</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">Fault Tolerant Frens</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-18 0415Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">17</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Participants</span>
+                            <span class="stat-value">4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="channel-card" tabindex="0" aria-label="L2 Interop Working Group channel card" onclick="showReportSelector('-1002276686237', 'L2 Interop Working Group')">
+                <div class="channel-header">
+                    <div class="channel-icon">👥</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">L2 Interop Working Group</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-18 0415Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">15</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Participants</span>
+                            <span class="stat-value">10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="channel-card" tabindex="0" aria-label="Flashbots_X Core channel card" onclick="showReportSelector('-1002682777986', 'Flashbots_X Core')">
+                <div class="channel-header">
+                    <div class="channel-icon">👥</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">Flashbots_X Core</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-18 0415Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">12</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Participants</span>
+                            <span class="stat-value">6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="channel-card" tabindex="0" aria-label="libp2p channel card" onclick="showReportSelector('-1002109810685', 'libp2p')">
+                <div class="channel-header">
+                    <div class="channel-icon">👥</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">libp2p</h3>
+                        <div class="channel-meta">
+                            <span class="last-update">Last: 2025-07-18 0415Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Messages</span>
+                            <span class="stat-value">4</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Participants</span>
+                            <span class="stat-value">2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    
+    <!-- Report Selector Popup -->
+    <div id="reportPopup" class="report-popup">
+        <div class="report-popup-content">
+            <div class="report-popup-header">
+                <h2 id="popupTitle" class="popup-title">Select Report</h2>
+                <button class="popup-close" onclick="closeReportSelector()">×</button>
+            </div>
+            <div id="reportList" class="report-list">
+                <!-- Reports will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <footer class="site-footer">
+        <p>Generated by Wartime Milady CEO Intelligence Platform</p>
+        <p>Data updated: 2025-07-18 0415Z</p>
+    </footer>
+    
+    <script>
+        // Embed metadata directly in the HTML to avoid CORS issues
+        const reportsMetadata = {"1002009589709": {"name": "Tevm", "reports": [{"date": "2025-07-17", "filename": "report_1002009589709_20250717.html", "start_date": "2025-07-17T04:15:47.730793", "end_date": "2025-07-18T04:15:47.730793", "total_messages": 191, "unique_participants": 14}, {"date": "2025-07-16", "filename": "report_1002009589709_20250716.html", "start_date": "2025-07-16T04:15:49.029821", "end_date": "2025-07-17T04:15:49.029821", "total_messages": 151, "unique_participants": 11}, {"date": "2025-07-15", "filename": "report_1002009589709_20250715.html", "start_date": "2025-07-15T04:15:49.895864", "end_date": "2025-07-16T04:15:49.895864", "total_messages": 1, "unique_participants": 1}, {"date": "2025-07-14", "filename": "report_1002009589709_20250714.html", "start_date": "2025-07-14T04:15:50.570733", "end_date": "2025-07-15T04:15:50.570733", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-13", "filename": "report_1002009589709_20250713.html", "start_date": "2025-07-13T04:15:51.105894", "end_date": "2025-07-14T04:15:51.105894", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-12", "filename": "report_1002009589709_20250712.html", "start_date": "2025-07-12T04:15:51.962994", "end_date": "2025-07-13T04:15:51.962994", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-11", "filename": "report_1002009589709_20250711.html", "start_date": "2025-07-11T04:15:52.841328", "end_date": "2025-07-12T04:15:52.841328", "total_messages": 0, "unique_participants": 0}]}, "1002412320552": {"name": "Fault Tolerant Frens", "reports": [{"date": "2025-07-17", "filename": "report_1002412320552_20250717.html", "start_date": "2025-07-17T04:15:53.255261", "end_date": "2025-07-18T04:15:53.255261", "total_messages": 17, "unique_participants": 4}, {"date": "2025-07-16", "filename": "report_1002412320552_20250716.html", "start_date": "2025-07-16T04:15:53.913852", "end_date": "2025-07-17T04:15:53.913852", "total_messages": 3, "unique_participants": 1}, {"date": "2025-07-15", "filename": "report_1002412320552_20250715.html", "start_date": "2025-07-15T04:15:54.595815", "end_date": "2025-07-16T04:15:54.595815", "total_messages": 1, "unique_participants": 1}, {"date": "2025-07-14", "filename": "report_1002412320552_20250714.html", "start_date": "2025-07-14T04:15:55.112300", "end_date": "2025-07-15T04:15:55.112300", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-13", "filename": "report_1002412320552_20250713.html", "start_date": "2025-07-13T04:15:55.542111", "end_date": "2025-07-14T04:15:55.542111", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-12", "filename": "report_1002412320552_20250712.html", "start_date": "2025-07-12T04:15:55.992365", "end_date": "2025-07-13T04:15:55.992365", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-11", "filename": "report_1002412320552_20250711.html", "start_date": "2025-07-11T04:15:56.465704", "end_date": "2025-07-12T04:15:56.465704", "total_messages": 0, "unique_participants": 0}]}, "1002276686237": {"name": "L2 Interop Working Group", "reports": [{"date": "2025-07-17", "filename": "report_1002276686237_20250717.html", "start_date": "2025-07-17T04:15:56.998288", "end_date": "2025-07-18T04:15:56.998288", "total_messages": 15, "unique_participants": 10}, {"date": "2025-07-16", "filename": "report_1002276686237_20250716.html", "start_date": "2025-07-16T04:15:57.575367", "end_date": "2025-07-17T04:15:57.575367", "total_messages": 1, "unique_participants": 1}, {"date": "2025-07-15", "filename": "report_1002276686237_20250715.html", "start_date": "2025-07-15T04:15:58.124930", "end_date": "2025-07-16T04:15:58.124930", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-14", "filename": "report_1002276686237_20250714.html", "start_date": "2025-07-14T04:15:58.560359", "end_date": "2025-07-15T04:15:58.560359", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-13", "filename": "report_1002276686237_20250713.html", "start_date": "2025-07-13T04:15:59.016318", "end_date": "2025-07-14T04:15:59.016318", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-12", "filename": "report_1002276686237_20250712.html", "start_date": "2025-07-12T04:15:59.478885", "end_date": "2025-07-13T04:15:59.478885", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-11", "filename": "report_1002276686237_20250711.html", "start_date": "2025-07-11T04:15:59.920153", "end_date": "2025-07-12T04:15:59.920153", "total_messages": 0, "unique_participants": 0}]}, "1002682777986": {"name": "Flashbots_X Core", "reports": [{"date": "2025-07-17", "filename": "report_1002682777986_20250717.html", "start_date": "2025-07-17T04:16:00.384746", "end_date": "2025-07-18T04:16:00.384746", "total_messages": 12, "unique_participants": 6}, {"date": "2025-07-16", "filename": "report_1002682777986_20250716.html", "start_date": "2025-07-16T04:16:00.978539", "end_date": "2025-07-17T04:16:00.978539", "total_messages": 14, "unique_participants": 2}, {"date": "2025-07-15", "filename": "report_1002682777986_20250715.html", "start_date": "2025-07-15T04:16:01.634165", "end_date": "2025-07-16T04:16:01.634165", "total_messages": 2, "unique_participants": 2}, {"date": "2025-07-14", "filename": "report_1002682777986_20250714.html", "start_date": "2025-07-14T04:16:02.266950", "end_date": "2025-07-15T04:16:02.266950", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-13", "filename": "report_1002682777986_20250713.html", "start_date": "2025-07-13T04:16:02.842775", "end_date": "2025-07-14T04:16:02.842775", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-12", "filename": "report_1002682777986_20250712.html", "start_date": "2025-07-12T04:16:03.342568", "end_date": "2025-07-13T04:16:03.342568", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-11", "filename": "report_1002682777986_20250711.html", "start_date": "2025-07-11T04:16:03.902330", "end_date": "2025-07-12T04:16:03.902330", "total_messages": 0, "unique_participants": 0}]}, "1002109810685": {"name": "libp2p", "reports": [{"date": "2025-07-17", "filename": "report_1002109810685_20250717.html", "start_date": "2025-07-17T04:16:04.443032", "end_date": "2025-07-18T04:16:04.443032", "total_messages": 4, "unique_participants": 2}, {"date": "2025-07-16", "filename": "report_1002109810685_20250716.html", "start_date": "2025-07-16T04:16:05.017961", "end_date": "2025-07-17T04:16:05.017961", "total_messages": 2, "unique_participants": 2}, {"date": "2025-07-15", "filename": "report_1002109810685_20250715.html", "start_date": "2025-07-15T04:16:05.641403", "end_date": "2025-07-16T04:16:05.641403", "total_messages": 1, "unique_participants": 1}, {"date": "2025-07-14", "filename": "report_1002109810685_20250714.html", "start_date": "2025-07-14T04:16:06.291537", "end_date": "2025-07-15T04:16:06.291537", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-13", "filename": "report_1002109810685_20250713.html", "start_date": "2025-07-13T04:16:06.710912", "end_date": "2025-07-14T04:16:06.710912", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-12", "filename": "report_1002109810685_20250712.html", "start_date": "2025-07-12T04:16:07.138195", "end_date": "2025-07-13T04:16:07.138195", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-11", "filename": "report_1002109810685_20250711.html", "start_date": "2025-07-11T04:16:07.571608", "end_date": "2025-07-12T04:16:07.571608", "total_messages": 0, "unique_participants": 0}]}};
+        
+        function showReportSelector(chatId, chatName) {
+            const popup = document.getElementById('reportPopup');
+            const title = document.getElementById('popupTitle');
+            const reportList = document.getElementById('reportList');
+            
+            console.log('showReportSelector called with:', { chatId, chatName });
+            console.log('reportsMetadata:', reportsMetadata);
+            
+            title.textContent = `Select Report - ${chatName}`;
+            
+            // Remove minus sign from chat ID for metadata lookup
+            const metadataKey = chatId.replace('-', '');
+            console.log('Looking for metadata key:', metadataKey);
+            
+            if (!reportsMetadata[metadataKey]) {
+                console.log('No reports found for key:', metadataKey);
+                console.log('Available keys:', Object.keys(reportsMetadata));
+                reportList.innerHTML = '<p class="no-reports">No reports available for this channel.</p>';
+                popup.style.display = 'flex';
+                return;
+            }
+            
+            const reports = reportsMetadata[metadataKey].reports;
+            console.log('Found reports:', reports);
+            let html = '';
+            
+            reports.forEach(report => {
+                const date = new Date(report.date);
+                const formattedDate = date.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                
+                const messages = report.total_messages || 0;
+                const participants = report.unique_participants || 0;
+                
+                html += `
+                    <div class="report-item" onclick="openReport('${report.filename}')">
+                        <div class="report-date">${formattedDate}</div>
+                        <div class="report-stats">
+                            <span class="stat-badge messages">${messages} messages</span>
+                            <span class="stat-badge participants">${participants} participants</span>
+                        </div>
+                        <div class="report-filename">${report.filename}</div>
+                    </div>
+                `;
+            });
+            
+            reportList.innerHTML = html;
+            popup.style.display = 'flex';
+        }
+        
+        function closeReportSelector() {
+            document.getElementById('reportPopup').style.display = 'none';
+        }
+        
+        function openReport(filename) {
+            window.open(`reports/${filename}`, '_blank');
+            closeReportSelector();
+        }
+        
+        // Close popup when clicking outside
+        document.getElementById('reportPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeReportSelector();
+            }
+        });
+        
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeReportSelector();
+            }
+        });
+    </script>
+</body>
+</html>

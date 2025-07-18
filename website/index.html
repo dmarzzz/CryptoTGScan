@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Wartime Milady CEO - Ethereum Intelligence Command</title>
+    <title>Wartime Milady CEO - Intelligence Command Center</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -340,6 +340,124 @@ h1.site-title {
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
+
+/* Intelligence Grid and Cards */
+.intelligence-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.intelligence-card {
+  background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%);
+  border: 2px solid #FF006E;
+  border-radius: 12px;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.intelligence-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,0,110,0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.intelligence-card:hover::before {
+  left: 100%;
+}
+
+.intelligence-card:hover {
+  transform: translateY(-4px);
+  border-color: #00F5FF;
+  box-shadow: 
+    0 8px 32px rgba(0,245,255,0.2),
+    0 0 20px rgba(255,0,110,0.3);
+}
+
+.intelligence-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.intelligence-icon {
+  font-size: 3em;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,0,110,0.1);
+  border: 2px solid var(--color-primary);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.intelligence-info {
+  flex: 1;
+}
+
+.intelligence-name {
+  font-size: 1.5rem;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.intelligence-description {
+  color: #888;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.intelligence-stats {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,0,110,0.2);
+  border-radius: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+}
+
+.breadcrumb-item {
+  color: #00F5FF;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-item:hover {
+  color: #FF006E;
+}
+
+.breadcrumb-separator {
+  color: #666;
+  margin: 0 0.25rem;
+}
+
+/* Channel Cards (existing styles) */
 .channel-header {
   display: flex;
   align-items: center;
@@ -578,152 +696,48 @@ h1.site-title {
             </div>
             <div class="header-text">
                 <h1 class="site-title">Wartime Milady CEO</h1>
-                <p class="site-subtitle">Monitoring 5 channels across the frontlines</p>
+                <p class="site-subtitle">Multi-Platform Intelligence Command Center</p>
                 <div class="status-bar">
-                    <span class="timestamp">2025-07-18 0415Z</span>
+                    <span class="timestamp">2025-07-18 0446Z</span>
                     <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
                 </div>
             </div>
         </div>
     </header>
     <main class="main-content">
-        <div class="channel-grid">
+        <div class="breadcrumb">
+            <span class="breadcrumb-item">/</span>
+        </div>
+        <div class="intelligence-grid">
             
-            <div class="channel-card" tabindex="0" aria-label="Tevm channel card" onclick="showReportSelector('-1002009589709', 'Tevm')">
-                <div class="channel-header">
-                    <div class="channel-icon">👥</div>
-                    <div class="channel-info">
-                        <h3 class="channel-name">Tevm</h3>
-                        <div class="channel-meta">
-                            <span class="last-update">Last: 2025-07-18 0415Z</span>
-                        </div>
+            <div class="intelligence-card" tabindex="0" aria-label="Telegram Intelligence intelligence card" onclick="navigateToIntelligence('telegram')">
+                <div class="intelligence-header">
+                    <div class="intelligence-icon">📱</div>
+                    <div class="intelligence-info">
+                        <h3 class="intelligence-name">Telegram Intelligence</h3>
+                        <p class="intelligence-description">Monitor Ethereum-focused Telegram channels</p>
                     </div>
                 </div>
-                <div class="channel-stats">
-                    <div class="stat-row">
-                        <div class="stat-item">
-                            <span class="stat-label">Messages</span>
-                            <span class="stat-value">191</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Participants</span>
-                            <span class="stat-value">14</span>
-                        </div>
-                    </div>
+                <div class="intelligence-stats">
+                    <span class="stat-badge">5 channels monitored</span>
                 </div>
             </div>
             
-            <div class="channel-card" tabindex="0" aria-label="Fault Tolerant Frens channel card" onclick="showReportSelector('-1002412320552', 'Fault Tolerant Frens')">
-                <div class="channel-header">
-                    <div class="channel-icon">👥</div>
-                    <div class="channel-info">
-                        <h3 class="channel-name">Fault Tolerant Frens</h3>
-                        <div class="channel-meta">
-                            <span class="last-update">Last: 2025-07-18 0415Z</span>
-                        </div>
+            <div class="intelligence-card" tabindex="0" aria-label="GitHub Intelligence intelligence card" onclick="navigateToIntelligence('github')">
+                <div class="intelligence-header">
+                    <div class="intelligence-icon">💻</div>
+                    <div class="intelligence-info">
+                        <h3 class="intelligence-name">GitHub Intelligence</h3>
+                        <p class="intelligence-description">Track repository activity and development</p>
                     </div>
                 </div>
-                <div class="channel-stats">
-                    <div class="stat-row">
-                        <div class="stat-item">
-                            <span class="stat-label">Messages</span>
-                            <span class="stat-value">17</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Participants</span>
-                            <span class="stat-value">4</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="channel-card" tabindex="0" aria-label="L2 Interop Working Group channel card" onclick="showReportSelector('-1002276686237', 'L2 Interop Working Group')">
-                <div class="channel-header">
-                    <div class="channel-icon">👥</div>
-                    <div class="channel-info">
-                        <h3 class="channel-name">L2 Interop Working Group</h3>
-                        <div class="channel-meta">
-                            <span class="last-update">Last: 2025-07-18 0415Z</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="channel-stats">
-                    <div class="stat-row">
-                        <div class="stat-item">
-                            <span class="stat-label">Messages</span>
-                            <span class="stat-value">15</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Participants</span>
-                            <span class="stat-value">10</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="channel-card" tabindex="0" aria-label="Flashbots_X Core channel card" onclick="showReportSelector('-1002682777986', 'Flashbots_X Core')">
-                <div class="channel-header">
-                    <div class="channel-icon">👥</div>
-                    <div class="channel-info">
-                        <h3 class="channel-name">Flashbots_X Core</h3>
-                        <div class="channel-meta">
-                            <span class="last-update">Last: 2025-07-18 0415Z</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="channel-stats">
-                    <div class="stat-row">
-                        <div class="stat-item">
-                            <span class="stat-label">Messages</span>
-                            <span class="stat-value">12</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Participants</span>
-                            <span class="stat-value">6</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="channel-card" tabindex="0" aria-label="libp2p channel card" onclick="showReportSelector('-1002109810685', 'libp2p')">
-                <div class="channel-header">
-                    <div class="channel-icon">👥</div>
-                    <div class="channel-info">
-                        <h3 class="channel-name">libp2p</h3>
-                        <div class="channel-meta">
-                            <span class="last-update">Last: 2025-07-18 0415Z</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="channel-stats">
-                    <div class="stat-row">
-                        <div class="stat-item">
-                            <span class="stat-label">Messages</span>
-                            <span class="stat-value">4</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Participants</span>
-                            <span class="stat-value">2</span>
-                        </div>
-                    </div>
+                <div class="intelligence-stats">
+                    <span class="stat-badge">Coming soon</span>
                 </div>
             </div>
             
         </div>
     </main>
-    
-    <!-- Report Selector Popup -->
-    <div id="reportPopup" class="report-popup">
-        <div class="report-popup-content">
-            <div class="report-popup-header">
-                <h2 id="popupTitle" class="popup-title">Select Report</h2>
-                <button class="popup-close" onclick="closeReportSelector()">×</button>
-            </div>
-            <div id="reportList" class="report-list">
-                <!-- Reports will be loaded here -->
-            </div>
-        </div>
-    </div>
     
     <footer class="site-footer">
         <p>Generated by Wartime Milady CEO Intelligence Platform</p>
@@ -731,85 +745,14 @@ h1.site-title {
     </footer>
     
     <script>
-        // Embed metadata directly in the HTML to avoid CORS issues
-        const reportsMetadata = {"1002009589709": {"name": "Tevm", "reports": [{"date": "2025-07-17", "filename": "report_1002009589709_20250717.html", "start_date": "2025-07-17 00:00:00", "end_date": "2025-07-17 23:59:59", "total_messages": 191, "unique_participants": 14}, {"date": "2025-07-16", "filename": "report_1002009589709_20250716.html", "start_date": "2025-07-16 00:00:00", "end_date": "2025-07-16 23:59:59", "total_messages": 151, "unique_participants": 11}, {"date": "2025-07-15", "filename": "report_1002009589709_20250715.html", "start_date": "2025-07-15 00:00:00", "end_date": "2025-07-15 23:59:59", "total_messages": 1, "unique_participants": 1}, {"date": "2025-07-14", "filename": "report_1002009589709_20250714.html", "start_date": "2025-07-14 00:00:00", "end_date": "2025-07-14 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-13", "filename": "report_1002009589709_20250713.html", "start_date": "2025-07-13 00:00:00", "end_date": "2025-07-13 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-12", "filename": "report_1002009589709_20250712.html", "start_date": "2025-07-12 00:00:00", "end_date": "2025-07-12 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-11", "filename": "report_1002009589709_20250711.html", "start_date": "2025-07-11 00:00:00", "end_date": "2025-07-11 23:59:59", "total_messages": 0, "unique_participants": 0}]}, "1002276686237": {"name": "L2 Interop Working Group", "reports": [{"date": "2025-07-17", "filename": "report_1002276686237_20250717.html", "start_date": "2025-07-17 00:00:00", "end_date": "2025-07-17 23:59:59", "total_messages": 15, "unique_participants": 10}, {"date": "2025-07-16", "filename": "report_1002276686237_20250716.html", "start_date": "2025-07-16 00:00:00", "end_date": "2025-07-16 23:59:59", "total_messages": 1, "unique_participants": 1}, {"date": "2025-07-15", "filename": "report_1002276686237_20250715.html", "start_date": "2025-07-15 00:00:00", "end_date": "2025-07-15 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-14", "filename": "report_1002276686237_20250714.html", "start_date": "2025-07-14 00:00:00", "end_date": "2025-07-14 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-13", "filename": "report_1002276686237_20250713.html", "start_date": "2025-07-13 00:00:00", "end_date": "2025-07-13 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-12", "filename": "report_1002276686237_20250712.html", "start_date": "2025-07-12 00:00:00", "end_date": "2025-07-12 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-11", "filename": "report_1002276686237_20250711.html", "start_date": "2025-07-11 00:00:00", "end_date": "2025-07-11 23:59:59", "total_messages": 0, "unique_participants": 0}]}, "1002682777986": {"name": "Flashbots_X Core", "reports": [{"date": "2025-07-17", "filename": "report_1002682777986_20250717.html", "start_date": "2025-07-17 00:00:00", "end_date": "2025-07-17 23:59:59", "total_messages": 12, "unique_participants": 6}, {"date": "2025-07-16", "filename": "report_1002682777986_20250716.html", "start_date": "2025-07-16 00:00:00", "end_date": "2025-07-16 23:59:59", "total_messages": 14, "unique_participants": 2}, {"date": "2025-07-15", "filename": "report_1002682777986_20250715.html", "start_date": "2025-07-15 00:00:00", "end_date": "2025-07-15 23:59:59", "total_messages": 2, "unique_participants": 2}, {"date": "2025-07-14", "filename": "report_1002682777986_20250714.html", "start_date": "2025-07-14 00:00:00", "end_date": "2025-07-14 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-13", "filename": "report_1002682777986_20250713.html", "start_date": "2025-07-13 00:00:00", "end_date": "2025-07-13 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-12", "filename": "report_1002682777986_20250712.html", "start_date": "2025-07-12 00:00:00", "end_date": "2025-07-12 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-11", "filename": "report_1002682777986_20250711.html", "start_date": "2025-07-11 00:00:00", "end_date": "2025-07-11 23:59:59", "total_messages": 0, "unique_participants": 0}]}, "1002109810685": {"name": "libp2p", "reports": [{"date": "2025-07-17", "filename": "report_1002109810685_20250717.html", "start_date": "2025-07-17 00:00:00", "end_date": "2025-07-17 23:59:59", "total_messages": 4, "unique_participants": 2}, {"date": "2025-07-16", "filename": "report_1002109810685_20250716.html", "start_date": "2025-07-16 00:00:00", "end_date": "2025-07-16 23:59:59", "total_messages": 2, "unique_participants": 2}, {"date": "2025-07-15", "filename": "report_1002109810685_20250715.html", "start_date": "2025-07-15 00:00:00", "end_date": "2025-07-15 23:59:59", "total_messages": 1, "unique_participants": 1}, {"date": "2025-07-14", "filename": "report_1002109810685_20250714.html", "start_date": "2025-07-14 00:00:00", "end_date": "2025-07-14 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-13", "filename": "report_1002109810685_20250713.html", "start_date": "2025-07-13 00:00:00", "end_date": "2025-07-13 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-12", "filename": "report_1002109810685_20250712.html", "start_date": "2025-07-12 00:00:00", "end_date": "2025-07-12 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-11", "filename": "report_1002109810685_20250711.html", "start_date": "2025-07-11 00:00:00", "end_date": "2025-07-11 23:59:59", "total_messages": 0, "unique_participants": 0}]}, "1002412320552": {"name": "Fault Tolerant Frens", "reports": [{"date": "2025-07-17", "filename": "report_1002412320552_20250717.html", "start_date": "2025-07-17 00:00:00", "end_date": "2025-07-17 23:59:59", "total_messages": 17, "unique_participants": 4}, {"date": "2025-07-16", "filename": "report_1002412320552_20250716.html", "start_date": "2025-07-16 00:00:00", "end_date": "2025-07-16 23:59:59", "total_messages": 3, "unique_participants": 1}, {"date": "2025-07-15", "filename": "report_1002412320552_20250715.html", "start_date": "2025-07-15 00:00:00", "end_date": "2025-07-15 23:59:59", "total_messages": 1, "unique_participants": 1}, {"date": "2025-07-14", "filename": "report_1002412320552_20250714.html", "start_date": "2025-07-14 00:00:00", "end_date": "2025-07-14 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-13", "filename": "report_1002412320552_20250713.html", "start_date": "2025-07-13 00:00:00", "end_date": "2025-07-13 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-12", "filename": "report_1002412320552_20250712.html", "start_date": "2025-07-12 00:00:00", "end_date": "2025-07-12 23:59:59", "total_messages": 0, "unique_participants": 0}, {"date": "2025-07-11", "filename": "report_1002412320552_20250711.html", "start_date": "2025-07-11 00:00:00", "end_date": "2025-07-11 23:59:59", "total_messages": 0, "unique_participants": 0}]}};
-        
-        function showReportSelector(chatId, chatName) {
-            const popup = document.getElementById('reportPopup');
-            const title = document.getElementById('popupTitle');
-            const reportList = document.getElementById('reportList');
-            
-            console.log('showReportSelector called with:', { chatId, chatName });
-            console.log('reportsMetadata:', reportsMetadata);
-            
-            title.textContent = `Select Report - ${chatName}`;
-            
-            // Remove minus sign from chat ID for metadata lookup
-            const metadataKey = chatId.replace('-', '');
-            console.log('Looking for metadata key:', metadataKey);
-            
-            if (!reportsMetadata[metadataKey]) {
-                console.log('No reports found for key:', metadataKey);
-                console.log('Available keys:', Object.keys(reportsMetadata));
-                reportList.innerHTML = '<p class="no-reports">No reports available for this channel.</p>';
-                popup.style.display = 'flex';
-                return;
+        function navigateToIntelligence(type) {
+            if (type === 'telegram') {
+                window.location.href = 'telegram.html';
+            } else if (type === 'github') {
+                // TODO: Implement GitHub intelligence
+                alert('GitHub Intelligence coming soon!');
             }
-            
-            const reports = reportsMetadata[metadataKey].reports;
-            console.log('Found reports:', reports);
-            let html = '';
-            
-            reports.forEach(report => {
-                const date = new Date(report.date);
-                const formattedDate = date.toLocaleDateString('en-US', { 
-                    weekday: 'long', 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                });
-                
-                const messages = report.total_messages || 0;
-                const participants = report.unique_participants || 0;
-                
-                html += `
-                    <div class="report-item" onclick="openReport('${report.filename}')">
-                        <div class="report-date">${formattedDate}</div>
-                        <div class="report-stats">
-                            <span class="stat-badge messages">${messages} messages</span>
-                            <span class="stat-badge participants">${participants} participants</span>
-                        </div>
-                        <div class="report-filename">${report.filename}</div>
-                    </div>
-                `;
-            });
-            
-            reportList.innerHTML = html;
-            popup.style.display = 'flex';
         }
-        
-        function closeReportSelector() {
-            document.getElementById('reportPopup').style.display = 'none';
-        }
-        
-        function openReport(filename) {
-            window.open(`reports/${filename}`, '_blank');
-            closeReportSelector();
-        }
-        
-        // Close popup when clicking outside
-        document.getElementById('reportPopup').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeReportSelector();
-            }
-        });
-        
-        // Close popup with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeReportSelector();
-            }
-        });
     </script>
 </body>
 </html>
