@@ -5,117 +5,56 @@
       {
         "date": "2025-07-17",
         "filename": "report_1002009589709_20250717.html",
-        "start_date": "2025-07-17 04:08:12.530468",
-        "end_date": "2025-07-18 04:08:12.530468",
+        "start_date": "2025-07-17 00:00:00",
+        "end_date": "2025-07-17 23:59:59",
         "total_messages": 191,
         "unique_participants": 14
       },
       {
         "date": "2025-07-16",
         "filename": "report_1002009589709_20250716.html",
-        "start_date": "2025-07-16 04:08:12.972299",
-        "end_date": "2025-07-17 04:08:12.972299",
+        "start_date": "2025-07-16 00:00:00",
+        "end_date": "2025-07-16 23:59:59",
         "total_messages": 151,
         "unique_participants": 11
       },
       {
         "date": "2025-07-15",
         "filename": "report_1002009589709_20250715.html",
-        "start_date": "2025-07-15 04:08:13.270335",
-        "end_date": "2025-07-16 04:08:13.270335",
+        "start_date": "2025-07-15 00:00:00",
+        "end_date": "2025-07-15 23:59:59",
         "total_messages": 1,
         "unique_participants": 1
       },
       {
         "date": "2025-07-14",
         "filename": "report_1002009589709_20250714.html",
-        "start_date": "2025-07-14 04:08:13.624816",
-        "end_date": "2025-07-15 04:08:13.624816",
+        "start_date": "2025-07-14 00:00:00",
+        "end_date": "2025-07-14 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-13",
         "filename": "report_1002009589709_20250713.html",
-        "start_date": "2025-07-13 04:08:13.935671",
-        "end_date": "2025-07-14 04:08:13.935671",
+        "start_date": "2025-07-13 00:00:00",
+        "end_date": "2025-07-13 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-12",
         "filename": "report_1002009589709_20250712.html",
-        "start_date": "2025-07-12 04:08:14.273535",
-        "end_date": "2025-07-13 04:08:14.273535",
+        "start_date": "2025-07-12 00:00:00",
+        "end_date": "2025-07-12 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-11",
         "filename": "report_1002009589709_20250711.html",
-        "start_date": "2025-07-11 04:08:14.533204",
-        "end_date": "2025-07-12 04:08:14.533204",
-        "total_messages": 0,
-        "unique_participants": 0
-      }
-    ]
-  },
-  "1002412320552": {
-    "name": "Fault Tolerant Frens",
-    "reports": [
-      {
-        "date": "2025-07-17",
-        "filename": "report_1002412320552_20250717.html",
-        "start_date": "2025-07-17 04:08:14.765179",
-        "end_date": "2025-07-18 04:08:14.765179",
-        "total_messages": 17,
-        "unique_participants": 4
-      },
-      {
-        "date": "2025-07-16",
-        "filename": "report_1002412320552_20250716.html",
-        "start_date": "2025-07-16 04:08:15.031029",
-        "end_date": "2025-07-17 04:08:15.031029",
-        "total_messages": 3,
-        "unique_participants": 1
-      },
-      {
-        "date": "2025-07-15",
-        "filename": "report_1002412320552_20250715.html",
-        "start_date": "2025-07-15 04:08:15.252551",
-        "end_date": "2025-07-16 04:08:15.252551",
-        "total_messages": 1,
-        "unique_participants": 1
-      },
-      {
-        "date": "2025-07-14",
-        "filename": "report_1002412320552_20250714.html",
-        "start_date": "2025-07-14 04:08:15.455944",
-        "end_date": "2025-07-15 04:08:15.455944",
-        "total_messages": 0,
-        "unique_participants": 0
-      },
-      {
-        "date": "2025-07-13",
-        "filename": "report_1002412320552_20250713.html",
-        "start_date": "2025-07-13 04:08:15.633115",
-        "end_date": "2025-07-14 04:08:15.633115",
-        "total_messages": 0,
-        "unique_participants": 0
-      },
-      {
-        "date": "2025-07-12",
-        "filename": "report_1002412320552_20250712.html",
-        "start_date": "2025-07-12 04:08:15.803855",
-        "end_date": "2025-07-13 04:08:15.803855",
-        "total_messages": 0,
-        "unique_participants": 0
-      },
-      {
-        "date": "2025-07-11",
-        "filename": "report_1002412320552_20250711.html",
-        "start_date": "2025-07-11 04:08:15.983105",
-        "end_date": "2025-07-12 04:08:15.983105",
+        "start_date": "2025-07-11 00:00:00",
+        "end_date": "2025-07-11 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       }
@@ -127,56 +66,56 @@
       {
         "date": "2025-07-17",
         "filename": "report_1002276686237_20250717.html",
-        "start_date": "2025-07-17 04:08:16.154030",
-        "end_date": "2025-07-18 04:08:16.154030",
+        "start_date": "2025-07-17 00:00:00",
+        "end_date": "2025-07-17 23:59:59",
         "total_messages": 15,
         "unique_participants": 10
       },
       {
         "date": "2025-07-16",
         "filename": "report_1002276686237_20250716.html",
-        "start_date": "2025-07-16 04:08:16.381171",
-        "end_date": "2025-07-17 04:08:16.381171",
+        "start_date": "2025-07-16 00:00:00",
+        "end_date": "2025-07-16 23:59:59",
         "total_messages": 1,
         "unique_participants": 1
       },
       {
         "date": "2025-07-15",
         "filename": "report_1002276686237_20250715.html",
-        "start_date": "2025-07-15 04:08:16.622053",
-        "end_date": "2025-07-16 04:08:16.622053",
+        "start_date": "2025-07-15 00:00:00",
+        "end_date": "2025-07-15 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-14",
         "filename": "report_1002276686237_20250714.html",
-        "start_date": "2025-07-14 04:08:16.832265",
-        "end_date": "2025-07-15 04:08:16.832265",
+        "start_date": "2025-07-14 00:00:00",
+        "end_date": "2025-07-14 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-13",
         "filename": "report_1002276686237_20250713.html",
-        "start_date": "2025-07-13 04:08:17.040284",
-        "end_date": "2025-07-14 04:08:17.040284",
+        "start_date": "2025-07-13 00:00:00",
+        "end_date": "2025-07-13 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-12",
         "filename": "report_1002276686237_20250712.html",
-        "start_date": "2025-07-12 04:08:17.260890",
-        "end_date": "2025-07-13 04:08:17.260890",
+        "start_date": "2025-07-12 00:00:00",
+        "end_date": "2025-07-12 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-11",
         "filename": "report_1002276686237_20250711.html",
-        "start_date": "2025-07-11 04:08:17.440993",
-        "end_date": "2025-07-12 04:08:17.440993",
+        "start_date": "2025-07-11 00:00:00",
+        "end_date": "2025-07-11 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       }
@@ -188,56 +127,56 @@
       {
         "date": "2025-07-17",
         "filename": "report_1002682777986_20250717.html",
-        "start_date": "2025-07-17 04:08:17.608740",
-        "end_date": "2025-07-18 04:08:17.608740",
+        "start_date": "2025-07-17 00:00:00",
+        "end_date": "2025-07-17 23:59:59",
         "total_messages": 12,
         "unique_participants": 6
       },
       {
         "date": "2025-07-16",
         "filename": "report_1002682777986_20250716.html",
-        "start_date": "2025-07-16 04:08:17.846976",
-        "end_date": "2025-07-17 04:08:17.846976",
+        "start_date": "2025-07-16 00:00:00",
+        "end_date": "2025-07-16 23:59:59",
         "total_messages": 14,
         "unique_participants": 2
       },
       {
         "date": "2025-07-15",
         "filename": "report_1002682777986_20250715.html",
-        "start_date": "2025-07-15 04:08:18.055078",
-        "end_date": "2025-07-16 04:08:18.055078",
+        "start_date": "2025-07-15 00:00:00",
+        "end_date": "2025-07-15 23:59:59",
         "total_messages": 2,
         "unique_participants": 2
       },
       {
         "date": "2025-07-14",
         "filename": "report_1002682777986_20250714.html",
-        "start_date": "2025-07-14 04:08:18.268214",
-        "end_date": "2025-07-15 04:08:18.268214",
+        "start_date": "2025-07-14 00:00:00",
+        "end_date": "2025-07-14 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-13",
         "filename": "report_1002682777986_20250713.html",
-        "start_date": "2025-07-13 04:08:18.444896",
-        "end_date": "2025-07-14 04:08:18.444896",
+        "start_date": "2025-07-13 00:00:00",
+        "end_date": "2025-07-13 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-12",
         "filename": "report_1002682777986_20250712.html",
-        "start_date": "2025-07-12 04:08:18.636955",
-        "end_date": "2025-07-13 04:08:18.636955",
+        "start_date": "2025-07-12 00:00:00",
+        "end_date": "2025-07-12 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-11",
         "filename": "report_1002682777986_20250711.html",
-        "start_date": "2025-07-11 04:08:18.814804",
-        "end_date": "2025-07-12 04:08:18.814804",
+        "start_date": "2025-07-11 00:00:00",
+        "end_date": "2025-07-11 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       }
@@ -249,56 +188,117 @@
       {
         "date": "2025-07-17",
         "filename": "report_1002109810685_20250717.html",
-        "start_date": "2025-07-17 04:08:18.981147",
-        "end_date": "2025-07-18 04:08:18.981147",
+        "start_date": "2025-07-17 00:00:00",
+        "end_date": "2025-07-17 23:59:59",
         "total_messages": 4,
         "unique_participants": 2
       },
       {
         "date": "2025-07-16",
         "filename": "report_1002109810685_20250716.html",
-        "start_date": "2025-07-16 04:08:19.204088",
-        "end_date": "2025-07-17 04:08:19.204088",
+        "start_date": "2025-07-16 00:00:00",
+        "end_date": "2025-07-16 23:59:59",
         "total_messages": 2,
         "unique_participants": 2
       },
       {
         "date": "2025-07-15",
         "filename": "report_1002109810685_20250715.html",
-        "start_date": "2025-07-15 04:08:19.436339",
-        "end_date": "2025-07-16 04:08:19.436339",
+        "start_date": "2025-07-15 00:00:00",
+        "end_date": "2025-07-15 23:59:59",
         "total_messages": 1,
         "unique_participants": 1
       },
       {
         "date": "2025-07-14",
         "filename": "report_1002109810685_20250714.html",
-        "start_date": "2025-07-14 04:08:19.652700",
-        "end_date": "2025-07-15 04:08:19.652700",
+        "start_date": "2025-07-14 00:00:00",
+        "end_date": "2025-07-14 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-13",
         "filename": "report_1002109810685_20250713.html",
-        "start_date": "2025-07-13 04:08:19.839669",
-        "end_date": "2025-07-14 04:08:19.839669",
+        "start_date": "2025-07-13 00:00:00",
+        "end_date": "2025-07-13 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-12",
         "filename": "report_1002109810685_20250712.html",
-        "start_date": "2025-07-12 04:08:20.013081",
-        "end_date": "2025-07-13 04:08:20.013081",
+        "start_date": "2025-07-12 00:00:00",
+        "end_date": "2025-07-12 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       },
       {
         "date": "2025-07-11",
         "filename": "report_1002109810685_20250711.html",
-        "start_date": "2025-07-11 04:08:20.247954",
-        "end_date": "2025-07-12 04:08:20.247954",
+        "start_date": "2025-07-11 00:00:00",
+        "end_date": "2025-07-11 23:59:59",
+        "total_messages": 0,
+        "unique_participants": 0
+      }
+    ]
+  },
+  "1002412320552": {
+    "name": "Fault Tolerant Frens",
+    "reports": [
+      {
+        "date": "2025-07-17",
+        "filename": "report_1002412320552_20250717.html",
+        "start_date": "2025-07-17 00:00:00",
+        "end_date": "2025-07-17 23:59:59",
+        "total_messages": 17,
+        "unique_participants": 4
+      },
+      {
+        "date": "2025-07-16",
+        "filename": "report_1002412320552_20250716.html",
+        "start_date": "2025-07-16 00:00:00",
+        "end_date": "2025-07-16 23:59:59",
+        "total_messages": 3,
+        "unique_participants": 1
+      },
+      {
+        "date": "2025-07-15",
+        "filename": "report_1002412320552_20250715.html",
+        "start_date": "2025-07-15 00:00:00",
+        "end_date": "2025-07-15 23:59:59",
+        "total_messages": 1,
+        "unique_participants": 1
+      },
+      {
+        "date": "2025-07-14",
+        "filename": "report_1002412320552_20250714.html",
+        "start_date": "2025-07-14 00:00:00",
+        "end_date": "2025-07-14 23:59:59",
+        "total_messages": 0,
+        "unique_participants": 0
+      },
+      {
+        "date": "2025-07-13",
+        "filename": "report_1002412320552_20250713.html",
+        "start_date": "2025-07-13 00:00:00",
+        "end_date": "2025-07-13 23:59:59",
+        "total_messages": 0,
+        "unique_participants": 0
+      },
+      {
+        "date": "2025-07-12",
+        "filename": "report_1002412320552_20250712.html",
+        "start_date": "2025-07-12 00:00:00",
+        "end_date": "2025-07-12 23:59:59",
+        "total_messages": 0,
+        "unique_participants": 0
+      },
+      {
+        "date": "2025-07-11",
+        "filename": "report_1002412320552_20250711.html",
+        "start_date": "2025-07-11 00:00:00",
+        "end_date": "2025-07-11 23:59:59",
         "total_messages": 0,
         "unique_participants": 0
       }
