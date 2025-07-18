@@ -1,5 +1,11 @@
 {
   "generated_at": "2025-01-17T12:00:00Z",
   "total_repositories": 0,
-  "repositories": []
+  "repositories": [
+    "https://github.com/ethereum/go-ethereum",
+    "https://github.com/ethereum/solidity",
+    "https://github.com/ethereum/EIPs",
+    "https://github.com/ethereum/ethereum-js",
+    "https://github.com/ethereum/consensus-specs"
+  ]
 } 
