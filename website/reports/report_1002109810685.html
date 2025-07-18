@@ -341,7 +341,7 @@ h1.site-title {
                 <h1 class="site-title">libp2p</h1>
                 <p class="site-subtitle">Detailed Intelligence Report - Last 24 Hours</p>
                 <div class="status-bar">
-                    <span class="timestamp">2025-07-18 0239Z</span>
+                    <span class="timestamp">2025-07-18 0242Z</span>
                     <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
                 </div>
             </div>
@@ -361,7 +361,11 @@ h1.site-title {
                 <div class="stat-label">Active Participants</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">3</div>
+                <div class="stat-value">33.3%</div>
+                <div class="stat-label">Activity Change</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">1</div>
                 <div class="stat-label">Message Types</div>
             </div>
         </div>
@@ -369,29 +373,96 @@ h1.site-title {
         <div class="messages-section">
             <h2 class="section-title">Recent Messages</h2>
             <div class="message-list">
+
                 <div class="message-item">
                     <div class="message-header">
-                        <span class="message-author">Sample User</span>
-                        <span class="message-time">2025-07-18 0239Z</span>
+                        <span class="message-author">Oleg</span>
+                        <span class="message-time">2025-07-17 1045Z</span>
                     </div>
-                    <div class="message-text">This is a sample message from the libp2p channel. In production, this would show real messages from the database.</div>
+                    <div class="message-text">I'm using the go version.</div>
                     <span class="message-type-badge">text</span>
                 </div>
+
                 <div class="message-item">
                     <div class="message-header">
-                        <span class="message-author">Another User</span>
-                        <span class="message-time">2025-07-18 0239Z</span>
+                        <span class="message-author">Vlad Maslianko</span>
+                        <span class="message-time">2025-07-17 1027Z</span>
                     </div>
-                    <div class="message-text">Another sample message showing the report page functionality.</div>
+                    <div class="message-text">correct me please if i do something incorrect</div>
                     <span class="message-type-badge">text</span>
                 </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Vlad Maslianko</span>
+                        <span class="message-time">2025-07-17 0948Z</span>
+                    </div>
+                    <div class="message-text">In this implementation i have an issue with testing connection of quic and tcp</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Vlad Maslianko</span>
+                        <span class="message-time">2025-07-17 0946Z</span>
+                    </div>
+                    <div class="message-text">It should be something like this? 
+
+/// Constructs a `Swarm<Behaviour>` from `P2PConfig` using QUIC with TCP fallback when available, or
+/// TCP only otherwise.
+pub fn with_default_transport(config: &P2PConfig) -> P2PResult<Swarm<Behaviour>> {
+    let builder = init_swarm!(config);
+
+    let swarm = finish_swarm!(
+        builder.with_other_transport(move |keypair| {
+            #[cfg(feature = "quic")]
+            {
+                // 1) QUIC transport, wrapping its muxer
+                let quic = quic::tokio::Transport::new(quic::Config::new(&keypair))
+                    .map(|(peer, conn), _| (peer, StreamMuxerBox::new(conn)));
+
+                // 2) TCP+Noise+Yamux fallback, wrapping its muxer
+                let tcp = tcp::tokio::Transport::new(tcp::Config::default().nodelay(true))
+                    .upgrade(libp2p::core::upgrade::Version::V1)
+                    .authenticate(noise::Config::new(&keypair).unwrap())
+                    .multiplex(yamux::Config::default())
+                    .map(|(peer, mux), _| (peer, StreamMuxerBox::new(mux)));
+
+                // 3) Try QUIC first, then TCP; flatten the Either into the same output type
+                quic.or_transport(tcp)
+                    .map(|either, _| match either {
+                        futures::future::Either::Left((peer, mx))
+                        | futures::future::Either::Right((peer, mx)) => (peer, mx),
+                    })
+                    .boxed()
+            }
+
+            #[cfg(not(feature = "quic"))]
+            {
+                // Only TCP branch when QUIC feature is off
+                tcp::tokio::Transport::new(tcp::Config::default().nodelay(true))
+                    .upgrade(libp2p::core::upgrade::Version::V1)
+                    .authenticate(noise::Config::new(&keypair).unwrap())
+                    .multiplex(yamux::Config::default())
+                    .map(|(peer, mux), _| (peer, StreamMuxerBox::new(mux)))
+                    .boxed()
+            }
+        }),
+        config
+    );
+
+    Ok(swarm)
+}</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
             </div>
         </div>
     </main>
     
     <footer class="site-footer">
         <p>Generated by Wartime Milady CEO Intelligence Platform</p>
-        <p>Report generated: 2025-07-18 0239Z</p>
+        <p>Report generated: 2025-07-18 0242Z</p>
     </footer>
 </body>
 </html>
