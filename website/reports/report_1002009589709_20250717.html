@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wartime Milady CEO - Tevm Report (2025-07-17 to 2025-07-18)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap');
+:root {
+  --color-primary: #FF006E;
+  --color-secondary: #00F5FF;
+  --color-accent: #00FF00;
+  --color-bg: #0A0A0A;
+  --color-surface: #1A1A1A;
+  --color-text: #F0F0F0;
+  --font-mono: 'Space Mono', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background:
+    radial-gradient(ellipse at top left, rgba(255,0,110,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(0,245,255,0.1) 0%, transparent 50%),
+    #0A0A0A;
+  min-height: 100vh;
+  margin: 0;
+  animation: flicker 10s infinite;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-image:
+    linear-gradient(rgba(255,0,110,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,0,110,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  95% { opacity: 0.98; }
+}
+
+h1.site-title {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: linear-gradient(45deg, #FF006E, #00F5FF, #00FF00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(255,0,110,0.5);
+  margin: 0;
+}
+
+.site-header {
+  position: relative;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  background: linear-gradient(180deg, rgba(26,26,26,0.8) 0%, transparent 100%);
+  border: 2px solid #FF006E;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.chat-icon {
+  font-size: 4em;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,0,110,0.1);
+  border: 2px solid var(--color-primary);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.header-text {
+  flex: 1;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.timestamp {
+  font-family: 'Space Mono', monospace;
+  background: rgba(0,245,255,0.1);
+  border: 1px solid #00F5FF;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  letter-spacing: 0.1em;
+  display: inline-block;
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  background: rgba(0,255,0,0.1);
+  border: 2px solid #00FF00;
+  border-radius: 20px;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  box-shadow:
+    inset 0 0 20px rgba(0,255,0,0.3),
+    0 0 20px rgba(0,255,0,0.5);
+  position: relative;
+}
+
+.status-indicator::before {
+  content: '';
+  display: inline-block;
+  width: 10px; height: 10px;
+  background: #00FF00;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  animation: blink 1s infinite;
+  box-shadow: 0 0 10px #00FF00;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%);
+  border: 2px solid #FF006E;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: #00F5FF;
+  box-shadow: 0 4px 24px rgba(0,245,255,0.15);
+}
+
+.stat-value {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #00F5FF;
+  text-shadow:
+    0 0 10px #00F5FF,
+    0 0 20px #00F5FF,
+    0 0 30px #00F5FF;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.7;
+  font-family: 'Space Mono', monospace;
+}
+
+.messages-section {
+  background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%);
+  border: 2px solid #FF006E;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.5rem;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.message-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,0,110,0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.2s ease;
+}
+
+.message-item:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,0,110,0.4);
+  transform: translateX(4px);
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.message-author {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  color: #00F5FF;
+  font-size: 0.9rem;
+}
+
+.message-time {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.message-text {
+  color: var(--color-text);
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.message-type-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  background: rgba(0,255,0,0.1);
+  border: 1px solid #00FF00;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-family: 'Space Mono', monospace;
+  color: #00FF00;
+  margin-left: 0.5rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255,0,110,0.1);
+  border: 2px solid #FF006E;
+  border-radius: 8px;
+  color: #FF006E;
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.2s ease;
+  margin-bottom: 2rem;
+}
+
+.back-link:hover {
+  background: rgba(255,0,110,0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(255,0,110,0.3);
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .chat-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5em;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .status-bar {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <div class="scan-lines"></div>
+    <header class="site-header">
+        <div class="header-content">
+            <div class="chat-icon">
+                👥
+            </div>
+            <div class="header-text">
+                <h1 class="site-title">Tevm</h1>
+                <p class="site-subtitle">Intelligence Report - 2025-07-17 to 2025-07-18</p>
+                <div class="status-bar">
+                    <span class="timestamp">2025-07-18 0305Z</span>
+                    <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <a href="../index.html" class="back-link">← BACK TO COMMAND CENTER</a>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">200</div>
+                <div class="stat-label">Total Messages</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">14</div>
+                <div class="stat-label">Active Participants</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">2</div>
+                <div class="stat-label">Message Types</div>
+            </div>
+        </div>
+        
+        <div class="messages-section">
+            <h2 class="section-title">Recent Messages</h2>
+            <div class="message-list">
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0202Z</span>
+                    </div>
+                    <div class="message-text">There is power in this idea beyond just the unstoppable nature of it. When you got unstoppable trustworthy frontends you also just created frontend legos like defi legos. Interop the normal internet cannot support</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Zodomo/</span>
+                        <span class="message-time">2025-07-18 0200Z</span>
+                    </div>
+                    <div class="message-text">Writing the frontend itself in Solidity is mostly a meme but at the end of the day I just want it to never go down even in the event of a hostile action against me. I want it to live forever, without relying on git repositories or as few external dependencies as possible.</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Zodomo/</span>
+                        <span class="message-time">2025-07-18 0159Z</span>
+                    </div>
+                    <div class="message-text">And need that world machine to be capable of serving the frontend for it in a completely unstoppable fashion</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Zodomo/</span>
+                        <span class="message-time">2025-07-18 0158Z</span>
+                    </div>
+                    <div class="message-text">I want to expand upon and enshrine forever an application for freedom on our blessed world machine</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0158Z</span>
+                    </div>
+                    <div class="message-text">@zodomo is carrying on the dream of Tevm.app cc @cipher0091 @dionysuzx</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Zodomo/</span>
+                        <span class="message-time">2025-07-18 0157Z</span>
+                    </div>
+                    <div class="message-text">gmilady</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Zodomo/</span>
+                        <span class="message-time">2025-07-18 0157Z</span>
+                    </div>
+                    <div class="message-text">None</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0149Z</span>
+                    </div>
+                    <div class="message-text">We are gonna upgrade the 2 fuck me rust to fuck me write myself though</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0148Z</span>
+                    </div>
+                    <div class="message-text">We ended up with 2 fuck me rust, 4 fuck me write myself, 1 c, rest zig</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0146Z</span>
+                    </div>
+                    <div class="message-text">Here was the flow chart btw of how we chose crypto
+
+1. Is it in Zig std lib
+2. Is there a C impl that looks well used and mantained?
+3. Fuck me! Is it simple enough to write myself?
+4. Fuck me! Use rust and make not available in wasm. Figure it out later</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">cipher</span>
+                        <span class="message-time">2025-07-18 0107Z</span>
+                    </div>
+                    <div class="message-text">this might be of interest, prior to migrating Sim into Dune-Sim this was made available on git
+https://github.com/duneanalytics/storage-layout-extractor</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0106Z</span>
+                    </div>
+                    <div class="message-text">should have joined the eve online corp</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0105Z</span>
+                    </div>
+                    <div class="message-text">"written by a senior google dev..."
+"who played fortnite 60 hours a week and mostly enjoyed eating free meals during that time"</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0104Z</span>
+                    </div>
+                    <div class="message-text">should do the trick</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0103Z</span>
+                    </div>
+                    <div class="message-text">s/crypto/self_rolled_crypto_by_js_dev_vibecoding/</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0103Z</span>
+                    </div>
+                    <div class="message-text">"half of this dude's tweets are about react and effect wtf"</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0102Z</span>
+                    </div>
+                    <div class="message-text">And they they go over the moon when they find out fucory is a javascript dev</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0102Z</span>
+                    </div>
+                    <div class="message-text">They will be even more pissed once realizing it's pronounced fuckery</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0101Z</span>
+                    </div>
+                    <div class="message-text">Imagine losing all your eth because you tried to get a .001% edge using crypto written by fucory</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Vlad</span>
+                        <span class="message-time">2025-07-18 0101Z</span>
+                    </div>
+                    <div class="message-text">nothing happened here</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0100Z</span>
+                    </div>
+                    <div class="message-text">quick purge the chat</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Vlad</span>
+                        <span class="message-time">2025-07-18 0059Z</span>
+                    </div>
+                    <div class="message-text">we can always say we didn't know</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Vlad</span>
+                        <span class="message-time">2025-07-18 0059Z</span>
+                    </div>
+                    <div class="message-text">hahaha even better than a backdoor</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0057Z</span>
+                    </div>
+                    <div class="message-text">if we can lure all of the evil MEV extractoooors to use broken crypto, we can steal all their keys and their loot</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0057Z</span>
+                    </div>
+                    <div class="message-text">It's gonna be highly hackable too I will be surprised if searchers don't use it at least a few</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0056Z</span>
+                    </div>
+                    <div class="message-text">Not all the time the zig evm is going to be the fastest evm in the world on the server.</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Vlad</span>
+                        <span class="message-time">2025-07-18 0056Z</span>
+                    </div>
+                    <div class="message-text">but yeah like someone can get physical access to the node I guess</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Vlad</span>
+                        <span class="message-time">2025-07-18 0056Z</span>
+                    </div>
+                    <div class="message-text">but honestly I thought it'd be fine because it's ran inside the browser</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0056Z</span>
+                    </div>
+                    <div class="message-text">In my case if you optimizePerf actually you will get the same bytecode</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0056Z</span>
+                    </div>
+                    <div class="message-text">In my cases it doesn't</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Vlad</span>
+                        <span class="message-time">2025-07-18 0055Z</span>
+                    </div>
+                    <div class="message-text">actually not sufficient if what you do inside the loop has if statements</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0053Z</span>
+                    </div>
+                    <div class="message-text">or worse, if it's a validator then it could leak the signing key for the validator</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0052Z</span>
+                    </div>
+                    <div class="message-text">enode hijacking or something</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0052Z</span>
+                    </div>
+                    <div class="message-text">but who knows, it's a node, maybe it'll be responsible for signing transactions or something with a key, exposed to the public it could leak bits</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0052Z</span>
+                    </div>
+                    <div class="message-text">Not confident at all</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0052Z</span>
+                    </div>
+                    <div class="message-text">I think the loops I made will still be safe since it's still deterministic loop</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0051Z</span>
+                    </div>
+                    <div class="message-text">at minimum worth a note, maybe rename the namespace to insecure_crypto or something and add a note that it was "optimized" and it's probably breaking sidechannel safety and other things</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0050Z</span>
+                    </div>
+                    <div class="message-text">Good point it will be the only zig implementation anybody finds</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0050Z</span>
+                    </div>
+                    <div class="message-text">hard to tell how this code will be used in the future</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0049Z</span>
+                    </div>
+                    <div class="message-text">I told the engineer helping me public chain don't worry about it</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0049Z</span>
+                    </div>
+                    <div class="message-text">Oh do we have to worry about side channels?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0049Z</span>
+                    </div>
+                    <div class="message-text">like this probably</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0049Z</span>
+                    </div>
+                    <div class="message-text">just don't break constant time assumptions for comparisons etc because sidechannels</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0048Z</span>
+                    </div>
+                    <div class="message-text">e.g. turning hardcoded series of things into a loop that you can look at and know is the same code</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0048Z</span>
+                    </div>
+                    <div class="message-text">yea I made very very very minimal changes. Any changes I made are just very tiny changes that make it optimize for smaller bundle size a little better since most crypto algorithms optimize for speed</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">shazow</span>
+                        <span class="message-time">2025-07-18 0047Z</span>
+                    </div>
+                    <div class="message-text">it's not rolling your own crypto if AI stochastically parrots it</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0046Z</span>
+                    </div>
+                    <div class="message-text">I rolled my own crypto on a few things 😱
+https://github.com/evmts/Guillotine/tree/main/src/crypto</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0045Z</span>
+                    </div>
+                    <div class="message-text">For kzg I contributed zig support to a relatively simple c implementation https://github.com/ethereum/c-kzg-4844/pull/586/files</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0043Z</span>
+                    </div>
+                    <div class="message-text">We got a well educated cryptographer helping roll our own crypto for the few rust dependencies we would like to remove from tevm!  Hopefully I can find funding to pay for audits</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">fucory.eth</span>
+                        <span class="message-time">2025-07-18 0003Z</span>
+                    </div>
+                    <div class="message-text">It would have been a single service anybody could connect to that would be more efficient than a normal rpc support all tevm apis and make building apps stupidly simple</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    
+    <footer class="site-footer">
+        <p>Generated by Wartime Milady CEO Intelligence Platform</p>
+        <p>Report generated: 2025-07-18 0305Z</p>
+    </footer>
+</body>
+</html>
