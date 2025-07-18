@@ -1,0 +1,307 @@
+{
+  "ethereum_go-ethereum": {
+    "name": "Go Ethereum",
+    "reports": [
+      {
+        "date": "2025-07-17",
+        "filename": "report_ethereum_go_ethereum_20250717.html",
+        "start_date": "2025-07-17T01:10:07.312132",
+        "end_date": "2025-07-18T01:10:07.312132",
+        "commits": 45,
+        "contributors": 12
+      },
+      {
+        "date": "2025-07-16",
+        "filename": "report_ethereum_go_ethereum_20250716.html",
+        "start_date": "2025-07-16T01:10:07.313519",
+        "end_date": "2025-07-17T01:10:07.313519",
+        "commits": 45,
+        "contributors": 12
+      },
+      {
+        "date": "2025-07-15",
+        "filename": "report_ethereum_go_ethereum_20250715.html",
+        "start_date": "2025-07-15T01:10:07.313708",
+        "end_date": "2025-07-16T01:10:07.313708",
+        "commits": 45,
+        "contributors": 12
+      },
+      {
+        "date": "2025-07-14",
+        "filename": "report_ethereum_go_ethereum_20250714.html",
+        "start_date": "2025-07-14T01:10:07.313883",
+        "end_date": "2025-07-15T01:10:07.313883",
+        "commits": 45,
+        "contributors": 12
+      },
+      {
+        "date": "2025-07-13",
+        "filename": "report_ethereum_go_ethereum_20250713.html",
+        "start_date": "2025-07-13T01:10:07.314032",
+        "end_date": "2025-07-14T01:10:07.314032",
+        "commits": 45,
+        "contributors": 12
+      },
+      {
+        "date": "2025-07-12",
+        "filename": "report_ethereum_go_ethereum_20250712.html",
+        "start_date": "2025-07-12T01:10:07.314168",
+        "end_date": "2025-07-13T01:10:07.314168",
+        "commits": 45,
+        "contributors": 12
+      },
+      {
+        "date": "2025-07-11",
+        "filename": "report_ethereum_go_ethereum_20250711.html",
+        "start_date": "2025-07-11T01:10:07.314305",
+        "end_date": "2025-07-12T01:10:07.314305",
+        "commits": 45,
+        "contributors": 12
+      }
+    ]
+  },
+  "ethereum_solidity": {
+    "name": "Solidity",
+    "reports": [
+      {
+        "date": "2025-07-17",
+        "filename": "report_ethereum_solidity_20250717.html",
+        "start_date": "2025-07-17T01:10:07.314448",
+        "end_date": "2025-07-18T01:10:07.314448",
+        "commits": 28,
+        "contributors": 8
+      },
+      {
+        "date": "2025-07-16",
+        "filename": "report_ethereum_solidity_20250716.html",
+        "start_date": "2025-07-16T01:10:07.314622",
+        "end_date": "2025-07-17T01:10:07.314622",
+        "commits": 28,
+        "contributors": 8
+      },
+      {
+        "date": "2025-07-15",
+        "filename": "report_ethereum_solidity_20250715.html",
+        "start_date": "2025-07-15T01:10:07.314772",
+        "end_date": "2025-07-16T01:10:07.314772",
+        "commits": 28,
+        "contributors": 8
+      },
+      {
+        "date": "2025-07-14",
+        "filename": "report_ethereum_solidity_20250714.html",
+        "start_date": "2025-07-14T01:10:07.314914",
+        "end_date": "2025-07-15T01:10:07.314914",
+        "commits": 28,
+        "contributors": 8
+      },
+      {
+        "date": "2025-07-13",
+        "filename": "report_ethereum_solidity_20250713.html",
+        "start_date": "2025-07-13T01:10:07.315071",
+        "end_date": "2025-07-14T01:10:07.315071",
+        "commits": 28,
+        "contributors": 8
+      },
+      {
+        "date": "2025-07-12",
+        "filename": "report_ethereum_solidity_20250712.html",
+        "start_date": "2025-07-12T01:10:07.315217",
+        "end_date": "2025-07-13T01:10:07.315217",
+        "commits": 28,
+        "contributors": 8
+      },
+      {
+        "date": "2025-07-11",
+        "filename": "report_ethereum_solidity_20250711.html",
+        "start_date": "2025-07-11T01:10:07.315358",
+        "end_date": "2025-07-12T01:10:07.315358",
+        "commits": 28,
+        "contributors": 8
+      }
+    ]
+  },
+  "ethereum_EIPs": {
+    "name": "Ethereum Improvement Proposals",
+    "reports": [
+      {
+        "date": "2025-07-17",
+        "filename": "report_ethereum_EIPs_20250717.html",
+        "start_date": "2025-07-17T01:10:07.315506",
+        "end_date": "2025-07-18T01:10:07.315506",
+        "commits": 12,
+        "contributors": 5
+      },
+      {
+        "date": "2025-07-16",
+        "filename": "report_ethereum_EIPs_20250716.html",
+        "start_date": "2025-07-16T01:10:07.315658",
+        "end_date": "2025-07-17T01:10:07.315658",
+        "commits": 12,
+        "contributors": 5
+      },
+      {
+        "date": "2025-07-15",
+        "filename": "report_ethereum_EIPs_20250715.html",
+        "start_date": "2025-07-15T01:10:07.315805",
+        "end_date": "2025-07-16T01:10:07.315805",
+        "commits": 12,
+        "contributors": 5
+      },
+      {
+        "date": "2025-07-14",
+        "filename": "report_ethereum_EIPs_20250714.html",
+        "start_date": "2025-07-14T01:10:07.315949",
+        "end_date": "2025-07-15T01:10:07.315949",
+        "commits": 12,
+        "contributors": 5
+      },
+      {
+        "date": "2025-07-13",
+        "filename": "report_ethereum_EIPs_20250713.html",
+        "start_date": "2025-07-13T01:10:07.316095",
+        "end_date": "2025-07-14T01:10:07.316095",
+        "commits": 12,
+        "contributors": 5
+      },
+      {
+        "date": "2025-07-12",
+        "filename": "report_ethereum_EIPs_20250712.html",
+        "start_date": "2025-07-12T01:10:07.316253",
+        "end_date": "2025-07-13T01:10:07.316253",
+        "commits": 12,
+        "contributors": 5
+      },
+      {
+        "date": "2025-07-11",
+        "filename": "report_ethereum_EIPs_20250711.html",
+        "start_date": "2025-07-11T01:10:07.316428",
+        "end_date": "2025-07-12T01:10:07.316428",
+        "commits": 12,
+        "contributors": 5
+      }
+    ]
+  },
+  "ethereum_ethereum-js": {
+    "name": "Ethereum.js",
+    "reports": [
+      {
+        "date": "2025-07-17",
+        "filename": "report_ethereum_ethereum_js_20250717.html",
+        "start_date": "2025-07-17T01:10:07.316701",
+        "end_date": "2025-07-18T01:10:07.316701",
+        "commits": 31,
+        "contributors": 9
+      },
+      {
+        "date": "2025-07-16",
+        "filename": "report_ethereum_ethereum_js_20250716.html",
+        "start_date": "2025-07-16T01:10:07.316865",
+        "end_date": "2025-07-17T01:10:07.316865",
+        "commits": 31,
+        "contributors": 9
+      },
+      {
+        "date": "2025-07-15",
+        "filename": "report_ethereum_ethereum_js_20250715.html",
+        "start_date": "2025-07-15T01:10:07.317011",
+        "end_date": "2025-07-16T01:10:07.317011",
+        "commits": 31,
+        "contributors": 9
+      },
+      {
+        "date": "2025-07-14",
+        "filename": "report_ethereum_ethereum_js_20250714.html",
+        "start_date": "2025-07-14T01:10:07.317160",
+        "end_date": "2025-07-15T01:10:07.317160",
+        "commits": 31,
+        "contributors": 9
+      },
+      {
+        "date": "2025-07-13",
+        "filename": "report_ethereum_ethereum_js_20250713.html",
+        "start_date": "2025-07-13T01:10:07.317313",
+        "end_date": "2025-07-14T01:10:07.317313",
+        "commits": 31,
+        "contributors": 9
+      },
+      {
+        "date": "2025-07-12",
+        "filename": "report_ethereum_ethereum_js_20250712.html",
+        "start_date": "2025-07-12T01:10:07.317471",
+        "end_date": "2025-07-13T01:10:07.317471",
+        "commits": 31,
+        "contributors": 9
+      },
+      {
+        "date": "2025-07-11",
+        "filename": "report_ethereum_ethereum_js_20250711.html",
+        "start_date": "2025-07-11T01:10:07.317622",
+        "end_date": "2025-07-12T01:10:07.317622",
+        "commits": 31,
+        "contributors": 9
+      }
+    ]
+  },
+  "ethereum_consensus-specs": {
+    "name": "Consensus Specs",
+    "reports": [
+      {
+        "date": "2025-07-17",
+        "filename": "report_ethereum_consensus_specs_20250717.html",
+        "start_date": "2025-07-17T01:10:07.317775",
+        "end_date": "2025-07-18T01:10:07.317775",
+        "commits": 19,
+        "contributors": 6
+      },
+      {
+        "date": "2025-07-16",
+        "filename": "report_ethereum_consensus_specs_20250716.html",
+        "start_date": "2025-07-16T01:10:07.317933",
+        "end_date": "2025-07-17T01:10:07.317933",
+        "commits": 19,
+        "contributors": 6
+      },
+      {
+        "date": "2025-07-15",
+        "filename": "report_ethereum_consensus_specs_20250715.html",
+        "start_date": "2025-07-15T01:10:07.318082",
+        "end_date": "2025-07-16T01:10:07.318082",
+        "commits": 19,
+        "contributors": 6
+      },
+      {
+        "date": "2025-07-14",
+        "filename": "report_ethereum_consensus_specs_20250714.html",
+        "start_date": "2025-07-14T01:10:07.318305",
+        "end_date": "2025-07-15T01:10:07.318305",
+        "commits": 19,
+        "contributors": 6
+      },
+      {
+        "date": "2025-07-13",
+        "filename": "report_ethereum_consensus_specs_20250713.html",
+        "start_date": "2025-07-13T01:10:07.318552",
+        "end_date": "2025-07-14T01:10:07.318552",
+        "commits": 19,
+        "contributors": 6
+      },
+      {
+        "date": "2025-07-12",
+        "filename": "report_ethereum_consensus_specs_20250712.html",
+        "start_date": "2025-07-12T01:10:07.318859",
+        "end_date": "2025-07-13T01:10:07.318859",
+        "commits": 19,
+        "contributors": 6
+      },
+      {
+        "date": "2025-07-11",
+        "filename": "report_ethereum_consensus_specs_20250711.html",
+        "start_date": "2025-07-11T01:10:07.319311",
+        "end_date": "2025-07-12T01:10:07.319311",
+        "commits": 19,
+        "contributors": 6
+      }
+    ]
+  }
+}

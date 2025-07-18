@@ -26,6 +26,27 @@ class MiladySiteGenerator:
         with open(data_file, 'r') as f:
             return json.load(f)
 
+    def load_github_data(self):
+        """Load GitHub repository data"""
+        data_file = self.data_dir / 'github_repositories.json'
+        if not data_file.exists():
+            # Generate GitHub data if it doesn't exist
+            import subprocess
+            import sys
+            try:
+                subprocess.run([sys.executable, 'scripts/generate_github_data.py'], 
+                             capture_output=True, text=True, check=True)
+            except subprocess.CalledProcessError as e:
+                print(f"Warning: Could not generate GitHub data: {e}")
+                return None
+        
+        try:
+            with open(data_file, 'r') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Warning: Could not load GitHub data: {e}")
+            return None
+
     def _create_sample_data(self):
         now = datetime.utcnow()
         return {
@@ -231,8 +252,7 @@ class MiladySiteGenerator:
             if (type === 'telegram') {{
                 window.location.href = 'telegram.html';
             }} else if (type === 'github') {{
-                // TODO: Implement GitHub intelligence
-                alert('GitHub Intelligence coming soon!');
+                window.location.href = 'github.html';
             }}
         }}
     </script>
@@ -430,6 +450,215 @@ class MiladySiteGenerator:
         document.addEventListener('keydown', function(e) {{
             if (e.key === 'Escape') {{
                 closeReportSelector();
+            }}
+        }});
+    </script>
+</body>
+</html>'''
+        
+        return html
+
+    def generate_github_page(self, data):
+        """Generate the GitHub repositories page"""
+        current_time = datetime.utcnow().strftime('%Y-%m-%d %H%MZ')
+        repo_cards = []
+        for repo in data['repositories']:
+            # Create safe filename for the report link
+            repo_id = repo['id']
+            safe_filename = repo_id.replace('/', '_').replace('-', '_')
+            card_html = f'''
+            <div class="repo-card" tabindex="0" aria-label="{repo['name']} repository card" onclick="showGitHubReportSelector('{repo_id}', '{repo['name']}')">
+                <div class="repo-header">
+                    <div class="repo-icon">{repo['icon']}</div>
+                    <div class="repo-info">
+                        <h3 class="repo-name">{repo['name']}</h3>
+                        <p class="repo-description">{repo.get('description', 'No description available')}</p>
+                        <div class="repo-meta">
+                            <span class="language">{repo.get('language', 'Unknown')}</span>
+                            <span class="last-update">Last: {self.format_military_time(repo['last_update'])}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="repo-stats">
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Commits (7d)</span>
+                            <span class="stat-value">{repo['stats']['commits_7d']}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Contributors (7d)</span>
+                            <span class="stat-value">{repo['stats']['contributors_7d']}</span>
+                        </div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-label">Stars</span>
+                            <span class="stat-value">{repo.get('stars', 0):,}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Forks</span>
+                            <span class="stat-value">{repo.get('forks', 0):,}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            '''
+            repo_cards.append(card_html)
+        
+        # Load and embed the metadata directly
+        metadata_file = Path('website/github_reports/metadata.json')
+        reports_metadata = {}
+        if metadata_file.exists():
+            try:
+                with open(metadata_file, 'r', encoding='utf-8') as f:
+                    reports_metadata = json.load(f)
+            except Exception as e:
+                print(f"Warning: Could not load GitHub metadata.json: {e}")
+        
+        # Use the static wartimemiladyceo.jpg for the avatar
+        avatar_html = '''
+            <img src="assets/wartimemiladyceo.jpg" alt="Wartime Milady CEO avatar" class="avatar-img" width="120" height="120" loading="lazy" style="display:block; border-radius:50%; object-fit:cover; background:#222;" onerror="this.style.display='none';this.parentNode.querySelector('.avatar-fallback').style.display='flex';">
+            <div class="avatar-fallback" style="display:none; width:120px; height:120px; align-items:center; justify-content:center; border-radius:50%; background:linear-gradient(45deg,#FF006E,#00F5FF); font-size:3rem; border:3px solid #00FF00; box-shadow:0 0 20px #FF006E,0 0 20px #00FF00;">👾</div>
+        '''
+        html = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wartime Milady CEO - GitHub Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+{self._get_css()}
+    </style>
+</head>
+<body>
+    <div class="scan-lines"></div>
+    <header class="site-header">
+        <div class="header-content">
+            <div class="milady-avatar">
+                {avatar_html}
+            </div>
+            <div class="header-text">
+                <h1 class="site-title">GitHub Intelligence</h1>
+                <p class="site-subtitle">Monitoring {data['total_repositories']} Ethereum repositories</p>
+                <div class="status-bar">
+                    <span class="timestamp">{current_time}</span>
+                    <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="main-content">
+        <div class="breadcrumb">
+            <a href="index.html" class="breadcrumb-item">/</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-item">github</span>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-item">reports</span>
+        </div>
+        <div class="repo-grid">
+            {''.join(repo_cards)}
+        </div>
+    </main>
+    
+    <!-- GitHub Report Selector Popup -->
+    <div id="githubReportPopup" class="report-popup">
+        <div class="report-popup-content">
+            <div class="report-popup-header">
+                <h2 id="githubPopupTitle" class="popup-title">Select Report</h2>
+                <button class="popup-close" onclick="closeGitHubReportSelector()">×</button>
+            </div>
+            <div id="githubReportList" class="report-list">
+                <!-- Reports will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <footer class="site-footer">
+        <p>Generated by Wartime Milady CEO Intelligence Platform</p>
+        <p>Data updated: {self.format_military_time(data['generated_at'])}</p>
+    </footer>
+    
+    <script>
+        // Embed metadata directly in the HTML to avoid CORS issues
+        const githubReportsMetadata = {json.dumps(reports_metadata)};
+        
+        function showGitHubReportSelector(repoId, repoName) {{
+            const popup = document.getElementById('githubReportPopup');
+            const title = document.getElementById('githubPopupTitle');
+            const reportList = document.getElementById('githubReportList');
+            
+            console.log('showGitHubReportSelector called with:', {{ repoId, repoName }});
+            console.log('githubReportsMetadata:', githubReportsMetadata);
+            
+            title.textContent = `Select Report - ${{repoName}}`;
+            
+            // Use the repo ID as the metadata key
+            const metadataKey = repoId.replace('/', '_');
+            console.log('Looking for metadata key:', metadataKey);
+            
+            if (!githubReportsMetadata[metadataKey]) {{
+                console.log('No reports found for key:', metadataKey);
+                console.log('Available keys:', Object.keys(githubReportsMetadata));
+                reportList.innerHTML = '<p class="no-reports">No reports available for this repository.</p>';
+                popup.style.display = 'flex';
+                return;
+            }}
+            
+            const reports = githubReportsMetadata[metadataKey].reports;
+            console.log('Found reports:', reports);
+            let html = '';
+            
+            reports.forEach(report => {{
+                const date = new Date(report.date);
+                const formattedDate = date.toLocaleDateString('en-US', {{ 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                }});
+                
+                const commits = report.commits || 0;
+                const contributors = report.contributors || 0;
+                
+                html += `
+                    <div class="report-item" onclick="openGitHubReport('${{report.filename}}')">
+                        <div class="report-date">${{formattedDate}}</div>
+                        <div class="report-stats">
+                            <span class="stat-badge commits">${{commits}} commits</span>
+                            <span class="stat-badge contributors">${{contributors}} contributors</span>
+                        </div>
+                        <div class="report-filename">${{report.filename}}</div>
+                    </div>
+                `;
+            }});
+            
+            reportList.innerHTML = html;
+            popup.style.display = 'flex';
+        }}
+        
+        function closeGitHubReportSelector() {{
+            document.getElementById('githubReportPopup').style.display = 'none';
+        }}
+        
+        function openGitHubReport(filename) {{
+            window.open(`github_reports/${{filename}}`, '_blank');
+            closeGitHubReportSelector();
+        }}
+        
+        // Close popup when clicking outside
+        document.getElementById('githubReportPopup').addEventListener('click', function(e) {{
+            if (e.target === this) {{
+                closeGitHubReportSelector();
+            }}
+        }});
+        
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {{
+            if (e.key === 'Escape') {{
+                closeGitHubReportSelector();
             }}
         }});
     </script>
@@ -930,6 +1159,138 @@ h1.site-title {
   flex-direction: column;
   align-items: flex-start;
 }
+
+/* GitHub Repository Cards */
+.repo-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+
+.repo-card {
+  background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%);
+  border: 2px solid #FF006E;
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.repo-card:hover {
+  transform: translateY(-2px);
+  border-color: #00F5FF;
+  box-shadow: 0 4px 24px rgba(0,245,255,0.15);
+}
+
+.repo-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.repo-icon {
+  font-size: 2em;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,0,110,0.1);
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.repo-info {
+  flex: 1;
+}
+
+.repo-name {
+  font-size: 1.3rem;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  font-family: 'Space Mono', monospace;
+}
+
+.repo-description {
+  font-size: 0.9rem;
+  color: #888;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.repo-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.language {
+  background: rgba(0,245,255,0.1);
+  border: 1px solid rgba(0,245,255,0.3);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Space Mono', monospace;
+}
+
+.repo-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.repo-stats .stat-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.repo-stats .stat-item {
+  flex: 1;
+  text-align: center;
+}
+
+.repo-stats .stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  margin-bottom: 0.25rem;
+  font-family: 'Space Mono', monospace;
+}
+
+.repo-stats .stat-value {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #00F5FF;
+  text-shadow: 0 0 10px #00F5FF;
+}
+
+/* Additional stat badge styles for GitHub reports */
+.stat-badge.commits {
+  background: rgba(0, 245, 255, 0.1);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  color: #00F5FF;
+}
+
+.stat-badge.contributors {
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  color: #00FF00;
+}
+
 @media (max-width: 1024px) {
   .site-title { font-size: 2rem; }
   .header-content { flex-direction: column; text-align: center; gap: 1.5rem; }
@@ -1152,6 +1513,18 @@ h1.site-title {
             print(f"Error output: {e.stderr}")
         
         print(f"✅ Generated daily report pages")
+        
+        # Generate GitHub reports
+        print("📊 Generating GitHub report pages...")
+        try:
+            result = subprocess.run([sys.executable, 'scripts/generate_github_reports.py'], 
+                                  capture_output=True, text=True, check=True)
+            print(result.stdout)
+        except subprocess.CalledProcessError as e:
+            print(f"⚠️  Error generating GitHub reports: {e}")
+            print(f"Error output: {e.stderr}")
+        
+        print(f"✅ Generated GitHub report pages")
 
     def _get_report_css(self):
         """Get CSS for report pages"""
@@ -1494,6 +1867,17 @@ h1.site-title {
         with open(telegram_path, 'w', encoding='utf-8') as f:
             f.write(telegram_html)
         print(f"📄 Generated Telegram page: {telegram_path}")
+        
+        # Generate GitHub page
+        github_data = self.load_github_data()
+        if github_data:
+            github_html = self.generate_github_page(github_data)
+            github_path = self.output_dir / 'github.html'
+            with open(github_path, 'w', encoding='utf-8') as f:
+                f.write(github_html)
+            print(f"📄 Generated GitHub page: {github_path}")
+        else:
+            print("⚠️  Could not load GitHub data, skipping GitHub page generation.")
         
         # Generate report pages
         self.generate_report_pages(data)

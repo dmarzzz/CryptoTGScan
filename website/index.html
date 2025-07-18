@@ -499,6 +499,138 @@ h1.site-title {
   flex-direction: column;
   align-items: flex-start;
 }
+
+/* GitHub Repository Cards */
+.repo-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+
+.repo-card {
+  background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%);
+  border: 2px solid #FF006E;
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.repo-card:hover {
+  transform: translateY(-2px);
+  border-color: #00F5FF;
+  box-shadow: 0 4px 24px rgba(0,245,255,0.15);
+}
+
+.repo-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.repo-icon {
+  font-size: 2em;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,0,110,0.1);
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.repo-info {
+  flex: 1;
+}
+
+.repo-name {
+  font-size: 1.3rem;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  font-family: 'Space Mono', monospace;
+}
+
+.repo-description {
+  font-size: 0.9rem;
+  color: #888;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.repo-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.language {
+  background: rgba(0,245,255,0.1);
+  border: 1px solid rgba(0,245,255,0.3);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Space Mono', monospace;
+}
+
+.repo-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.repo-stats .stat-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.repo-stats .stat-item {
+  flex: 1;
+  text-align: center;
+}
+
+.repo-stats .stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  margin-bottom: 0.25rem;
+  font-family: 'Space Mono', monospace;
+}
+
+.repo-stats .stat-value {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #00F5FF;
+  text-shadow: 0 0 10px #00F5FF;
+}
+
+/* Additional stat badge styles for GitHub reports */
+.stat-badge.commits {
+  background: rgba(0, 245, 255, 0.1);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  color: #00F5FF;
+}
+
+.stat-badge.contributors {
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  color: #00FF00;
+}
+
 @media (max-width: 1024px) {
   .site-title { font-size: 2rem; }
   .header-content { flex-direction: column; text-align: center; gap: 1.5rem; }
@@ -698,7 +830,7 @@ h1.site-title {
                 <h1 class="site-title">Wartime Milady CEO</h1>
                 <p class="site-subtitle">Multi-Platform Intelligence Command Center</p>
                 <div class="status-bar">
-                    <span class="timestamp">2025-07-18 0447Z</span>
+                    <span class="timestamp">2025-07-18 0510Z</span>
                     <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
                 </div>
             </div>
@@ -749,8 +881,7 @@ h1.site-title {
             if (type === 'telegram') {
                 window.location.href = 'telegram.html';
             } else if (type === 'github') {
-                // TODO: Implement GitHub intelligence
-                alert('GitHub Intelligence coming soon!');
+                window.location.href = 'github.html';
             }
         }
     </script>
