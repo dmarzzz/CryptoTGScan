@@ -1,16 +1,16 @@
 {
-  "generated_at": "2025-07-18T03:10:57Z",
+  "generated_at": "2025-07-18T03:25:32Z",
   "total_channels": 5,
   "channels": [
     {
       "id": "-1002009589709",
       "name": "Tevm",
       "icon": "👥",
-      "last_update": "2025-07-18T03:10:57Z",
+      "last_update": "2025-07-18T03:25:32Z",
       "stats": {
-        "messages_24h": 193,
+        "messages_24h": 191,
         "participants_24h": 14,
-        "change_percent": 28.7,
+        "change_percent": 25.7,
         "trend": "up"
       }
     },
@@ -18,7 +18,7 @@
       "id": "-1002412320552",
       "name": "Fault Tolerant Frens",
       "icon": "👥",
-      "last_update": "2025-07-18T03:10:57Z",
+      "last_update": "2025-07-18T03:25:32Z",
       "stats": {
         "messages_24h": 17,
         "participants_24h": 4,
@@ -30,7 +30,7 @@
       "id": "-1002276686237",
       "name": "L2 Interop Working Group",
       "icon": "👥",
-      "last_update": "2025-07-18T03:10:57Z",
+      "last_update": "2025-07-18T03:25:32Z",
       "stats": {
         "messages_24h": 15,
         "participants_24h": 10,
@@ -42,7 +42,7 @@
       "id": "-1002682777986",
       "name": "Flashbots_X Core",
       "icon": "👥",
-      "last_update": "2025-07-18T03:10:57Z",
+      "last_update": "2025-07-18T03:25:32Z",
       "stats": {
         "messages_24h": 12,
         "participants_24h": 6,
@@ -54,7 +54,7 @@
       "id": "-1002109810685",
       "name": "libp2p",
       "icon": "👥",
-      "last_update": "2025-07-18T03:10:57Z",
+      "last_update": "2025-07-18T03:25:32Z",
       "stats": {
         "messages_24h": 4,
         "participants_24h": 2,
