@@ -250,13 +250,16 @@ class MiladySiteGenerator:
             
             title.textContent = `Select Report - ${{chatName}}`;
             
-            if (!reportsMetadata || !reportsMetadata[chatId]) {{
+            // Remove minus sign from chat ID for metadata lookup
+            const metadataKey = chatId.replace('-', '');
+            
+            if (!reportsMetadata || !reportsMetadata[metadataKey]) {{
                 reportList.innerHTML = '<p class="no-reports">No reports available for this channel.</p>';
                 popup.style.display = 'flex';
                 return;
             }}
             
-            const reports = reportsMetadata[chatId].reports;
+            const reports = reportsMetadata[metadataKey].reports;
             let html = '';
             
             reports.forEach(report => {{

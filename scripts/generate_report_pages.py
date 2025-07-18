@@ -618,7 +618,9 @@ def generate_all_reports():
                 
                 # Generate daily reports for this chat
                 reports = generate_daily_reports_for_chat(chat_id, days_back=7)
-                all_reports[chat_id] = {
+                # Use the chat ID without minus sign for the metadata key
+                metadata_key = str(chat_id).replace('-', '')
+                all_reports[metadata_key] = {
                     'name': channel['name'],
                     'reports': reports
                 }
