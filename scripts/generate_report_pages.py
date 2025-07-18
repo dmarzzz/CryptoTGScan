@@ -21,13 +21,11 @@ if not supabase_url or not supabase_key:
 
 supabase: Client = create_client(supabase_url, supabase_key)
 
-def get_chat_messages(chat_id, hours=24, limit=100):
-    """Get messages from a specific chat"""
-    cutoff_time = datetime.now() - timedelta(hours=hours)
-    
+def get_chat_messages(chat_id, start_date, end_date, limit=100):
+    """Get messages from a specific chat within a date range"""
     response = supabase.table('messages_v1').select(
         'id, telegram_message_id, from_user_id, date, text, message_type, reply_to_message_id'
-    ).eq('chat_id', chat_id).gte('date', cutoff_time.isoformat()).order('date', desc=True).limit(limit).execute()
+    ).eq('chat_id', chat_id).gte('date', start_date.isoformat()).lt('date', end_date.isoformat()).order('date', desc=True).limit(limit).execute()
     
     return response.data
 
@@ -47,14 +45,12 @@ def get_users_data(user_ids):
         users[user['user_id']] = user
     return users
 
-def get_chat_stats(chat_id, hours=24):
-    """Get comprehensive statistics for a chat"""
-    cutoff_time = datetime.now() - timedelta(hours=hours)
-    
+def get_chat_stats(chat_id, start_date, end_date):
+    """Get comprehensive statistics for a chat within a date range"""
     # Get messages
     messages_response = supabase.table('messages_v1').select(
         'id, from_user_id, message_type, date'
-    ).eq('chat_id', chat_id).gte('date', cutoff_time.isoformat()).execute()
+    ).eq('chat_id', chat_id).gte('date', start_date.isoformat()).lt('date', end_date.isoformat()).execute()
     
     messages = messages_response.data
     
@@ -73,28 +69,11 @@ def get_chat_stats(chat_id, hours=24):
         hour = msg_time.strftime('%H')
         hourly_activity[hour] = hourly_activity.get(hour, 0) + 1
     
-    # Get previous period for comparison
-    prev_cutoff = cutoff_time - timedelta(hours=hours)
-    prev_messages_response = supabase.table('messages_v1').select(
-        'id, from_user_id, date'
-    ).eq('chat_id', chat_id).gte('date', prev_cutoff.isoformat()).lt('date', cutoff_time.isoformat()).execute()
-    
-    prev_messages = prev_messages_response.data
-    prev_count = len(prev_messages)
-    current_count = len(messages)
-    
-    if prev_count > 0:
-        change_percent = ((current_count - prev_count) / prev_count) * 100
-    else:
-        change_percent = 100 if current_count > 0 else 0
-    
     return {
-        'total_messages': current_count,
+        'total_messages': len(messages),
         'unique_participants': len(unique_users),
         'message_types': message_types,
         'hourly_activity': hourly_activity,
-        'change_percent': round(change_percent, 1),
-        'trend': 'up' if change_percent > 0 else 'down',
         'last_message': max([msg['date'] for msg in messages]) if messages else None
     }
 
@@ -465,8 +444,8 @@ h1.site-title {
 }
 '''
 
-def generate_report_page(chat_id, output_dir='website/reports'):
-    """Generate a detailed report page for a specific chat"""
+def generate_report_page(chat_id, start_date, end_date, output_dir='website/reports'):
+    """Generate a detailed report page for a specific chat and date range"""
     
     # Get chat data
     chat_info = get_chat_info(chat_id)
@@ -475,14 +454,14 @@ def generate_report_page(chat_id, output_dir='website/reports'):
         return
     
     # Get messages
-    messages = get_chat_messages(chat_id, hours=24, limit=50)
+    messages = get_chat_messages(chat_id, start_date, end_date, limit=50)
     
     # Get user data
     user_ids = set(msg['from_user_id'] for msg in messages if msg['from_user_id'])
     users_data = get_users_data(user_ids)
     
     # Get statistics
-    stats = get_chat_stats(chat_id, hours=24)
+    stats = get_chat_stats(chat_id, start_date, end_date)
     
     # Create output directory
     output_path = Path(output_dir)
@@ -492,12 +471,15 @@ def generate_report_page(chat_id, output_dir='website/reports'):
     current_time = datetime.utcnow().strftime('%Y-%m-%d %H%MZ')
     chat_icon = get_chat_icon(chat_info.get('chat_type'), chat_info.get('title'))
     
+    # Format date range for display
+    date_range = f"{start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}"
+    
     html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Wartime Milady CEO - {chat_info.get('title', 'Unknown Chat')} Report</title>
+    <title>Wartime Milady CEO - {chat_info.get('title', 'Unknown Chat')} Report ({date_range})</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -514,7 +496,7 @@ def generate_report_page(chat_id, output_dir='website/reports'):
             </div>
             <div class="header-text">
                 <h1 class="site-title">{chat_info.get('title', 'Unknown Chat')}</h1>
-                <p class="site-subtitle">Detailed Intelligence Report - Last 24 Hours</p>
+                <p class="site-subtitle">Intelligence Report - {date_range}</p>
                 <div class="status-bar">
                     <span class="timestamp">{current_time}</span>
                     <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
@@ -580,9 +562,10 @@ def generate_report_page(chat_id, output_dir='website/reports'):
 </body>
 </html>'''
     
-    # Write to file
+    # Write to file with date-based filename
     safe_filename = str(chat_id).replace('-', '')  # Remove minus sign for filename
-    output_file = output_path / f"report_{safe_filename}.html"
+    date_suffix = start_date.strftime('%Y%m%d')
+    output_file = output_path / f"report_{safe_filename}_{date_suffix}.html"
     
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(html)
@@ -590,8 +573,29 @@ def generate_report_page(chat_id, output_dir='website/reports'):
     print(f"Generated report: {output_file}")
     return output_file
 
+def generate_daily_reports_for_chat(chat_id, days_back=7):
+    """Generate daily reports for the last N days for a specific chat"""
+    reports = []
+    
+    for i in range(days_back):
+        # Calculate date range for this day
+        end_date = datetime.now() - timedelta(days=i)
+        start_date = end_date - timedelta(days=1)
+        
+        # Generate report for this day
+        report_file = generate_report_page(chat_id, start_date, end_date)
+        if report_file:
+            reports.append({
+                'date': start_date.strftime('%Y-%m-%d'),
+                'filename': report_file.name,
+                'start_date': start_date,
+                'end_date': end_date
+            })
+    
+    return reports
+
 def generate_all_reports():
-    """Generate report pages for all monitored chats"""
+    """Generate daily report pages for all monitored chats"""
     # Read channels data from the JSON file generated by the main script
     channels_file = Path('data/channels.json')
     
@@ -603,17 +607,34 @@ def generate_all_reports():
         with open(channels_file, 'r', encoding='utf-8') as f:
             channels_data = json.load(f)
         
-        print(f"📊 Generating reports for {len(channels_data['channels'])} channels...")
+        print(f"📊 Generating daily reports for {len(channels_data['channels'])} channels...")
+        
+        all_reports = {}
         
         for channel in channels_data['channels']:
             try:
                 chat_id = int(channel['id'])  # Convert string ID back to int
-                print(f"📄 Generating report for {channel['name']} (ID: {chat_id})")
-                generate_report_page(chat_id)
+                print(f"📄 Generating daily reports for {channel['name']} (ID: {chat_id})")
+                
+                # Generate daily reports for this chat
+                reports = generate_daily_reports_for_chat(chat_id, days_back=7)
+                all_reports[chat_id] = {
+                    'name': channel['name'],
+                    'reports': reports
+                }
+                
             except Exception as e:
-                print(f"Error generating report for chat {channel['name']} (ID: {channel['id']}): {e}")
+                print(f"Error generating reports for chat {channel['name']} (ID: {channel['id']}): {e}")
         
-        print(f"✅ Generated {len(channels_data['channels'])} report pages")
+        # Save reports metadata for the popup interface
+        metadata_file = Path('website/reports/metadata.json')
+        metadata_file.parent.mkdir(exist_ok=True)
+        
+        with open(metadata_file, 'w', encoding='utf-8') as f:
+            json.dump(all_reports, f, indent=2, default=str)
+        
+        print(f"✅ Generated daily reports for {len(channels_data['channels'])} channels")
+        print(f"📁 Reports metadata saved to: {metadata_file}")
         
     except Exception as e:
         print(f"Error reading channels data: {e}")

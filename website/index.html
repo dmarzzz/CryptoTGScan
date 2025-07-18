@@ -414,6 +414,128 @@ h1.site-title {
   :root { --color-bg: #000; --color-surface: #111111; --color-text: #ffffff; }
 }
 
+/* Report Selector Popup Styles */
+.report-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(5px);
+}
+
+.report-popup-content {
+  background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%);
+  border: 2px solid #FF006E;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 0 50px rgba(255, 0, 110, 0.3);
+}
+
+.report-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 0, 110, 0.3);
+}
+
+.popup-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.5rem;
+  color: #FF006E;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.popup-close {
+  background: none;
+  border: none;
+  color: #FF006E;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.popup-close:hover {
+  background: rgba(255, 0, 110, 0.1);
+  transform: scale(1.1);
+}
+
+.report-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.report-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 0, 110, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.report-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 0, 110, 0.4);
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(255, 0, 110, 0.2);
+}
+
+.report-date {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  color: #00F5FF;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.report-filename {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: #888;
+  opacity: 0.7;
+}
+
+.no-reports {
+  text-align: center;
+  color: #888;
+  font-family: 'Space Mono', monospace;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .report-popup-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+  
+  .popup-title {
+    font-size: 1.2rem;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -430,7 +552,7 @@ h1.site-title {
                 <h1 class="site-title">Wartime Milady CEO</h1>
                 <p class="site-subtitle">Monitoring 5 channels across the frontlines</p>
                 <div class="status-bar">
-                    <span class="timestamp">2025-07-18 0252Z</span>
+                    <span class="timestamp">2025-07-18 0304Z</span>
                     <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
                 </div>
             </div>
@@ -439,7 +561,7 @@ h1.site-title {
     <main class="main-content">
         <div class="channel-grid">
             
-            <a href="reports/report_1002009589709.html" class="channel-card" tabindex="0" aria-label="Tevm channel card">
+            <div class="channel-card" tabindex="0" aria-label="Tevm channel card" onclick="showReportSelector('-1002009589709', 'Tevm')">
                 <div class="channel-header">
                     <div class="channel-icon">👥</div>
                     <div class="channel-info">
@@ -461,9 +583,9 @@ h1.site-title {
                         </div>
                     </div>
                 </div>
-            </a>
+            </div>
             
-            <a href="reports/report_1002412320552.html" class="channel-card" tabindex="0" aria-label="Fault Tolerant Frens channel card">
+            <div class="channel-card" tabindex="0" aria-label="Fault Tolerant Frens channel card" onclick="showReportSelector('-1002412320552', 'Fault Tolerant Frens')">
                 <div class="channel-header">
                     <div class="channel-icon">👥</div>
                     <div class="channel-info">
@@ -485,9 +607,9 @@ h1.site-title {
                         </div>
                     </div>
                 </div>
-            </a>
+            </div>
             
-            <a href="reports/report_1002276686237.html" class="channel-card" tabindex="0" aria-label="L2 Interop Working Group channel card">
+            <div class="channel-card" tabindex="0" aria-label="L2 Interop Working Group channel card" onclick="showReportSelector('-1002276686237', 'L2 Interop Working Group')">
                 <div class="channel-header">
                     <div class="channel-icon">👥</div>
                     <div class="channel-info">
@@ -509,9 +631,9 @@ h1.site-title {
                         </div>
                     </div>
                 </div>
-            </a>
+            </div>
             
-            <a href="reports/report_1002682777986.html" class="channel-card" tabindex="0" aria-label="Flashbots_X Core channel card">
+            <div class="channel-card" tabindex="0" aria-label="Flashbots_X Core channel card" onclick="showReportSelector('-1002682777986', 'Flashbots_X Core')">
                 <div class="channel-header">
                     <div class="channel-icon">👥</div>
                     <div class="channel-info">
@@ -533,9 +655,9 @@ h1.site-title {
                         </div>
                     </div>
                 </div>
-            </a>
+            </div>
             
-            <a href="reports/report_1002109810685.html" class="channel-card" tabindex="0" aria-label="libp2p channel card">
+            <div class="channel-card" tabindex="0" aria-label="libp2p channel card" onclick="showReportSelector('-1002109810685', 'libp2p')">
                 <div class="channel-header">
                     <div class="channel-icon">👥</div>
                     <div class="channel-info">
@@ -557,13 +679,101 @@ h1.site-title {
                         </div>
                     </div>
                 </div>
-            </a>
+            </div>
             
         </div>
     </main>
+    
+    <!-- Report Selector Popup -->
+    <div id="reportPopup" class="report-popup">
+        <div class="report-popup-content">
+            <div class="report-popup-header">
+                <h2 id="popupTitle" class="popup-title">Select Report</h2>
+                <button class="popup-close" onclick="closeReportSelector()">×</button>
+            </div>
+            <div id="reportList" class="report-list">
+                <!-- Reports will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
     <footer class="site-footer">
         <p>Generated by Wartime Milady CEO Intelligence Platform</p>
         <p>Data updated: 2025-07-18 0252Z</p>
     </footer>
+    
+    <script>
+        let reportsMetadata = null;
+        
+        // Load reports metadata
+        fetch('reports/metadata.json')
+            .then(response => response.json())
+            .then(data => {
+                reportsMetadata = data;
+            })
+            .catch(error => {
+                console.error('Error loading reports metadata:', error);
+            });
+        
+        function showReportSelector(chatId, chatName) {
+            const popup = document.getElementById('reportPopup');
+            const title = document.getElementById('popupTitle');
+            const reportList = document.getElementById('reportList');
+            
+            title.textContent = `Select Report - ${chatName}`;
+            
+            if (!reportsMetadata || !reportsMetadata[chatId]) {
+                reportList.innerHTML = '<p class="no-reports">No reports available for this channel.</p>';
+                popup.style.display = 'flex';
+                return;
+            }
+            
+            const reports = reportsMetadata[chatId].reports;
+            let html = '';
+            
+            reports.forEach(report => {
+                const date = new Date(report.date);
+                const formattedDate = date.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                
+                html += `
+                    <div class="report-item" onclick="openReport('${report.filename}')">
+                        <div class="report-date">${formattedDate}</div>
+                        <div class="report-filename">${report.filename}</div>
+                    </div>
+                `;
+            });
+            
+            reportList.innerHTML = html;
+            popup.style.display = 'flex';
+        }
+        
+        function closeReportSelector() {
+            document.getElementById('reportPopup').style.display = 'none';
+        }
+        
+        function openReport(filename) {
+            window.open(`reports/${filename}`, '_blank');
+            closeReportSelector();
+        }
+        
+        // Close popup when clicking outside
+        document.getElementById('reportPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeReportSelector();
+            }
+        });
+        
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeReportSelector();
+            }
+        });
+    </script>
 </body>
 </html>

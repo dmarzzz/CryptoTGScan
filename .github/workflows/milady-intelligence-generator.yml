@@ -43,5 +43,6 @@ jobs:
           git add ./website/index.html
           git add ./website/assets/
           git add ./website/reports/
+          git add ./website/reports/metadata.json
           git commit -m "🤖 Update Wartime Milady CEO Intelligence Platform $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
           git push
