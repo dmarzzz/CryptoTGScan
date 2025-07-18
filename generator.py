@@ -280,9 +280,16 @@ class MiladySiteGenerator:
                     day: 'numeric' 
                 }});
                 
+                const messages = report.total_messages || 0;
+                const participants = report.unique_participants || 0;
+                
                 html += `
                     <div class="report-item" onclick="openReport('${{report.filename}}')">
                         <div class="report-date">${{formattedDate}}</div>
+                        <div class="report-stats">
+                            <span class="stat-badge messages">${{messages}} messages</span>
+                            <span class="stat-badge participants">${{participants}} participants</span>
+                        </div>
                         <div class="report-filename">${{report.filename}}</div>
                     </div>
                 `;
@@ -821,6 +828,34 @@ h1.site-title {
   color: #00F5FF;
   font-size: 1rem;
   margin-bottom: 0.5rem;
+}
+
+.report-stats {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.stat-badge.messages {
+  background: rgba(0, 245, 255, 0.1);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  color: #00F5FF;
+}
+
+.stat-badge.participants {
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  color: #00FF00;
 }
 
 .report-filename {

@@ -582,6 +582,9 @@ def generate_daily_reports_for_chat(chat_id, days_back=7):
         end_date = datetime.now() - timedelta(days=i)
         start_date = end_date - timedelta(days=1)
         
+        # Get statistics for this day
+        stats = get_chat_stats(chat_id, start_date, end_date)
+        
         # Generate report for this day
         report_file = generate_report_page(chat_id, start_date, end_date)
         if report_file:
@@ -589,7 +592,9 @@ def generate_daily_reports_for_chat(chat_id, days_back=7):
                 'date': start_date.strftime('%Y-%m-%d'),
                 'filename': report_file.name,
                 'start_date': start_date,
-                'end_date': end_date
+                'end_date': end_date,
+                'total_messages': stats['total_messages'],
+                'unique_participants': stats['unique_participants']
             })
     
     return reports
