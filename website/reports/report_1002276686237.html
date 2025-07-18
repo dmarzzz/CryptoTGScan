@@ -341,7 +341,7 @@ h1.site-title {
                 <h1 class="site-title">L2 Interop Working Group</h1>
                 <p class="site-subtitle">Detailed Intelligence Report - Last 24 Hours</p>
                 <div class="status-bar">
-                    <span class="timestamp">2025-07-18 0230Z</span>
+                    <span class="timestamp">2025-07-18 0233Z</span>
                     <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
                 </div>
             </div>
@@ -365,7 +365,7 @@ h1.site-title {
                 <div class="stat-label">Activity Change</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">3</div>
+                <div class="stat-value">1</div>
                 <div class="stat-label">Message Types</div>
             </div>
         </div>
@@ -373,29 +373,170 @@ h1.site-title {
         <div class="messages-section">
             <h2 class="section-title">Recent Messages</h2>
             <div class="message-list">
+
                 <div class="message-item">
                     <div class="message-header">
-                        <span class="message-author">Sample User</span>
-                        <span class="message-time">2025-07-18 0230Z</span>
+                        <span class="message-author">Christine D. Kim</span>
+                        <span class="message-time">2025-07-17 2052Z</span>
                     </div>
-                    <div class="message-text">This is a sample message from the L2 Interop Working Group channel. In production, this would show real messages from the database.</div>
+                    <div class="message-text">Thank you ! Adding it to my writeup</div>
                     <span class="message-type-badge">text</span>
                 </div>
+
                 <div class="message-item">
                     <div class="message-header">
-                        <span class="message-author">Another User</span>
-                        <span class="message-time">2025-07-18 0230Z</span>
+                        <span class="message-author">Josh Rudolf</span>
+                        <span class="message-time">2025-07-17 2052Z</span>
                     </div>
-                    <div class="message-text">Another sample message showing the report page functionality.</div>
+                    <div class="message-text">yep next Weds at 4pm UTC 
+
+Just created agenda here</div>
                     <span class="message-type-badge">text</span>
                 </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Christine D. Kim</span>
+                        <span class="message-time">2025-07-17 2022Z</span>
+                    </div>
+                    <div class="message-text">Will there be a call an interop next Wednesday ?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">cwgoes [if it is urgent use signal]</span>
+                        <span class="message-time">2025-07-17 1845Z</span>
+                    </div>
+                    <div class="message-text">> Doesn’t synchronous execution also require TTL guarantees in the fork choice rule too?
+
+Why / what property would TTL guarantees provide? Maybe synchrony bounds for some bounded-async stuff?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">cwgoes [if it is urgent use signal]</span>
+                        <span class="message-time">2025-07-17 1844Z</span>
+                    </div>
+                    <div class="message-text">I feel like execution sharding is pretty much a solved problem, e.g. CalvinDB in 2012 - https://cs.yale.edu/homes/thomson/publications/calvin-sigmod12.pdf supports synchronous calls just fine (Anoma's execution sharding is based on this paper), lots of production sharded database systems. None of the particulars here are specific to the instruction set, so it should work fine w/the EVM.</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Ellie Davidson</span>
+                        <span class="message-time">2025-07-17 1810Z</span>
+                    </div>
+                    <div class="message-text">Yes.  This is all correct. async is much more practical, even though sync is awfully interesting from a research perspective.</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Zaki Manian</span>
+                        <span class="message-time">2025-07-17 1810Z</span>
+                    </div>
+                    <div class="message-text">Doesn’t synchronous execution also require TTL guarantees in the fork choice rule too ?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">cwgoes [if it is urgent use signal]</span>
+                        <span class="message-time">2025-07-17 1752Z</span>
+                    </div>
+                    <div class="message-text">https://x.com/cwgoes/status/1945899163029270677 - I'm pretty sure that the only way to scale synchronously composable execution is straight up execution sharding, regardless of "rollup flavor" particulars, seems just like rebranding which obscures the core problem (synchronous messaging w/o doing all the messaging on one machine, which is exactly execution sharding). Am I getting something wrong here?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Aram</span>
+                        <span class="message-time">2025-07-17 1442Z</span>
+                    </div>
+                    <div class="message-text">train.tech is designed with that idea, you can have a look - instead of relaying on messaging systems, user and solver are communicating directly to finalize the swap</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Rahul Guha</span>
+                        <span class="message-time">2025-07-17 1434Z</span>
+                    </div>
+                    <div class="message-text">Hi everyone, We had this idea of a liquidity protocol where people can be do crosschain swaps and essentially be solver nodes themselves , while the communication between them can be handled by libp2p and also enabling automated rebalancing. We intend to build this in the Unite Defi hackathon but we are open to ideas and would love to hear any problem statements in the ecosystem or maybe some thoughts on the current one.</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Rahul Guha</span>
+                        <span class="message-time">2025-07-17 1418Z</span>
+                    </div>
+                    <div class="message-text">None</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Rahul Guha</span>
+                        <span class="message-time">2025-07-17 1357Z</span>
+                    </div>
+                    <div class="message-text">None</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Jacob E l RISC Zero</span>
+                        <span class="message-time">2025-07-17 1354Z</span>
+                    </div>
+                    <div class="message-text">Update: I wrote a blog here that is more technical than the above announcement https://x.com/0xEverly/status/1945842494429700388. Additionally we have raised 200k USD in the first few days, we believe this gives us enough money to at a minimium generate these proofs as an open source good for the next 6 months and we are happy to share a key with anyone in this group 🫡</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Georgios</span>
+                        <span class="message-time">2025-07-17 0720Z</span>
+                    </div>
+                    <div class="message-text">None</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Ndeto | Unruggable</span>
+                        <span class="message-time">2025-07-17 0712Z</span>
+                    </div>
+                    <div class="message-text">Hi Interop WG,
+
+I wanted to share an EIP-7828 resolver we've developed for chain specific addresses using ENS. You can use it to resolve EIP-7828 valid names. 
+
+import { resolve7828 } from "@unruggable-labs/ens-7828-resolver";
+
+// Resolve an ENS name on a specific chain
+const result = await resolve7828("vitalik.eth@ethereum");
+
+console.log(result);
+// {
+//   address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+//   chainId: 1,
+//   chainName: 'Ethereum Mainnet',
+//   caip10: 'eip155:1:0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+//   coinType: 60
+// }
+Here is the repo: https://github.com/unruggable-labs/ens-7828-resolver</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
             </div>
         </div>
     </main>
     
     <footer class="site-footer">
         <p>Generated by Wartime Milady CEO Intelligence Platform</p>
-        <p>Report generated: 2025-07-18 0230Z</p>
+        <p>Report generated: 2025-07-18 0233Z</p>
     </footer>
 </body>
 </html>

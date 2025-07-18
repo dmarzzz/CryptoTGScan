@@ -341,7 +341,7 @@ h1.site-title {
                 <h1 class="site-title">Fault Tolerant Frens</h1>
                 <p class="site-subtitle">Detailed Intelligence Report - Last 24 Hours</p>
                 <div class="status-bar">
-                    <span class="timestamp">2025-07-18 0230Z</span>
+                    <span class="timestamp">2025-07-18 0233Z</span>
                     <span class="status-indicator" aria-live="polite">SYSTEMS ONLINE</span>
                 </div>
             </div>
@@ -353,19 +353,19 @@ h1.site-title {
         
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-value">12</div>
+                <div class="stat-value">17</div>
                 <div class="stat-label">Total Messages</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">3</div>
+                <div class="stat-value">4</div>
                 <div class="stat-label">Active Participants</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">200.0%</div>
+                <div class="stat-value">325.0%</div>
                 <div class="stat-label">Activity Change</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">3</div>
+                <div class="stat-value">1</div>
                 <div class="stat-label">Message Types</div>
             </div>
         </div>
@@ -373,29 +373,177 @@ h1.site-title {
         <div class="messages-section">
             <h2 class="section-title">Recent Messages</h2>
             <div class="message-list">
+
                 <div class="message-item">
                     <div class="message-header">
-                        <span class="message-author">Sample User</span>
-                        <span class="message-time">2025-07-18 0230Z</span>
+                        <span class="message-author">Liam</span>
+                        <span class="message-time">2025-07-18 0132Z</span>
                     </div>
-                    <div class="message-text">This is a sample message from the Fault Tolerant Frens channel. In production, this would show real messages from the database.</div>
+                    <div class="message-text">I wonder what it would take to implement nakamoto consensus in this</div>
                     <span class="message-type-badge">text</span>
                 </div>
+
                 <div class="message-item">
                     <div class="message-header">
-                        <span class="message-author">Another User</span>
-                        <span class="message-time">2025-07-18 0230Z</span>
+                        <span class="message-author">Liam</span>
+                        <span class="message-time">2025-07-18 0132Z</span>
                     </div>
-                    <div class="message-text">Another sample message showing the report page functionality.</div>
+                    <div class="message-text">mean, median, stddev, jitter, batch runs</div>
                     <span class="message-type-badge">text</span>
                 </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Liam</span>
+                        <span class="message-time">2025-07-18 0131Z</span>
+                    </div>
+                    <div class="message-text">I love what you've built</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Liam</span>
+                        <span class="message-time">2025-07-18 0130Z</span>
+                    </div>
+                    <div class="message-text">I've got some novice questions</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Liam</span>
+                        <span class="message-time">2025-07-18 0130Z</span>
+                    </div>
+                    <div class="message-text">Yes very interesting work!</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Adi Seredinschi</span>
+                        <span class="message-time">2025-07-17 1830Z</span>
+                    </div>
+                    <div class="message-text">Thanks - and inspiring work again! Looking forward to look into it more deeply.</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Adi Seredinschi</span>
+                        <span class="message-time">2025-07-17 1830Z</span>
+                    </div>
+                    <div class="message-text">Yep, makes sense! (adds delay; might help scale throughput with growing # of nodes I guess)</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Adi Seredinschi</span>
+                        <span class="message-time">2025-07-17 1829Z</span>
+                    </div>
+                    <div class="message-text">(Tendermint may easily break without multicast hehe)</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Patrick O’Grady</span>
+                        <span class="message-time">2025-07-17 1829Z</span>
+                    </div>
+                    <div class="message-text">If you do a gossip send of messages would be worse in practice tho (don’t have a configuration for hop broadcast)</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Adi Seredinschi</span>
+                        <span class="message-time">2025-07-17 1829Z</span>
+                    </div>
+                    <div class="message-text">Yes, it's assumed to be multicast</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Patrick O’Grady</span>
+                        <span class="message-time">2025-07-17 1828Z</span>
+                    </div>
+                    <div class="message-text">If just multicast, should be the same I think</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Patrick O’Grady</span>
+                        <span class="message-time">2025-07-17 1828Z</span>
+                    </div>
+                    <div class="message-text">The big delta would come from leader relayed messages (see the hotstuff.lazy file for what that looks like)</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Patrick O’Grady</span>
+                        <span class="message-time">2025-07-17 1827Z</span>
+                    </div>
+                    <div class="message-text">Yeah, exactly.
+
+You can tune which regions are active to see how different distributions of nodes impact this number.</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Adi Seredinschi</span>
+                        <span class="message-time">2025-07-17 1821Z</span>
+                    </div>
+                    <div class="message-text">(I didn't look at the DSL syntax yet, but ..) would you expect Simplex <> Tendermint to be different?</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Adi Seredinschi</span>
+                        <span class="message-time">2025-07-17 1820Z</span>
+                    </div>
+                    <div class="message-text">very cool!
+
+interesting the Simplex ~260ms versus Minimmit ~220ms 
+the first phase of Simplex takes ~200ms
+
+so 20ms is roughly the additional latency needed to bolster a quorum from 67% to 80%, right?
+(where 220ms - 200ms = 20ms)</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Patrick O’Grady</span>
+                        <span class="message-time">2025-07-17 1504Z</span>
+                    </div>
+                    <div class="message-text">If you've been tinkering with mechanism design lately, you may find our latest primitive useful!
+
+https://x.com/_patrickogrady/status/1945861699510342135</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-author">Giorgos Tsimos</span>
+                        <span class="message-time">2025-07-17 0754Z</span>
+                    </div>
+                    <div class="message-text">None</div>
+                    <span class="message-type-badge">text</span>
+                </div>
+
             </div>
         </div>
     </main>
     
     <footer class="site-footer">
         <p>Generated by Wartime Milady CEO Intelligence Platform</p>
-        <p>Report generated: 2025-07-18 0230Z</p>
+        <p>Report generated: 2025-07-18 0233Z</p>
     </footer>
 </body>
 </html>
