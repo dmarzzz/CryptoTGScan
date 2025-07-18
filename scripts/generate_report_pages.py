@@ -536,10 +536,6 @@ def generate_report_page(chat_id, output_dir='website/reports'):
                 <div class="stat-label">Active Participants</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">{stats['change_percent']}%</div>
-                <div class="stat-label">Activity Change</div>
-            </div>
-            <div class="stat-card">
                 <div class="stat-value">{len(stats['message_types'])}</div>
                 <div class="stat-label">Message Types</div>
             </div>
